@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="FerreterOfSplorr/FerreterOfSplorr.csproj" />
+  <Project Path="FOS.UI/FOS.UI.csproj" Id="61e5d5b8-b4fa-499b-94ff-dd4870fa387d" />
+  <Project Path="TGGD.UI/TGGD.UI.csproj" Id="6b06e7bd-0b88-4c73-adc1-3eb2a14d8cee" />
+</Solution>

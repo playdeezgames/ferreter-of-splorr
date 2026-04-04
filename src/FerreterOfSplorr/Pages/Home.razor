@@ -1,0 +1,38 @@
+﻿@page "/"
+
+<PageTitle>Ferreter of SPLORR!!</PageTitle>
+
+<div>
+@foreach(var line in context.GetLines())
+{
+	@line<br/>
+}
+</div>
+<div>
+<EditForm Model="@inputModel" OnValidSubmit="HandleSubmit">
+	<InputText @bind-Value="@inputModel.Text"/>
+	<button type="submit">GO!</button>
+</EditForm>
+</div>
+
+@code{
+	InputModel inputModel = new();
+	IUIContext context = new UIContext();
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+		await context.InitializeAsync();
+	}
+	void HandleSubmit()
+	{
+		if(inputModel.Text != null)
+		{
+			context.HandleInput(inputModel.Text);
+		}
+	}
+
+	class InputModel
+	{
+		public string? Text { get; set; }
+	}
+}
