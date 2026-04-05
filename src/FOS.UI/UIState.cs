@@ -1,11 +1,13 @@
-﻿using TGGD.UI;
+﻿using FOS.Business;
+using TGGD.UI;
 
 namespace FOS.UI
 {
-    public abstract class UIState(IEnumerable<IDialogLine> lines, IEnumerable<IDialogChoice> choices) : IUIState
+    public abstract class UIState(IWorld world, IEnumerable<IDialogLine> lines, IEnumerable<IDialogChoice> choices) : IUIState
     {
         private readonly List<IDialogLine> _lines = [.. lines];
         private readonly List<IDialogChoice> _choices = [.. choices];
+        protected readonly IWorld _world = world;
 
         public IEnumerable<IDialogChoice> GetChoices()
         {

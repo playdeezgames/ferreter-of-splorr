@@ -1,17 +1,18 @@
-﻿using TGGD.UI;
+﻿using FOS.Business;
+using TGGD.UI;
 
 namespace FOS.UI
 {
     internal class TitleState : UIState
     {
-        public TitleState(): base(GenerateLines(), GenerateChoices())
+        public TitleState(IWorld world): base(world, GenerateLines(), GenerateChoices())
         {
 
         }
 
         private static IEnumerable<IDialogChoice> GenerateChoices()
         {
-            return [new DialogChoice("OK","OK")];
+            return [new DialogChoice(Commands.EMBARK,"OK")];
         }
 
         private static IEnumerable<IDialogLine> GenerateLines()
@@ -21,7 +22,7 @@ namespace FOS.UI
 
         public override IUIState HandleInput(string input)
         {
-            return new MainMenuState();
+            return new MainMenuState(_world);
         }
     }
 }

@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\FOS.Business\FOS.Business.csproj" />
-    <ProjectReference Include="..\TGGD.UI\TGGD.UI.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -1,5 +1,7 @@
 <Solution>
   <Project Path="FerreterOfSplorr/FerreterOfSplorr.csproj" />
+  <Project Path="FOS.Business/FOS.Business.csproj" Id="c9d401df-4c9b-4a67-b04e-f1268baa9f45" />
+  <Project Path="FOS.Data/FOS.Data.csproj" Id="b862689f-4678-4058-9fed-e7d81f52dec0" />
   <Project Path="FOS.UI/FOS.UI.csproj" Id="61e5d5b8-b4fa-499b-94ff-dd4870fa387d" />
   <Project Path="TGGD.UI/TGGD.UI.csproj" Id="6b06e7bd-0b88-4c73-adc1-3eb2a14d8cee" />
 </Solution>

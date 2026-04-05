@@ -1,12 +1,13 @@
-﻿using TGGD.UI;
+﻿using FOS.Business;
+using TGGD.UI;
 
 namespace FOS.UI
 {
-    internal class MainMenuState() : UIState(GenerateLines(), GenerateChoices())
+    internal class MainMenuState(IWorld world) : UIState(world, GenerateLines(), GenerateChoices())
     {
         private static IEnumerable<IDialogChoice> GenerateChoices()
         {
-            return [new DialogChoice("Embark", "Embark!")];
+            return [new DialogChoice(Commands.EMBARK, "Embark!")];
         }
 
         private static IEnumerable<IDialogLine> GenerateLines()
@@ -16,6 +17,11 @@ namespace FOS.UI
 
         public override IUIState HandleInput(string input)
         {
+            if(input == Commands.EMBARK)
+            {
+                _world.Embark();
+                return new InPlayState(_world);
+            }
             return this;
         }
     }
