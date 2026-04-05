@@ -1,9 +1,7 @@
 ﻿namespace TGGD.UI
 {
-    public interface IUIContext
+    public interface IUIContext: IUIState
     {
-        IEnumerable<string> GetLines();
-        void HandleInput(string input);
         Task InitializeAsync();
     }
 }

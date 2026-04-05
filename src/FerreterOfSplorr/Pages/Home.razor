@@ -7,7 +7,7 @@
 		<td>
 			@foreach (var line in context.GetLines())
 			{
-				@line
+				@line.Text
 
 				<br />
 			}
@@ -15,10 +15,20 @@
 	</tr>
 	<tr>
 		<td>
-			<EditForm Model="@inputModel" OnValidSubmit="HandleSubmit">
-				<InputText @bind-Value="@inputModel.Text"/>
-				<button type="submit">GO!</button>
-			</EditForm>
+			@if(context.GetChoices().Any())
+			{
+				foreach(var choice in context.GetChoices())
+				{
+					<button @onclick="()=>Choose(choice.Command)">@choice.Text</button>				
+				}
+			}
+			else
+			{
+				<EditForm Model="@inputModel" OnValidSubmit="HandleSubmit">
+					<InputText @bind-Value="@inputModel.Text"/>
+					<button type="submit">GO!</button>
+				</EditForm>
+			}
 		</td>
 	</tr>
 </table>
@@ -39,9 +49,12 @@
 			inputModel.Text = null;
 		}
 	}
-
 	class InputModel
 	{
 		public string? Text { get; set; }
+	}
+	private void Choose(string command)
+	{
+		context.HandleInput(command);
 	}
 }

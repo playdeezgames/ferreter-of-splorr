@@ -4,24 +4,29 @@ namespace FOS.UI
 {
     public class UIContext : IUIContext
     {
-        private readonly List<string> _lines = [];
+        private IUIState? _uiState = null;
 
-        public IEnumerable<string> GetLines()
+        public IEnumerable<IDialogChoice> GetChoices()
         {
-            return _lines;
+            return _uiState?.GetChoices() ?? [];
         }
 
-        public void HandleInput(string input)
+        public IEnumerable<IDialogLine> GetLines()
         {
-            _lines.Add($"Added Line: {input}");
+            return _uiState?.GetLines() ?? [];
+        }
+
+        public IUIState HandleInput(string input)
+        {
+            _uiState = _uiState!.HandleInput(input);
+            return this;
         }
 
         public Task InitializeAsync()
         {
             return Task.Run(() => 
             {
-                _lines.Clear();
-                _lines.Add("Hello, world!");
+                _uiState = new TitleState();
             });
         }
     }
