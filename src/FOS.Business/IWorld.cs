@@ -2,6 +2,9 @@
 {
     public interface IWorld
     {
-        void Embark();
+        void Clear();
+        void Initialize();
+        ICharacter CreateCharacter();
+        ICharacter? Avatar { get; set; }
     }
 }

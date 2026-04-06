@@ -1,4 +1,5 @@
 ﻿using FOS.Business;
+using TGGD.Business;
 using TGGD.UI;
 
 namespace FOS.UI
@@ -19,7 +20,7 @@ namespace FOS.UI
         {
             if(input == Commands.EMBARK)
             {
-                _world.Embark();
+                _world.Initialize();
                 return new InPlayState(_world);
             }
             return this;

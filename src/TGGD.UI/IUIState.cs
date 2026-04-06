@@ -1,4 +1,6 @@
-﻿namespace TGGD.UI
+﻿using TGGD.Business;
+
+namespace TGGD.UI
 {
     public interface IUIState
     {

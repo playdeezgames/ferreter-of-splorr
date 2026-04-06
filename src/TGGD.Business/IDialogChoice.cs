@@ -1,4 +1,4 @@
-﻿namespace TGGD.UI
+﻿namespace TGGD.Business
 {
     public interface IDialogChoice
     {
