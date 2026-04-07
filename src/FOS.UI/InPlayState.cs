@@ -6,19 +6,21 @@ namespace FOS.UI
 {
     internal class InPlayState(IWorld world) : UIState(world, GenerateLines(world), GenerateChoices(world))
     {
-        private static IEnumerable<IDialogChoice> GenerateChoices(IWorld world)
+        private static List<IDialogChoice> GenerateChoices(IWorld world)
         {
-            return [new DialogChoice(Commands.GAME_MENU, "Game Menu")];
+            List<IDialogChoice> choices = [.. world.GetChoices()];
+            choices.Add(new DialogChoice(Commands.GAME_MENU, "Game Menu"));
+            return choices;
         }
 
         private static IEnumerable<IDialogLine> GenerateLines(IWorld world)
         {
-            return [new DialogLine("", "Yer playing the game!")];
+            return world.GetLines();
         }
 
-        public override IUIState HandleInput(string input)
+        public override IUIState HandleCommand(string command)
         {
-            if(input == Commands.GAME_MENU)
+            if(command == Commands.GAME_MENU)
             {
                 return new GameMenuState(_world);
             }

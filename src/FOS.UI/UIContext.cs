@@ -20,9 +20,9 @@ namespace FOS.UI
             return _uiState?.GetLines() ?? [];
         }
 
-        public IUIState HandleInput(string input)
+        public IUIState HandleCommand(string command)
         {
-            _uiState = _uiState!.HandleInput(input);
+            _uiState = _uiState!.HandleCommand(command);
             return this;
         }
 

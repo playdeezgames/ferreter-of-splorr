@@ -3,23 +3,21 @@
 <PageTitle>Ferreter of SPLORR!!</PageTitle>
 
 <table>
-	<tr>
-		<td>
-			@foreach (var line in context.GetLines())
-			{
+	@foreach (var line in context.GetLines())
+	{
+		<tr>
+			<td class="mood-@line.Mood">
 				@line.Text
-
-				<br />
-			}
-		</td>
-	</tr>
+			</td>
+		</tr>
+	}
 	<tr>
 		<td>
 			@if(context.GetChoices().Any())
 			{
 				foreach(var choice in context.GetChoices())
 				{
-					<button @onclick="()=>Choose(choice.Command)">@choice.Text</button>				
+					<button @onclick="()=>Choose(choice.Command)">@choice.Text</button><br/>			
 				}
 			}
 			else
@@ -45,7 +43,7 @@
 	{
 		if(inputModel.Text != null)
 		{
-			context.HandleInput(inputModel.Text);
+			context.HandleCommand(inputModel.Text);
 			inputModel.Text = null;
 		}
 	}
@@ -55,6 +53,6 @@
 	}
 	private void Choose(string command)
 	{
-		context.HandleInput(command);
+		context.HandleCommand(command);
 	}
 }

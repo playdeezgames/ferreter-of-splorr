@@ -1,4 +1,5 @@
 ﻿using FOS.Data;
+using TGGD.Business;
 
 namespace FOS.Business
 {
@@ -41,16 +42,35 @@ namespace FOS.Business
             _data.Characters.Clear();
         }
 
-        public ICharacter CreateCharacter()
+        public ICharacter CreateCharacter(string characterType)
         {
             var characterId = Guid.NewGuid();
-            _data.Characters[characterId] = new CharacterData();
+            _data.Characters[characterId] = new CharacterData { CharacterType = characterType };
             return new Character(_data, characterId);
+        }
+
+        public IEnumerable<IDialogChoice> GetChoices()
+        {
+            return Avatar?.GetChoices() ?? [];
+        }
+
+        public IEnumerable<IDialogLine> GetLines()
+        {
+            return Avatar?.GetLines() ??
+                [
+                    new DialogLine(Moods.NORMAL,"No avatar!")
+                ];
+        }
+
+        public void HandleCommand(string command)
+        {
+            Avatar?.HandleCommand(command);
         }
 
         public void Initialize()
         {
             Clear();
+            Avatar = CreateCharacter(CharacterTypes.N00B);
         }
     }
 }

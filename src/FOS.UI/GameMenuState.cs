@@ -16,16 +16,16 @@ namespace FOS.UI
 
         private static IEnumerable<IDialogLine> GenerateLines(IWorld world)
         {
-            return [new DialogLine("","Game Menu:")];
+            return [new DialogLine(Moods.MENU_HEADER,"Game Menu:")];
         }
 
-        public override IUIState HandleInput(string input)
+        public override IUIState HandleCommand(string command)
         {
-            if(input == Commands.RESUME_GAME)
+            if(command == Commands.RESUME_GAME)
             {
                 return new InPlayState(_world);
             }
-            else if(input == Commands.ABANDON_GAME)
+            else if(command == Commands.ABANDON_GAME)
             {
                 return new MainMenuState(_world);
             }

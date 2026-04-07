@@ -13,12 +13,12 @@ namespace FOS.UI
 
         private static IEnumerable<IDialogLine> GenerateLines()
         {
-            return [new DialogLine("", "Main Menu:")];
+            return [new DialogLine(Moods.MENU_HEADER, "Main Menu:")];
         }
 
-        public override IUIState HandleInput(string input)
+        public override IUIState HandleCommand(string command)
         {
-            if(input == Commands.EMBARK)
+            if(command == Commands.EMBARK)
             {
                 _world.Initialize();
                 return new InPlayState(_world);

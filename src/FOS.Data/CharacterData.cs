@@ -2,5 +2,6 @@
 {
     public class CharacterData
     {
+        public required string CharacterType { get; set; }
     }
 }

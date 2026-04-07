@@ -2,10 +2,8 @@
 
 namespace TGGD.UI
 {
-    public interface IUIState
+    public interface IUIState: IDialog
     {
-        IEnumerable<IDialogLine> GetLines();
-        IEnumerable<IDialogChoice> GetChoices();
-        IUIState HandleInput(string input);
+        IUIState HandleCommand(string command);
     }
 }

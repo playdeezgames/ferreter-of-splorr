@@ -18,10 +18,10 @@ namespace FOS.UI
 
         private static IEnumerable<IDialogLine> GenerateLines()
         {
-            return [new DialogLine("","Ferreter of SPLORR!")];
+            return [new DialogLine(Moods.TITLE, "Ferreter of SPLORR!")];
         }
 
-        public override IUIState HandleInput(string input)
+        public override IUIState HandleCommand(string command)
         {
             return new MainMenuState(_world);
         }
