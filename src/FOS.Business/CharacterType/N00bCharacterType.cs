@@ -14,14 +14,21 @@ namespace FOS.Business
 
         public IEnumerable<IDialogLine> GetLines(ICharacter character)
         {
-            var result = new List<IDialogLine>();
-            result.Add(new DialogLine(Moods.NORMAL, "Yer the n00b!"));
+            var result = new List<IDialogLine>
+            {
+                new DialogLine(Moods.NORMAL, "Yer the n00b!"),
+                new DialogLine(Moods.NORMAL, $"Yer facing {character.Direction.GetName()}.")
+            };
             return result;
         }
 
         public void HandleCommand(ICharacter character, string command)
         {
             //do nothing!
+        }
+
+        public void Initialize(ICharacter character)
+        {
         }
     }
 }

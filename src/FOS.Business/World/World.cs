@@ -45,8 +45,14 @@ namespace FOS.Business
         public ICharacter CreateCharacter(string characterType)
         {
             var characterId = Guid.NewGuid();
-            _data.Characters[characterId] = new CharacterData { CharacterType = characterType };
-            return new Character(_data, characterId);
+            _data.Characters[characterId] = new CharacterData 
+            { 
+                CharacterType = characterType,
+                Direction = Direction.NORTH
+            };
+            var result = new Character(_data, characterId);
+            CharacterTypes.All[characterType].Initialize(result);
+            return result;
         }
 
         public IEnumerable<IDialogChoice> GetChoices()

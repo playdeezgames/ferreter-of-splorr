@@ -1,4 +1,5 @@
-﻿using TGGD.Business;
+﻿using FOS.Data;
+using TGGD.Business;
 
 namespace FOS.Business
 {
@@ -9,5 +10,6 @@ namespace FOS.Business
         IEnumerable<IDialogChoice> GetChoices();
         IEnumerable<IDialogLine> GetLines();
         void HandleCommand(string command);
+        Direction Direction { get; }
     }
 }

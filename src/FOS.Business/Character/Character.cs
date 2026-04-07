@@ -20,6 +20,8 @@ namespace FOS.Business
 
         public IWorld World => new World(_data);
 
+        public Direction Direction => CharacterData.Direction;
+
         public IEnumerable<IDialogChoice> GetChoices()
         {
             return CharacterType.GetChoices(this);
