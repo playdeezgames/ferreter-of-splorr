@@ -10,6 +10,6 @@ namespace FOS.Business
         IEnumerable<IDialogChoice> GetChoices();
         IEnumerable<IDialogLine> GetLines();
         void HandleCommand(string command);
-        Direction Direction { get; }
+        Direction Direction { get; set; }
     }
 }

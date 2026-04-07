@@ -9,6 +9,13 @@ namespace FOS.Business
         public IEnumerable<IDialogChoice> GetChoices(ICharacter character)
         {
             var result = new List<IDialogChoice>();
+            foreach(var entry in Verbs.All)
+            {
+                if(entry.Value.CanPerform(character))
+                {
+                    result.Add(new DialogChoice(entry.Key, entry.Value.GetText(character)));
+                }
+            }
             return result;
         }
 
@@ -24,7 +31,7 @@ namespace FOS.Business
 
         public void HandleCommand(ICharacter character, string command)
         {
-            //do nothing!
+            Verbs.All[command].Perform(character);
         }
 
         public void Initialize(ICharacter character)

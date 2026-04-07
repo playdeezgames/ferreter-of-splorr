@@ -9,9 +9,20 @@ namespace FOS.Business
             return direction switch
             {
                 Direction.NORTH => "North",
-                Direction.SOUTH => "South",
                 Direction.EAST => "East",
+                Direction.SOUTH => "South",
                 Direction.WEST => "West",
+                _ => throw new NotImplementedException(),
+            };
+        }
+        public static Direction GetPreviousDirection(this Direction direction)
+        {
+            return direction switch
+            {
+                Direction.NORTH => Direction.WEST,
+                Direction.EAST => Direction.NORTH,
+                Direction.SOUTH => Direction.EAST,
+                Direction.WEST => Direction.SOUTH,
                 _ => throw new NotImplementedException(),
             };
         }

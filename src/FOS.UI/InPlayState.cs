@@ -24,7 +24,8 @@ namespace FOS.UI
             {
                 return new GameMenuState(_world);
             }
-            return this;
+            _world.HandleCommand(command);
+            return new InPlayState(_world);
         }
     }
 }
