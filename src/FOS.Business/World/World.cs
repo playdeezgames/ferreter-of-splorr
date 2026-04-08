@@ -108,6 +108,7 @@ namespace FOS.Business
         {
             Clear();
             var blueRoom = CreateBlueRoom();
+            CreateFeature(FeatureTypes.BED, "Yer Bed", blueRoom);
             var town = CreateTown();
             var blueRoomTownLocation = RNG.FromEnumerable(town.Where(x => !x.HasRoute(Direction.IN)));
             town.Remove(blueRoomTownLocation);
@@ -164,6 +165,21 @@ namespace FOS.Business
             CreateRoute(RouteTypes.LADDER, "Ladder from Loft", Direction.DOWN, loft, blueRoom);
             Avatar = CreateCharacter(CharacterTypes.N00B, blueRoom);
             return blueRoom;
+        }
+
+        public IFeature CreateFeature(string featureType, string name, ILocation location)
+        {
+            var featureId = Guid.NewGuid();
+            _data.Features[featureId] = new FeatureData
+            {
+                FeatureType = featureType,
+                Name = name,
+                LocationId = location.LocationId
+            };
+            var result = new Feature(_data, featureId);
+            location.AddFeature(result);
+            FeatureTypes.All[featureType].Initialize(result);
+            return result;
         }
     }
 }

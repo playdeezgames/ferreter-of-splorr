@@ -12,5 +12,6 @@ namespace FOS.Business
         void HandleCommand(string command);
         ILocation CreateLocation(string locationType, string name);
         IRoute CreateRoute(string routeType, string name, Direction direction, ILocation fromLocation, ILocation toLocation);
+        IFeature CreateFeature(string featureType, string name, ILocation location);
     }
 }

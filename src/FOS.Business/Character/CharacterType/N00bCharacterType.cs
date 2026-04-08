@@ -28,6 +28,15 @@ namespace FOS.Business
                 new DialogLine(Moods.NORMAL, $"Yer facing {character.Direction.GetName()}."),
                 new DialogLine(Moods.NORMAL, $"Location: {location.Name}.")
             };
+            var features = location.Features;
+            if (features.Any())
+            {
+                result.Add(new DialogLine(Moods.NORMAL, "Features:"));
+            }
+            foreach (var feature in features)
+            {
+                result.Add(new DialogLine(Moods.NORMAL, $"{feature.Name}"));
+            }
             var routes = location.Routes;
             if (routes.Any())
             {

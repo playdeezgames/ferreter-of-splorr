@@ -14,6 +14,8 @@ namespace FOS.Business
 
         public IEnumerable<IRoute> Routes => GetEntityData().RouteIds.Select(x => new Route(_data, x.Key, x.Value));
 
+        public IEnumerable<IFeature> Features => GetEntityData().FeatureIds.Select(x => new Feature(_data, x));
+
         internal Location(WorldData data, Guid locationId)
         {
             _data = data;
@@ -52,6 +54,11 @@ namespace FOS.Business
         internal override LocationData GetEntityData()
         {
             return _data.Locations[_locationId];
+        }
+
+        public void AddFeature(IFeature feature)
+        {
+            GetEntityData().FeatureIds.Add(feature.FeatureId);
         }
     }
 }
