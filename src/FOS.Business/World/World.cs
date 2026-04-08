@@ -42,16 +42,30 @@ namespace FOS.Business
             _data.Characters.Clear();
         }
 
-        public ICharacter CreateCharacter(string characterType)
+        public ICharacter CreateCharacter(string characterType, ILocation location)
         {
             var characterId = Guid.NewGuid();
             _data.Characters[characterId] = new CharacterData 
             { 
                 CharacterType = characterType,
-                Direction = Direction.NORTH
+                Direction = Direction.NORTH,
+                LocationId = location.LocationId
             };
             var result = new Character(_data, characterId);
+            location.AddCharacter(result);
             CharacterTypes.All[characterType].Initialize(result);
+            return result;
+        }
+
+        public ILocation CreateLocation(string locationType)
+        {
+            var locationId = Guid.NewGuid();
+            _data.Locations[locationId] = new LocationData
+            {
+                LocationType = locationType
+            };
+            var result = new Location(_data, locationId);
+            LocationTypes.All[locationType].Initialize(result);
             return result;
         }
 
@@ -76,7 +90,8 @@ namespace FOS.Business
         public void Initialize()
         {
             Clear();
-            Avatar = CreateCharacter(CharacterTypes.N00B);
+            var blueRoom = CreateLocation(LocationTypes.BLUE_ROOM);
+            Avatar = CreateCharacter(CharacterTypes.N00B, blueRoom);
         }
     }
 }

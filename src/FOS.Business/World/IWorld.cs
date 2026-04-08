@@ -6,8 +6,9 @@ namespace FOS.Business
     {
         void Clear();
         void Initialize();
-        ICharacter CreateCharacter(string characterType);
+        ICharacter CreateCharacter(string characterType, ILocation location);
         ICharacter? Avatar { get; set; }
         void HandleCommand(string command);
+        ILocation CreateLocation(string locationType);
     }
 }
