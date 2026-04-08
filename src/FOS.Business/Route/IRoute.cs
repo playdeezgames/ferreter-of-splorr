@@ -7,5 +7,6 @@ namespace FOS.Business
         Guid RouteId { get; }
         Direction Direction { get; }
         string Name { get; }
+        ILocation Destination { get; }
     }
 }

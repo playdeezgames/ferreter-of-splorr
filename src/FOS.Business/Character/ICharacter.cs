@@ -11,6 +11,6 @@ namespace FOS.Business
         IEnumerable<IDialogLine> GetLines();
         void HandleCommand(string command);
         Direction Direction { get; set; }
-        ILocation Location { get; }
+        ILocation Location { get; set; }
     }
 }

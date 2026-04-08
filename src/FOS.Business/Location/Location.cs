@@ -30,5 +30,24 @@ namespace FOS.Business
         {
             LocationData.RouteIds[direction] = result.RouteId;
         }
+
+        public void RemoveCharacter(ICharacter character)
+        {
+            LocationData.CharacterIds.Remove(character.CharacterId);
+        }
+
+        public bool HasRoute(Direction direction)
+        {
+            return LocationData.RouteIds.ContainsKey(direction);
+        }
+
+        public IRoute? GetRoute(Direction direction)
+        {
+            if (!HasRoute(direction))
+            {
+                return null;
+            }
+            return new Route(_data, direction, LocationData.RouteIds[direction]);
+        }
     }
 }

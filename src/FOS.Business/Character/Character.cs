@@ -21,8 +21,16 @@ namespace FOS.Business
         public IWorld World => new World(_data);
 
         Direction ICharacter.Direction { get => CharacterData.Direction; set => CharacterData.Direction = value; }
-
-        public ILocation Location => new Location(_data, CharacterData.LocationId);
+        public ILocation Location
+        {
+            get => new Location(_data, CharacterData.LocationId);
+            set
+            {
+                Location.RemoveCharacter(this);
+                CharacterData.LocationId = value.LocationId;
+                Location.AddCharacter(this);
+            }
+        }
 
         public IEnumerable<IDialogChoice> GetChoices()
         {

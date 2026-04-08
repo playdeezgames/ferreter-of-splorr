@@ -20,5 +20,7 @@ namespace FOS.Business
         public Direction Direction => _direction;
 
         public string Name => RouteData.Name;
+
+        public ILocation Destination => new Location(_data, RouteData.ToLocationId);
     }
 }
