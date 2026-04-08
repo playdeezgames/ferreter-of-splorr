@@ -2,7 +2,7 @@
 
 namespace FOS.Business
 {
-    internal class Location: ILocation
+    internal class Location : ILocation
     {
         private readonly WorldData _data;
         private readonly Guid _locationId;
@@ -20,6 +20,11 @@ namespace FOS.Business
         public void AddCharacter(ICharacter character)
         {
             LocationData.CharacterIds.Add(character.CharacterId);
+        }
+
+        public void SetRoute(Direction direction, IRoute result)
+        {
+            LocationData.RouteIds[direction] = result.RouteId;
         }
     }
 }

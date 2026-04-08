@@ -45,8 +45,8 @@ namespace FOS.Business
         public ICharacter CreateCharacter(string characterType, ILocation location)
         {
             var characterId = Guid.NewGuid();
-            _data.Characters[characterId] = new CharacterData 
-            { 
+            _data.Characters[characterId] = new CharacterData
+            {
                 CharacterType = characterType,
                 Direction = Direction.NORTH,
                 LocationId = location.LocationId
@@ -66,6 +66,20 @@ namespace FOS.Business
             };
             var result = new Location(_data, locationId);
             LocationTypes.All[locationType].Initialize(result);
+            return result;
+        }
+
+        public IRoute CreateRoute(string routeType, Direction direction, ILocation fromLocation, ILocation toLocation)
+        {
+            var routeId = Guid.NewGuid();
+            _data.Routes[routeId] = new RouteData
+            {
+                RouteType = routeType,
+                ToLocationId = toLocation.LocationId
+            };
+            var result = new Route(_data, routeId);
+            fromLocation.SetRoute(direction, result);
+            RouteTypes.All[routeType].Initialize(result);
             return result;
         }
 
@@ -91,6 +105,9 @@ namespace FOS.Business
         {
             Clear();
             var blueRoom = CreateLocation(LocationTypes.BLUE_ROOM);
+            var nextRoom = CreateLocation(LocationTypes.ROOM);
+            CreateRoute(RouteTypes.DOOR, Direction.NORTH, blueRoom, nextRoom);
+            CreateRoute(RouteTypes.DOOR, Direction.SOUTH, nextRoom, blueRoom);
             Avatar = CreateCharacter(CharacterTypes.N00B, blueRoom);
         }
     }

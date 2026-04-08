@@ -1,4 +1,5 @@
-﻿using TGGD.Business;
+﻿using FOS.Data;
+using TGGD.Business;
 
 namespace FOS.Business
 {
@@ -10,5 +11,6 @@ namespace FOS.Business
         ICharacter? Avatar { get; set; }
         void HandleCommand(string command);
         ILocation CreateLocation(string locationType);
+        IRoute CreateRoute(string routeType, Direction direction, ILocation fromLocation, ILocation toLocation);
     }
 }
