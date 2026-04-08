@@ -22,6 +22,8 @@ namespace FOS.Business
 
         Direction ICharacter.Direction { get => CharacterData.Direction; set => CharacterData.Direction = value; }
 
+        public ILocation Location => new Location(_data, CharacterData.LocationId);
+
         public IEnumerable<IDialogChoice> GetChoices()
         {
             return CharacterType.GetChoices(this);

@@ -11,6 +11,10 @@ namespace FOS.Business
 
         public Guid LocationId => _locationId;
 
+        public string Name => LocationData.Name;
+
+        public IEnumerable<IRoute> Routes => LocationData.RouteIds.Select(x => new Route(_data, x.Key, x.Value));
+
         internal Location(WorldData data, Guid locationId)
         {
             _data = data;

@@ -10,7 +10,7 @@ namespace FOS.Business
         ICharacter CreateCharacter(string characterType, ILocation location);
         ICharacter? Avatar { get; set; }
         void HandleCommand(string command);
-        ILocation CreateLocation(string locationType);
-        IRoute CreateRoute(string routeType, Direction direction, ILocation fromLocation, ILocation toLocation);
+        ILocation CreateLocation(string locationType, string name);
+        IRoute CreateRoute(string routeType, string name, Direction direction, ILocation fromLocation, ILocation toLocation);
     }
 }

@@ -9,9 +9,9 @@ namespace FOS.Business
         public IEnumerable<IDialogChoice> GetChoices(ICharacter character)
         {
             var result = new List<IDialogChoice>();
-            foreach(var entry in Verbs.All)
+            foreach (var entry in Verbs.All)
             {
-                if(entry.Value.CanPerform(character))
+                if (entry.Value.CanPerform(character))
                 {
                     result.Add(new DialogChoice(entry.Key, entry.Value.GetText(character)));
                 }
@@ -21,11 +21,22 @@ namespace FOS.Business
 
         public IEnumerable<IDialogLine> GetLines(ICharacter character)
         {
+            var location = character.Location;
             var result = new List<IDialogLine>
             {
                 new DialogLine(Moods.NORMAL, "Yer the n00b!"),
-                new DialogLine(Moods.NORMAL, $"Yer facing {character.Direction.GetName()}.")
+                new DialogLine(Moods.NORMAL, $"Yer facing {character.Direction.GetName()}."),
+                new DialogLine(Moods.NORMAL, $"Location: {location.Name}.")
             };
+            var routes = location.Routes;
+            if (routes.Any())
+            {
+                result.Add(new DialogLine(Moods.NORMAL, "Exits:"));
+            }
+            foreach (var route in routes)
+            {
+                result.Add(new DialogLine(Moods.NORMAL, $"{route.Direction.GetName()}: {route.Name}"));
+            }
             return result;
         }
 

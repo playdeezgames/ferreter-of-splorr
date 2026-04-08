@@ -57,27 +57,29 @@ namespace FOS.Business
             return result;
         }
 
-        public ILocation CreateLocation(string locationType)
+        public ILocation CreateLocation(string locationType, string name)
         {
             var locationId = Guid.NewGuid();
             _data.Locations[locationId] = new LocationData
             {
-                LocationType = locationType
+                LocationType = locationType,
+                Name = name
             };
             var result = new Location(_data, locationId);
             LocationTypes.All[locationType].Initialize(result);
             return result;
         }
 
-        public IRoute CreateRoute(string routeType, Direction direction, ILocation fromLocation, ILocation toLocation)
+        public IRoute CreateRoute(string routeType, string name, Direction direction, ILocation fromLocation, ILocation toLocation)
         {
             var routeId = Guid.NewGuid();
             _data.Routes[routeId] = new RouteData
             {
                 RouteType = routeType,
-                ToLocationId = toLocation.LocationId
+                ToLocationId = toLocation.LocationId,
+                Name = name
             };
-            var result = new Route(_data, routeId);
+            var result = new Route(_data, direction, routeId);
             fromLocation.SetRoute(direction, result);
             RouteTypes.All[routeType].Initialize(result);
             return result;
@@ -104,10 +106,10 @@ namespace FOS.Business
         public void Initialize()
         {
             Clear();
-            var blueRoom = CreateLocation(LocationTypes.BLUE_ROOM);
-            var nextRoom = CreateLocation(LocationTypes.ROOM);
-            CreateRoute(RouteTypes.DOOR, Direction.NORTH, blueRoom, nextRoom);
-            CreateRoute(RouteTypes.DOOR, Direction.SOUTH, nextRoom, blueRoom);
+            var blueRoom = CreateLocation(LocationTypes.BLUE_ROOM, "The Blue Room");
+            var nextRoom = CreateLocation(LocationTypes.ROOM, "The Room That Isn't Blue");
+            CreateRoute(RouteTypes.DOOR, "Door", Direction.NORTH, blueRoom, nextRoom);
+            CreateRoute(RouteTypes.DOOR, "Door", Direction.SOUTH, nextRoom, blueRoom);
             Avatar = CreateCharacter(CharacterTypes.N00B, blueRoom);
         }
     }
