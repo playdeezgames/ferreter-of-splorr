@@ -5,6 +5,10 @@
         NORTH,
         EAST,
         SOUTH,
-        WEST
+        WEST,
+        UP,
+        DOWN,
+        IN,
+        OUT
     }
 }

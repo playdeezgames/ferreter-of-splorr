@@ -1,8 +1,8 @@
 ﻿namespace FOS.Business
 {
-    internal class RoomLocationType : ILocationType
+    internal class LoftLocationType : ILocationType
     {
-        public string Identifier => LocationTypes.ROOM;
+        public string Identifier => LocationTypes.LOFT;
 
         public void Initialize(ILocation location)
         {

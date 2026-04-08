@@ -1,8 +1,8 @@
 ﻿namespace FOS.Business
 {
-    internal class DoorRouteType : IRouteType
+    internal class LadderRouteType : IRouteType
     {
-        public string Identifier => RouteTypes.DOOR;
+        public string Identifier => RouteTypes.LADDER;
 
         public void Initialize(IRoute route)
         {

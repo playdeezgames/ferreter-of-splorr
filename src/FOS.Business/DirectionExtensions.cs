@@ -12,6 +12,10 @@ namespace FOS.Business
                 Direction.EAST => "East",
                 Direction.SOUTH => "South",
                 Direction.WEST => "West",
+                Direction.DOWN => "Down",
+                Direction.UP => "Up",
+                Direction.IN => "In",
+                Direction.OUT => "Out",
                 _ => throw new NotImplementedException(),
             };
         }
@@ -23,7 +27,7 @@ namespace FOS.Business
                 Direction.EAST => Direction.NORTH,
                 Direction.SOUTH => Direction.EAST,
                 Direction.WEST => Direction.SOUTH,
-                _ => throw new NotImplementedException(),
+                _ => direction,
             };
         }
         public static Direction GetNextDirection(this Direction direction)
@@ -34,7 +38,7 @@ namespace FOS.Business
                 Direction.EAST => Direction.SOUTH,
                 Direction.SOUTH => Direction.WEST,
                 Direction.WEST => Direction.NORTH,
-                _ => throw new NotImplementedException(),
+                _ => direction,
             };
         }
         public static Direction GetOppositeDirection(this Direction direction)
@@ -45,6 +49,10 @@ namespace FOS.Business
                 Direction.EAST => Direction.WEST,
                 Direction.SOUTH => Direction.NORTH,
                 Direction.WEST => Direction.EAST,
+                Direction.IN => Direction.OUT,
+                Direction.OUT => Direction.IN,
+                Direction.UP => Direction.DOWN,
+                Direction.DOWN => Direction.UP,
                 _ => throw new NotImplementedException(),
             };
         }

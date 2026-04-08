@@ -107,9 +107,9 @@ namespace FOS.Business
         {
             Clear();
             var blueRoom = CreateLocation(LocationTypes.BLUE_ROOM, "The Blue Room");
-            var nextRoom = CreateLocation(LocationTypes.ROOM, "The Room That Isn't Blue");
-            CreateRoute(RouteTypes.DOOR, "Door", Direction.NORTH, blueRoom, nextRoom);
-            CreateRoute(RouteTypes.DOOR, "Door", Direction.SOUTH, nextRoom, blueRoom);
+            var loft = CreateLocation(LocationTypes.LOFT, "The Room That Isn't Blue");
+            CreateRoute(RouteTypes.LADDER, "Ladder to Loft", Direction.UP, blueRoom, loft);
+            CreateRoute(RouteTypes.LADDER, "Ladder from Loft", Direction.DOWN, loft, blueRoom);
             Avatar = CreateCharacter(CharacterTypes.N00B, blueRoom);
         }
     }
