@@ -8,6 +8,8 @@
         internal readonly static string MOVE_AHEAD = nameof(MOVE_AHEAD);
         internal readonly static string CLIMB_UP = nameof(CLIMB_UP);
         internal readonly static string CLIMB_DOWN = nameof(CLIMB_DOWN);
+        internal readonly static string EXIT_LOCATION = nameof(EXIT_LOCATION);
+        internal readonly static string ENTER_LOCATION = nameof(ENTER_LOCATION);
         internal static IReadOnlyDictionary<string, IVerbType> All =
             new List<IVerbType>
             {
@@ -16,7 +18,9 @@
                 new TurnAroundVerbType(),
                 new MoveAheadVerbType(),
                 new ClimbUpVerbType(),
-                new ClimbDownVerbType()
+                new ClimbDownVerbType(),
+                new EnterLocationVerbType(),
+                new ExitLocationVerbType()
             }.ToDictionary(x => x.Identifier, x => x);
     }
 }

@@ -2,8 +2,9 @@
 
 namespace FOS.Business
 {
-    public static class DirectionExtensions
+    public static class Directions
     {
+        public static readonly Direction[] Cardinal = [Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST];
         public static string GetName(this Direction direction)
         {
             return direction switch
@@ -56,6 +57,23 @@ namespace FOS.Business
                 _ => throw new NotImplementedException(),
             };
         }
-
+        public static int GetNextColumn(this Direction direction, int column)
+        {
+            return direction switch
+            {
+                Direction.EAST => column + 1,
+                Direction.WEST => column - 1,
+                _ => column
+            };
+        }
+        public static int GetNextRow(this Direction direction, int row)
+        {
+            return direction switch
+            {
+                Direction.NORTH => row - 1,
+                Direction.SOUTH => row + 1,
+                _ => row
+            };
+        }
     }
 }

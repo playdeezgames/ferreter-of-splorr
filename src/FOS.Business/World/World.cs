@@ -1,4 +1,5 @@
 ﻿using FOS.Data;
+using System.Data;
 using TGGD.Business;
 
 namespace FOS.Business
@@ -106,11 +107,63 @@ namespace FOS.Business
         public void Initialize()
         {
             Clear();
+            var blueRoom = CreateBlueRoom();
+            var town = CreateTown();
+            var blueRoomTownLocation = RNG.FromEnumerable(town.Where(x => !x.HasRoute(Direction.IN)));
+            town.Remove(blueRoomTownLocation);
+            CreateRoute(RouteTypes.DOOR, "The Blue Room Entrance", Direction.IN, blueRoomTownLocation, blueRoom);
+            CreateRoute(RouteTypes.DOOR, "The Blue Room Exit", Direction.OUT, blueRoom, blueRoomTownLocation);
+        }
+
+        private List<ILocation> CreateTown()
+        {
+            const int TOWN_COLUMNS = 3;
+            const int TOWN_ROWS = 3;
+            var result = new List<ILocation>();
+            foreach (var column in Enumerable.Range(0, TOWN_COLUMNS))
+            {
+                foreach (var row in Enumerable.Range(0, TOWN_ROWS))
+                {
+                    var townLocation = CreateLocation(LocationTypes.TOWN, $"Town Location ({column},{row})");
+                    townLocation.SetStatistic(StatisticTypes.COLUMN, column);
+                    townLocation.SetStatistic(StatisticTypes.ROW, row);
+                    result.Add(townLocation);
+                }
+            }
+            foreach (var townLocation in result)
+            {
+                var column = townLocation.GetStatistic(StatisticTypes.COLUMN);
+                var row = townLocation.GetStatistic(StatisticTypes.ROW);
+                foreach (var direction in Directions.Cardinal)
+                {
+                    var nextColumn = direction.GetNextColumn(column);
+                    var nextRow = direction.GetNextRow(row);
+                    if (nextColumn >= 0 && nextRow >= 0 && nextColumn < TOWN_COLUMNS && nextRow < TOWN_ROWS)
+                    {
+                        var nextTownLocation =
+                            result.Single(x =>
+                                x.GetStatistic(StatisticTypes.COLUMN) == nextColumn &&
+                                x.GetStatistic(StatisticTypes.ROW) == nextRow);
+                        CreateRoute(
+                            RouteTypes.ROAD,
+                            $"Road to {nextTownLocation.Name}",
+                            direction,
+                            townLocation,
+                            nextTownLocation);
+                    }
+                }
+            }
+            return result;
+        }
+
+        private ILocation CreateBlueRoom()
+        {
             var blueRoom = CreateLocation(LocationTypes.BLUE_ROOM, "The Blue Room");
             var loft = CreateLocation(LocationTypes.LOFT, "The Loft");
             CreateRoute(RouteTypes.LADDER, "Ladder to Loft", Direction.UP, blueRoom, loft);
             CreateRoute(RouteTypes.LADDER, "Ladder from Loft", Direction.DOWN, loft, blueRoom);
             Avatar = CreateCharacter(CharacterTypes.N00B, blueRoom);
+            return blueRoom;
         }
     }
 }

@@ -2,18 +2,17 @@
 
 namespace FOS.Business
 {
-    internal class Location : ILocation
+    internal class Location : Entity<LocationData>, ILocation
     {
         private readonly WorldData _data;
         private readonly Guid _locationId;
-        private LocationData LocationData => _data.Locations[_locationId];
-        private ILocationType LocationType => LocationTypes.All[LocationData.LocationType];
+        private ILocationType LocationType => LocationTypes.All[GetEntityData().LocationType];
 
         public Guid LocationId => _locationId;
 
-        public string Name => LocationData.Name;
+        public string Name => GetEntityData().Name;
 
-        public IEnumerable<IRoute> Routes => LocationData.RouteIds.Select(x => new Route(_data, x.Key, x.Value));
+        public IEnumerable<IRoute> Routes => GetEntityData().RouteIds.Select(x => new Route(_data, x.Key, x.Value));
 
         internal Location(WorldData data, Guid locationId)
         {
@@ -23,22 +22,22 @@ namespace FOS.Business
 
         public void AddCharacter(ICharacter character)
         {
-            LocationData.CharacterIds.Add(character.CharacterId);
+            GetEntityData().CharacterIds.Add(character.CharacterId);
         }
 
         public void SetRoute(Direction direction, IRoute result)
         {
-            LocationData.RouteIds[direction] = result.RouteId;
+            GetEntityData().RouteIds[direction] = result.RouteId;
         }
 
         public void RemoveCharacter(ICharacter character)
         {
-            LocationData.CharacterIds.Remove(character.CharacterId);
+            GetEntityData().CharacterIds.Remove(character.CharacterId);
         }
 
         public bool HasRoute(Direction direction)
         {
-            return LocationData.RouteIds.ContainsKey(direction);
+            return GetEntityData().RouteIds.ContainsKey(direction);
         }
 
         public IRoute? GetRoute(Direction direction)
@@ -47,7 +46,12 @@ namespace FOS.Business
             {
                 return null;
             }
-            return new Route(_data, direction, LocationData.RouteIds[direction]);
+            return new Route(_data, direction, GetEntityData().RouteIds[direction]);
+        }
+
+        internal override LocationData GetEntityData()
+        {
+            return _data.Locations[_locationId];
         }
     }
 }
