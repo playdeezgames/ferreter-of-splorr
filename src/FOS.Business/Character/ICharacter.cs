@@ -3,7 +3,7 @@ using TGGD.Business;
 
 namespace FOS.Business
 {
-    public interface ICharacter
+    public interface ICharacter : IEntity
     {
         Guid CharacterId { get; }
         IWorld World { get; }

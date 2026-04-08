@@ -3,12 +3,11 @@ using TGGD.Business;
 
 namespace FOS.Business
 {
-    internal class Character : ICharacter
+    internal class Character : Entity<CharacterData>, ICharacter
     {
         private readonly WorldData _data;
         private readonly Guid _characterId;
-        private CharacterData CharacterData => _data.Characters[_characterId];
-        private ICharacterType CharacterType => CharacterTypes.All[CharacterData.CharacterType];
+        private ICharacterType CharacterType => CharacterTypes.All[GetEntityData().CharacterType];
 
         internal Character(WorldData data, Guid characterId)
         {
@@ -20,14 +19,18 @@ namespace FOS.Business
 
         public IWorld World => new World(_data);
 
-        Direction ICharacter.Direction { get => CharacterData.Direction; set => CharacterData.Direction = value; }
+        Direction ICharacter.Direction
+        {
+            get => GetEntityData().Direction;
+            set => GetEntityData().Direction = value;
+        }
         public ILocation Location
         {
-            get => new Location(_data, CharacterData.LocationId);
+            get => new Location(_data, GetEntityData().LocationId);
             set
             {
                 Location.RemoveCharacter(this);
-                CharacterData.LocationId = value.LocationId;
+                GetEntityData().LocationId = value.LocationId;
                 Location.AddCharacter(this);
             }
         }
@@ -45,6 +48,11 @@ namespace FOS.Business
         public void HandleCommand(string command)
         {
             CharacterType.HandleCommand(this, command);
+        }
+
+        internal override CharacterData GetEntityData()
+        {
+            return _data.Characters[_characterId];
         }
     }
 }
