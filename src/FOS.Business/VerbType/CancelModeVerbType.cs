@@ -1,8 +1,8 @@
 ﻿namespace FOS.Business
 {
-    internal class TurnLeftVerbType : IVerbType
+    internal class CancelModeVerbType : IVerbType
     {
-        public string Identifier => Verbs.TURN_LEFT;
+        public string Identifier => Verbs.CANCEL_MODE;
 
         public bool CanPerform(ICharacter character)
         {
@@ -11,12 +11,11 @@
 
         public string GetText(ICharacter character)
         {
-            return "Turn Left";
+            return "Cancel";
         }
 
         public void Perform(ICharacter character)
         {
-            character.Direction = character.Direction.GetPreviousDirection();
             character.ClearMetadata(Metadatas.MODE);
         }
     }

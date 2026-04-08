@@ -4,5 +4,9 @@
     {
         void SetStatistic(string statisticTypeId, int statisticValue);
         int GetStatistic(string statisticTypeId);
+        bool HasMetadata(string metadataId);
+        void SetMetadata(string metadataId, string metadataValue);
+        string GetMetadata(string metadataId);
+        void ClearMetadata(string metadataId);
     }
 }

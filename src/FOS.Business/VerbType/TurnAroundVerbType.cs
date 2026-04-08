@@ -6,7 +6,7 @@
 
         public bool CanPerform(ICharacter character)
         {
-            return true;
+            return character.HasMetadata(Metadatas.MODE) && character.GetMetadata(Metadatas.MODE) == Modes.TURN;
         }
 
         public string GetText(ICharacter character)
@@ -17,6 +17,7 @@
         public void Perform(ICharacter character)
         {
             character.Direction = character.Direction.GetOppositeDirection();
+            character.ClearMetadata(Metadatas.MODE);
         }
     }
 }
