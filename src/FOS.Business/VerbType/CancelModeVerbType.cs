@@ -6,7 +6,11 @@
 
         public bool CanPerform(ICharacter character)
         {
-            return character.HasMetadata(Metadatas.MODE) && character.GetMetadata(Metadatas.MODE) == Modes.TURN;
+            return
+                character.HasMetadata(Metadatas.MODE) &&
+                (
+                    character.GetMetadata(Metadatas.MODE) == Modes.TURN ||
+                    character.GetMetadata(Metadatas.MODE) == Modes.MOVE);
         }
 
         public string GetText(ICharacter character)

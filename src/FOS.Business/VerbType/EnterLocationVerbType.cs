@@ -8,7 +8,10 @@ namespace FOS.Business
 
         public bool CanPerform(ICharacter character)
         {
-            return character.Location.HasRoute(Direction.IN);
+            return
+                character.HasMetadata(Metadatas.MODE) &&
+                character.GetMetadata(Metadatas.MODE) == Modes.MOVE &&
+                character.Location.HasRoute(Direction.IN);
         }
 
         public string GetText(ICharacter character)
@@ -19,6 +22,7 @@ namespace FOS.Business
         public void Perform(ICharacter character)
         {
             character.Location = character.Location.GetRoute(Direction.IN)!.Destination;
+            character.ClearMetadata(Metadatas.MODE);
         }
     }
 }

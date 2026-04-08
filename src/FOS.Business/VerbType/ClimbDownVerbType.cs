@@ -6,7 +6,10 @@
 
         public bool CanPerform(ICharacter character)
         {
-            return character.Location.HasRoute(Data.Direction.DOWN);
+            return
+                character.HasMetadata(Metadatas.MODE) &&
+                character.GetMetadata(Metadatas.MODE) == Modes.MOVE &&
+                character.Location.HasRoute(Data.Direction.DOWN);
         }
 
         public string GetText(ICharacter character)
@@ -17,6 +20,7 @@
         public void Perform(ICharacter character)
         {
             character.Location = character.Location.GetRoute(Data.Direction.DOWN)!.Destination;
+            character.ClearMetadata(Metadatas.MODE);
         }
     }
 }
