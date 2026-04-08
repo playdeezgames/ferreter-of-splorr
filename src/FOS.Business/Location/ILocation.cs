@@ -14,5 +14,6 @@ namespace FOS.Business
         IRoute? GetRoute(Direction direction);
         void AddFeature(IFeature feature);
         IEnumerable<IFeature> Features { get; }
+        bool HasFeatures { get; }
     }
 }

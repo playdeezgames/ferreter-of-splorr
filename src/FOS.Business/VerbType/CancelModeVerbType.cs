@@ -10,9 +10,9 @@
                 character.HasMetadata(Metadatas.MODE) &&
                 (
                     character.GetMetadata(Metadatas.MODE) == Modes.TURN ||
-                    character.GetMetadata(Metadatas.MODE) == Modes.MOVE);
+                    character.GetMetadata(Metadatas.MODE) == Modes.MOVE ||
+                    character.GetMetadata(Metadatas.MODE) == Modes.FEATURES);
         }
-
         public string GetText(ICharacter character)
         {
             return "Cancel";

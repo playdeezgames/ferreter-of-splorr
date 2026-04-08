@@ -6,7 +6,6 @@ namespace FOS.Business
     {
         private readonly WorldData _data;
         private readonly Guid _locationId;
-        private ILocationType LocationType => LocationTypes.All[GetEntityData().LocationType];
 
         public Guid LocationId => _locationId;
 
@@ -15,6 +14,8 @@ namespace FOS.Business
         public IEnumerable<IRoute> Routes => GetEntityData().RouteIds.Select(x => new Route(_data, x.Key, x.Value));
 
         public IEnumerable<IFeature> Features => GetEntityData().FeatureIds.Select(x => new Feature(_data, x));
+
+        public bool HasFeatures => GetEntityData().FeatureIds.Count != 0;
 
         internal Location(WorldData data, Guid locationId)
         {

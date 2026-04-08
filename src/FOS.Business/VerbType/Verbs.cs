@@ -13,6 +13,7 @@
         internal readonly static string TURN_MODE = nameof(TURN_MODE);
         internal readonly static string CANCEL_MODE = nameof(CANCEL_MODE);
         internal readonly static string MOVE_MODE = nameof(MOVE_MODE);
+        internal readonly static string FEATURES_MODE = nameof(FEATURES_MODE);
         internal static IReadOnlyDictionary<string, IVerbType> All =
             new List<IVerbType>
             {
@@ -26,7 +27,8 @@
                 new ExitLocationVerbType(),
                 new TurnModeVerbType(),
                 new CancelModeVerbType(),
-                new MoveModeVerbType()
+                new MoveModeVerbType(),
+                new FeaturesModeVerbType()
             }.ToDictionary(x => x.Identifier, x => x);
     }
 }
