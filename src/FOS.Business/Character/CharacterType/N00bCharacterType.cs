@@ -9,19 +9,9 @@ namespace FOS.Business
         public IEnumerable<IDialogChoice> GetChoices(ICharacter character)
         {
             var choices = new List<IDialogChoice>();
-            AddCurrentFeatureChoices(choices, character);
             AddFeaturesChoices(choices, character);
             AddVerbChoices(choices, character);
             return choices;
-        }
-
-        private static void AddCurrentFeatureChoices(List<IDialogChoice> choices, ICharacter character)
-        {
-            var feature = character.Feature;
-            if (feature != null)
-            {
-                return;
-            }
         }
 
         private static void AddVerbChoices(List<IDialogChoice> choices, ICharacter character)
