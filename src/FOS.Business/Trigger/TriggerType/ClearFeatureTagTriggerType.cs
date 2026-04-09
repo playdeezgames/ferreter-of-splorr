@@ -1,0 +1,18 @@
+﻿namespace FOS.Business
+{
+    internal class ClearFeatureTagTriggerType : ITriggerType
+    {
+        public string Identifier => TriggerTypes.CLEAR_FEATURE_TAG;
+
+        public void Fire(ITrigger trigger, ICharacter character)
+        {
+            var feature = character.Feature!;
+            var tagId = trigger.GetMetadata(Metadatas.TAG_ID);
+            feature.ClearTag(tagId);
+        }
+
+        public void Initialize(ITrigger trigger)
+        {
+        }
+    }
+}

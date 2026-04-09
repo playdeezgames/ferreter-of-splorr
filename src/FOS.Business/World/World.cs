@@ -163,9 +163,20 @@ namespace FOS.Business
             CreateRoute(RouteTypes.LADDER, "Ladder to Loft", Direction.UP, blueRoom, loft);
             CreateRoute(RouteTypes.LADDER, "Ladder from Loft", Direction.DOWN, loft, blueRoom);
             Avatar = CreateCharacter(CharacterTypes.N00B, blueRoom);
-            var bed = CreateFeature(FeatureTypes.BED, "Yer Bed", blueRoom);
-            bed.SetTag(Tags.SEARCHABLE);
+            CreateBlueRoomBed(blueRoom);
             return blueRoom;
+        }
+
+        private void CreateBlueRoomBed(ILocation location)
+        {
+            var feature = CreateFeature(FeatureTypes.BED, "Yer Bed", location);
+            feature.SetTag(Tags.SEARCHABLE);
+            var clearTagTrigger = CreateTrigger(TriggerTypes.CLEAR_FEATURE_TAG);
+            clearTagTrigger.SetMetadata(Metadatas.TAG_ID, Tags.SEARCHABLE);
+            var bestowItemTrigger = CreateTrigger(TriggerTypes.BESTOW_ITEM_OF_TYPE);
+            bestowItemTrigger.SetMetadata(Metadatas.ITEM_TYPE, ItemTypes.DAGGER);
+            clearTagTrigger.NextTrigger = bestowItemTrigger;
+            feature.SetTrigger(TriggerTypes.CLEAR_FEATURE_TAG, clearTagTrigger);
         }
 
         public IFeature CreateFeature(string featureType, string name, ILocation location)
@@ -186,6 +197,18 @@ namespace FOS.Business
         public IFeature GetFeature(Guid featureId)
         {
             return new Feature(_data, featureId);
+        }
+
+        public ITrigger CreateTrigger(string triggerType)
+        {
+            var triggerId = Guid.NewGuid();
+            _data.Triggers[triggerId] = new TriggerData
+            {
+                TriggerType = triggerType
+            };
+            var result = new Trigger(_data, triggerId);
+            TriggerTypes.All[triggerType].Initialize(result);
+            return result;
         }
     }
 }

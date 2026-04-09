@@ -16,7 +16,7 @@
 
         public void Perform(ICharacter character)
         {
-            character.Feature!.ClearTag(Tags.SEARCHABLE);
+            character.Feature!.FireTrigger(TriggerTypes.CLEAR_FEATURE_TAG, character);
         }
     }
 }

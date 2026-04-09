@@ -14,5 +14,6 @@ namespace FOS.Business
         IRoute CreateRoute(string routeType, string name, Direction direction, ILocation fromLocation, ILocation toLocation);
         IFeature CreateFeature(string featureType, string name, ILocation location);
         IFeature GetFeature(Guid featureId);
+        ITrigger CreateTrigger(string triggerType);
     }
 }
