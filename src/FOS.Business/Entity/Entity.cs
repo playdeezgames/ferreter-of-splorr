@@ -9,6 +9,11 @@ namespace FOS.Business
             GetEntityData().Metadatas.Remove(metadataId);
         }
 
+        public void ClearTag(string tagId)
+        {
+            GetEntityData().Tags.Remove(tagId);
+        }
+
         public string GetMetadata(string metadataId)
         {
             return GetEntityData().Metadatas[metadataId];
@@ -24,6 +29,11 @@ namespace FOS.Business
             return GetEntityData().Metadatas.ContainsKey(metadataId);
         }
 
+        public bool HasTag(string tagId)
+        {
+            return GetEntityData().Tags.Contains(tagId);
+        }
+
         public void SetMetadata(string metadataId, string metadataValue)
         {
             GetEntityData().Metadatas[metadataId] = metadataValue;
@@ -32,6 +42,11 @@ namespace FOS.Business
         public void SetStatistic(string statisticTypeId, int statisticValue)
         {
             GetEntityData().Statistics[statisticTypeId] = statisticValue;
+        }
+
+        public void SetTag(string tagId)
+        {
+            GetEntityData().Tags.Add(tagId);
         }
 
         internal abstract TEntityData GetEntityData();

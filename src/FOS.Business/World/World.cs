@@ -108,7 +108,6 @@ namespace FOS.Business
         {
             Clear();
             var blueRoom = CreateBlueRoom();
-            CreateFeature(FeatureTypes.BED, "Yer Bed", blueRoom);
             var town = CreateTown();
             var blueRoomTownLocation = RNG.FromEnumerable(town.Where(x => !x.HasRoute(Direction.IN)));
             town.Remove(blueRoomTownLocation);
@@ -164,6 +163,8 @@ namespace FOS.Business
             CreateRoute(RouteTypes.LADDER, "Ladder to Loft", Direction.UP, blueRoom, loft);
             CreateRoute(RouteTypes.LADDER, "Ladder from Loft", Direction.DOWN, loft, blueRoom);
             Avatar = CreateCharacter(CharacterTypes.N00B, blueRoom);
+            var bed = CreateFeature(FeatureTypes.BED, "Yer Bed", blueRoom);
+            bed.SetTag(Tags.SEARCHABLE);
             return blueRoom;
         }
 
