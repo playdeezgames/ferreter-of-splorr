@@ -35,6 +35,25 @@ namespace FOS.Business
             }
         }
 
+        public IFeature? Feature
+        {
+            get
+            {
+                var featureId = GetEntityData().FeatureId;
+                if (featureId.HasValue)
+                {
+                    return new Feature(_data, featureId.Value);
+                }
+                return null;
+            }
+            set
+            {
+                GetEntityData().FeatureId = value?.FeatureId;
+            }
+        }
+
+        public bool HasFeature => GetEntityData().FeatureId.HasValue;
+
         public IEnumerable<IDialogChoice> GetChoices()
         {
             return CharacterType.GetChoices(this);

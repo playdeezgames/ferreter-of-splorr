@@ -181,5 +181,10 @@ namespace FOS.Business
             FeatureTypes.All[featureType].Initialize(result);
             return result;
         }
+
+        public IFeature GetFeature(Guid featureId)
+        {
+            return new Feature(_data, featureId);
+        }
     }
 }
