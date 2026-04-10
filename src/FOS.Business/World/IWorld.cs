@@ -17,5 +17,6 @@ namespace FOS.Business
         ITrigger CreateTrigger(string triggerType);
         IItem CreateItem(string itemType);
         IInventory CreateInventory();
+        IEnumerable<IMessage> Messages { get; }
     }
 }

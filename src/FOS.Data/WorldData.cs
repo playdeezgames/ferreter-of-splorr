@@ -10,5 +10,6 @@
         public Dictionary<Guid, TriggerData> Triggers { get; set; } = [];
         public Dictionary<Guid, InventoryData> Inventories { get; set; } = [];
         public Dictionary<Guid, ItemData> Items { get; set; } = [];
+        public List<MessageData> Messages { get; set; } = [];
     }
 }

@@ -68,12 +68,14 @@ namespace FOS.Business
         public IEnumerable<IDialogLine> GetLines(ICharacter character)
         {
             var location = character.Location;
-            var lines = new List<IDialogLine>
-            {
-                new DialogLine(Moods.NORMAL, "Yer the n00b!"),
-                new DialogLine(Moods.NORMAL, $"Yer facing {character.Direction.GetName()}."),
-                new DialogLine(Moods.NORMAL, $"Location: {location.Name}.")
-            };
+            var lines = new List<IDialogLine>();
+            lines.AddRange(character.World.Messages.Select(x => new DialogLine(x.Mood, x.Text)));
+            lines.AddRange(
+                [
+                    new DialogLine(Moods.NORMAL, "Yer the n00b!"),
+                    new DialogLine(Moods.NORMAL, $"Yer facing {character.Direction.GetName()}."),
+                    new DialogLine(Moods.NORMAL, $"Location: {location.Name}.")
+                ]);
             GetCurrentFeatureLines(lines, character);
             GetFeaturesLines(lines, location);
             GetRoutesLines(lines, location);
