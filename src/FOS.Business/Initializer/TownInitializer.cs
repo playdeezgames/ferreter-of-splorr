@@ -2,7 +2,7 @@
 {
     internal static class TownInitializer
     {
-        internal static void InitializeTown(IWorld world, Action<List<ILocation>> initializer)
+        internal static void Run(IWorld world, Action<List<ILocation>> initializer)
         {
             const int TOWN_COLUMNS = 3;
             const int TOWN_ROWS = 3;
