@@ -22,7 +22,7 @@ namespace FOS.UI
         {
             if (command == Commands.EMBARK)
             {
-                _world.Initialize();
+                _world.Initialize(WorldInitializer.InitializeWorld);
                 return new InPlayState(_world);
             }
             return this;

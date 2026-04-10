@@ -6,7 +6,7 @@ namespace FOS.Business
     public interface IWorld : IDialog
     {
         void Clear();
-        void Initialize();
+        void Initialize(Action<IWorld> initializer);
         ICharacter CreateCharacter(string characterType, ILocation location, Action<ICharacter>? initializer = null);
         ICharacter? Avatar { get; set; }
         void HandleCommand(string command);

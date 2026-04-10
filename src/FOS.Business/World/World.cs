@@ -120,90 +120,10 @@ namespace FOS.Business
             Avatar?.HandleCommand(command);
         }
 
-        public void Initialize()
+        public void Initialize(Action<IWorld> initializer)
         {
             Clear();
-            var blueRoom = CreateBlueRoom();
-            var town = CreateTown();
-            var blueRoomTownLocation = RNG.FromEnumerable(town.Where(x => !x.HasRoute(Direction.IN)));
-            town.Remove(blueRoomTownLocation);
-            CreateRoute(RouteTypes.DOOR, "The Blue Room Entrance", Direction.IN, blueRoomTownLocation, blueRoom);
-            CreateRoute(RouteTypes.DOOR, "The Blue Room Exit", Direction.OUT, blueRoom, blueRoomTownLocation);
-        }
-
-        private List<ILocation> CreateTown()
-        {
-            const int TOWN_COLUMNS = 3;
-            const int TOWN_ROWS = 3;
-            var result = new List<ILocation>();
-            foreach (var column in Enumerable.Range(0, TOWN_COLUMNS))
-            {
-                foreach (var row in Enumerable.Range(0, TOWN_ROWS))
-                {
-                    var townLocation = CreateLocation(LocationTypes.TOWN, $"Town Location ({column},{row})");
-                    townLocation.SetStatistic(StatisticTypes.COLUMN, column);
-                    townLocation.SetStatistic(StatisticTypes.ROW, row);
-                    result.Add(townLocation);
-                }
-            }
-            foreach (var townLocation in result)
-            {
-                var column = townLocation.GetStatistic(StatisticTypes.COLUMN);
-                var row = townLocation.GetStatistic(StatisticTypes.ROW);
-                foreach (var direction in Directions.Cardinal)
-                {
-                    var nextColumn = direction.GetNextColumn(column);
-                    var nextRow = direction.GetNextRow(row);
-                    if (nextColumn >= 0 && nextRow >= 0 && nextColumn < TOWN_COLUMNS && nextRow < TOWN_ROWS)
-                    {
-                        var nextTownLocation =
-                            result.Single(x =>
-                                x.GetStatistic(StatisticTypes.COLUMN) == nextColumn &&
-                                x.GetStatistic(StatisticTypes.ROW) == nextRow);
-                        CreateRoute(
-                            RouteTypes.ROAD,
-                            $"Road to {nextTownLocation.Name}",
-                            direction,
-                            townLocation,
-                            nextTownLocation);
-                    }
-                }
-            }
-            return result;
-        }
-
-        private ILocation CreateBlueRoom()
-        {
-            var blueRoom = CreateLocation(LocationTypes.BLUE_ROOM, "The Blue Room");
-            var loft = CreateLocation(LocationTypes.LOFT, "The Loft");
-            CreateRoute(RouteTypes.LADDER, "Ladder to Loft", Direction.UP, blueRoom, loft);
-            CreateRoute(RouteTypes.LADDER, "Ladder from Loft", Direction.DOWN, loft, blueRoom);
-            Avatar = CreateCharacter(CharacterTypes.N00B, blueRoom);
-            CreateBlueRoomBed(blueRoom);
-            return blueRoom;
-        }
-
-        private void CreateBlueRoomBed(ILocation location)
-        {
-            CreateFeature(FeatureTypes.BED, "Yer Bed", location, f =>
-            {
-                f.SetTrigger(Triggers.SEARCH, CreateTrigger(
-                    TriggerTypes.BESTOW_INVENTORY,
-                    bit =>
-                    {
-                        bit.Inventory.AddItem(CreateItem(ItemTypes.DAGGER));
-                        bit.NextTrigger = CreateTrigger(
-                            TriggerTypes.ADD_MESSAGE,
-                            mt =>
-                            {
-                                mt.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
-                                mt.SetMetadata(Metadatas.TEXT, "You find a rusty dagger!");
-                                mt.NextTrigger = CreateTrigger(
-                                    TriggerTypes.DESTROY_FEATURE_TRIGGER,
-                                    dt => dt.SetMetadata(Metadatas.TRIGGER_ID, Triggers.SEARCH));
-                            });
-                    }));
-            });
+            initializer.Invoke(this);
         }
 
         public IFeature CreateFeature(string featureType, string name, ILocation location, Action<IFeature>? initializer = null)
