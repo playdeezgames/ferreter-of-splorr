@@ -19,7 +19,9 @@
 
         public void Perform(ICharacter character)
         {
-            character.Location = character.Location.GetRoute(character.Direction)!.Destination;
+            var route = character.Location.GetRoute(character.Direction)!;
+            character.AddMessage(Moods.NORMAL, $"You move ahead thru {route.Name}.");
+            character.Location = route.Destination;
             character.ClearMetadata(Metadatas.MODE);
         }
     }

@@ -19,7 +19,9 @@
 
         public void Perform(ICharacter character)
         {
-            character.Location = character.Location.GetRoute(Data.Direction.DOWN)!.Destination;
+            var route = character.Location.GetRoute(Data.Direction.DOWN)!;
+            character.AddMessage(Moods.NORMAL, $"You climb down {route.Name}.");
+            character.Location = route.Destination;
             character.ClearMetadata(Metadatas.MODE);
         }
     }

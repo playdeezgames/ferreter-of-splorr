@@ -21,7 +21,9 @@ namespace FOS.Business
 
         public void Perform(ICharacter character)
         {
-            character.Location = character.Location.GetRoute(Direction.OUT)!.Destination;
+            var route = character.Location.GetRoute(Direction.OUT)!;
+            character.AddMessage(Moods.NORMAL, $"You exit through {route.Name}.");
+            character.Location = route.Destination;
             character.ClearMetadata(Metadatas.MODE);
         }
     }
