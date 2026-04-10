@@ -71,5 +71,10 @@ namespace FOS.Business
         {
             return _data.Characters[_characterId];
         }
+
+        public void AddMessage(string mood, string text)
+        {
+            CharacterType.AddMessage(this, mood, text);
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace FOS.Business
         IEnumerable<IDialogChoice> GetChoices(ICharacter character);
         string GetPrompt(ICharacter character);
         void HandleCommand(ICharacter character, string command);
+        void AddMessage(Character character, string mood, string text);
     }
 }

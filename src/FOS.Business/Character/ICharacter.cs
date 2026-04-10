@@ -14,5 +14,6 @@ namespace FOS.Business
         ILocation Location { get; set; }
         IFeature? Feature { get; set; }
         bool HasFeature { get; }
+        void AddMessage(string mood, string text);
     }
 }

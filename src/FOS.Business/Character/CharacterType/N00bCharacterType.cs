@@ -95,6 +95,7 @@ namespace FOS.Business
 
         public void HandleCommand(ICharacter character, string command)
         {
+            character.World.ClearMessages();
             if (character.HasMetadata(Metadatas.MODE))
             {
                 if (character.GetMetadata(Metadatas.MODE) == Modes.FEATURES)
@@ -142,6 +143,11 @@ namespace FOS.Business
             {
                 throw new NotImplementedException();
             }
+        }
+
+        public void AddMessage(Character character, string mood, string text)
+        {
+            character.World.AddMessage(mood, text);
         }
     }
 }

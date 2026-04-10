@@ -235,5 +235,15 @@ namespace FOS.Business
             var result = new Inventory(_data, inventoryId);
             return result;
         }
+
+        public void ClearMessages()
+        {
+            _data.Messages.Clear();
+        }
+
+        public void AddMessage(string mood, string text)
+        {
+            _data.Messages.Add(new MessageData { Mood = mood, Text = text });
+        }
     }
 }

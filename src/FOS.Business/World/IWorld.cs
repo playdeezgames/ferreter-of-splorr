@@ -18,5 +18,7 @@ namespace FOS.Business
         IItem CreateItem(string itemType);
         IInventory CreateInventory();
         IEnumerable<IMessage> Messages { get; }
+        void ClearMessages();
+        void AddMessage(string mood, string text);
     }
 }

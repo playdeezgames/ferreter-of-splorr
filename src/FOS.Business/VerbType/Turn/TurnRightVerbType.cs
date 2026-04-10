@@ -18,6 +18,7 @@
         {
             character.Direction = character.Direction.GetNextDirection();
             character.ClearMetadata(Metadatas.MODE);
+            character.AddMessage(Moods.NORMAL, "You turn right.");
         }
     }
 }
