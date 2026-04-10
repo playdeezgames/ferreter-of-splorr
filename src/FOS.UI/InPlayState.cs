@@ -6,6 +6,8 @@ namespace FOS.UI
 {
     internal class InPlayState(IWorld world) : UIState(world, GenerateLines(world), GenerateChoices(world))
     {
+        public override string Prompt => _world.Prompt;
+
         private static List<IDialogChoice> GenerateChoices(IWorld world)
         {
             List<IDialogChoice> choices = [.. world.GetChoices()];
@@ -20,7 +22,7 @@ namespace FOS.UI
 
         public override IUIState HandleCommand(string command)
         {
-            if(command == Commands.GAME_MENU)
+            if (command == Commands.GAME_MENU)
             {
                 return new GameMenuState(_world);
             }

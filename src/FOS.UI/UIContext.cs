@@ -10,6 +10,8 @@ namespace FOS.UI
         private IUIState? _uiState = null;
         private readonly IWorld _world = World.Create(new WorldData());
 
+        public string Prompt => _uiState?.Prompt ?? string.Empty;
+
         public IEnumerable<IDialogChoice> GetChoices()
         {
             return _uiState?.GetChoices() ?? [];
@@ -28,7 +30,7 @@ namespace FOS.UI
 
         public Task InitializeAsync()
         {
-            return Task.Run(() => 
+            return Task.Run(() =>
             {
                 _uiState = new TitleState(_world);
             });

@@ -8,6 +8,7 @@ namespace FOS.Business
         void Initialize(ICharacter character);
         IEnumerable<IDialogLine> GetLines(ICharacter character);
         IEnumerable<IDialogChoice> GetChoices(ICharacter character);
+        string GetPrompt(ICharacter character);
         void HandleCommand(ICharacter character, string command);
     }
 }

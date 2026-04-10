@@ -4,5 +4,6 @@
     {
         IEnumerable<IDialogLine> GetLines();
         IEnumerable<IDialogChoice> GetChoices();
+        string Prompt { get; }
     }
 }

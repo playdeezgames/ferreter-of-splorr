@@ -32,6 +32,8 @@ namespace FOS.Business
             }
         }
 
+        public string Prompt => Avatar?.Prompt ?? string.Empty;
+
         public static IWorld Create(WorldData worldData)
         {
             return new World(worldData);

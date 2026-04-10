@@ -50,6 +50,8 @@ namespace FOS.Business
 
         public bool HasFeature => GetEntityData().FeatureId.HasValue;
 
+        public string Prompt => CharacterType.GetPrompt(this);
+
         public IEnumerable<IDialogChoice> GetChoices()
         {
             return CharacterType.GetChoices(this);

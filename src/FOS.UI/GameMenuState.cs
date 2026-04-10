@@ -4,9 +4,11 @@ using TGGD.UI;
 
 namespace FOS.UI
 {
-    internal class GameMenuState(IWorld world) : UIState(world, GenerateLines(world), GenerateChoices(world))
+    internal class GameMenuState(IWorld world) : UIState(world, GenerateLines(), GenerateChoices())
     {
-        private static IEnumerable<IDialogChoice> GenerateChoices(IWorld world)
+        public override string Prompt => "Game Menu:";
+
+        private static IEnumerable<IDialogChoice> GenerateChoices()
         {
             return [
                 new DialogChoice(Commands.RESUME_GAME, "Resume Game"),
@@ -14,18 +16,18 @@ namespace FOS.UI
             ];
         }
 
-        private static IEnumerable<IDialogLine> GenerateLines(IWorld world)
+        private static IEnumerable<IDialogLine> GenerateLines()
         {
-            return [new DialogLine(Moods.MENU_HEADER,"Game Menu:")];
+            return [];
         }
 
         public override IUIState HandleCommand(string command)
         {
-            if(command == Commands.RESUME_GAME)
+            if (command == Commands.RESUME_GAME)
             {
                 return new InPlayState(_world);
             }
-            else if(command == Commands.ABANDON_GAME)
+            else if (command == Commands.ABANDON_GAME)
             {
                 return new MainMenuState(_world);
             }

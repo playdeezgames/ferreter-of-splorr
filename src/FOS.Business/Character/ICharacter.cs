@@ -8,6 +8,7 @@ namespace FOS.Business
         Guid CharacterId { get; }
         IEnumerable<IDialogChoice> GetChoices();
         IEnumerable<IDialogLine> GetLines();
+        string Prompt { get; }
         void HandleCommand(string command);
         Direction Direction { get; set; }
         ILocation Location { get; set; }

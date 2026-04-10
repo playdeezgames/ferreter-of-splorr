@@ -4,16 +4,13 @@ using TGGD.UI;
 
 namespace FOS.UI
 {
-    internal class TitleState : UIState
+    internal class TitleState(IWorld world) : UIState(world, GenerateLines(), GenerateChoices())
     {
-        public TitleState(IWorld world): base(world, GenerateLines(), GenerateChoices())
-        {
-
-        }
+        public override string Prompt => string.Empty;
 
         private static IEnumerable<IDialogChoice> GenerateChoices()
         {
-            return [new DialogChoice(Commands.EMBARK,"OK")];
+            return [new DialogChoice(Commands.EMBARK, "OK")];
         }
 
         private static IEnumerable<IDialogLine> GenerateLines()

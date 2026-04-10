@@ -110,5 +110,36 @@ namespace FOS.Business
         public void Initialize(ICharacter character)
         {
         }
+
+        public string GetPrompt(ICharacter character)
+        {
+            if (!character.HasMetadata(Metadatas.MODE))
+            {
+                return "Now What?";
+            }
+            if (character.GetMetadata(Metadatas.MODE) == Modes.MOVE)
+            {
+                return "Move how?";
+            }
+            else if (character.GetMetadata(Metadatas.MODE) == Modes.TURN)
+            {
+                return "Turn how?";
+            }
+            else if (character.GetMetadata(Metadatas.MODE) == Modes.FEATURES)
+            {
+                if (character.HasFeature)
+                {
+                    return $"Interact with {character.Feature!.Name}...";
+                }
+                else
+                {
+                    return "Which Feature?";
+                }
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

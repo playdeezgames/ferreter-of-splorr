@@ -10,6 +10,8 @@ namespace FOS.UI
         private readonly List<IDialogChoice> _choices = [.. choices];
         protected readonly IWorld _world = world;
 
+        public abstract string Prompt { get; }
+
         public IEnumerable<IDialogChoice> GetChoices()
         {
             return _choices;
