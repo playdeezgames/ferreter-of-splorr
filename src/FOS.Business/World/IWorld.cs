@@ -12,9 +12,9 @@ namespace FOS.Business
         void HandleCommand(string command);
         ILocation CreateLocation(string locationType, string name);
         IRoute CreateRoute(string routeType, string name, Direction direction, ILocation fromLocation, ILocation toLocation);
-        IFeature CreateFeature(string featureType, string name, ILocation location);
+        IFeature CreateFeature(string featureType, string name, ILocation location, Action<IFeature>? initializer = null);
         IFeature GetFeature(Guid featureId);
-        ITrigger CreateTrigger(string triggerType);
+        ITrigger CreateTrigger(string triggerType, Action<ITrigger>? initializer = null);
         IItem CreateItem(string itemType);
         IInventory CreateInventory();
         IEnumerable<IMessage> Messages { get; }

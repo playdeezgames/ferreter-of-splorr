@@ -173,18 +173,28 @@ namespace FOS.Business
 
         private void CreateBlueRoomBed(ILocation location)
         {
-            var feature = CreateFeature(FeatureTypes.BED, "Yer Bed", location);
-            var bestowItemTrigger = CreateTrigger(TriggerTypes.BESTOW_INVENTORY);
-            bestowItemTrigger.SetMetadata(Metadatas.ITEM_TYPE, ItemTypes.DAGGER);
-            var bestowedDagger = CreateItem(ItemTypes.DAGGER);
-            bestowItemTrigger.Inventory.AddItem(bestowedDagger);
-            var destroyTrigger = CreateTrigger(TriggerTypes.DESTROY_FEATURE_TRIGGER);
-            destroyTrigger.SetMetadata(Metadatas.TRIGGER_ID, Triggers.SEARCH);
-            bestowItemTrigger.NextTrigger = destroyTrigger;
-            feature.SetTrigger(Triggers.SEARCH, bestowItemTrigger);
+            CreateFeature(FeatureTypes.BED, "Yer Bed", location, f =>
+            {
+                f.SetTrigger(Triggers.SEARCH, CreateTrigger(
+                    TriggerTypes.BESTOW_INVENTORY,
+                    bit =>
+                    {
+                        bit.Inventory.AddItem(CreateItem(ItemTypes.DAGGER));
+                        bit.NextTrigger = CreateTrigger(
+                            TriggerTypes.ADD_MESSAGE,
+                            mt =>
+                            {
+                                mt.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
+                                mt.SetMetadata(Metadatas.TEXT, "You find a rusty dagger!");
+                                mt.NextTrigger = CreateTrigger(
+                                    TriggerTypes.DESTROY_FEATURE_TRIGGER,
+                                    dt => dt.SetMetadata(Metadatas.TRIGGER_ID, Triggers.SEARCH));
+                            });
+                    }));
+            });
         }
 
-        public IFeature CreateFeature(string featureType, string name, ILocation location)
+        public IFeature CreateFeature(string featureType, string name, ILocation location, Action<IFeature>? initializer = null)
         {
             var featureId = Guid.NewGuid();
             _data.Features[featureId] = new FeatureData
@@ -196,6 +206,7 @@ namespace FOS.Business
             var result = new Feature(_data, featureId);
             location.AddFeature(result);
             FeatureTypes.All[featureType].Initialize(result);
+            initializer?.Invoke(result);
             return result;
         }
 
@@ -204,7 +215,7 @@ namespace FOS.Business
             return new Feature(_data, featureId);
         }
 
-        public ITrigger CreateTrigger(string triggerType)
+        public ITrigger CreateTrigger(string triggerType, Action<ITrigger>? initializer = null)
         {
             var triggerId = Guid.NewGuid();
             _data.Triggers[triggerId] = new TriggerData
@@ -213,6 +224,7 @@ namespace FOS.Business
             };
             var result = new Trigger(_data, triggerId);
             TriggerTypes.All[triggerType].Initialize(result);
+            initializer?.Invoke(result);
             return result;
         }
 
