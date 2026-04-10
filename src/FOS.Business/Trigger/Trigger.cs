@@ -2,17 +2,9 @@
 
 namespace FOS.Business
 {
-    internal class Trigger : Entity<TriggerData>, ITrigger
+    internal class Trigger(WorldData data, Guid triggerId) : InventoryEntity<TriggerData>(data), ITrigger
     {
-        private readonly WorldData _data;
-        private readonly Guid _triggerId;
-        internal Trigger(WorldData data, Guid triggerId)
-        {
-            _data = data;
-            _triggerId = triggerId;
-        }
-
-        public Guid TriggerId => _triggerId;
+        public Guid TriggerId => triggerId;
 
         public ITrigger? NextTrigger
         {
@@ -39,7 +31,7 @@ namespace FOS.Business
 
         internal override TriggerData GetEntityData()
         {
-            return _data.Triggers[_triggerId];
+            return _data.Triggers[TriggerId];
         }
     }
 }

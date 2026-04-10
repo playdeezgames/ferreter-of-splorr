@@ -170,8 +170,10 @@ namespace FOS.Business
         private void CreateBlueRoomBed(ILocation location)
         {
             var feature = CreateFeature(FeatureTypes.BED, "Yer Bed", location);
-            var bestowItemTrigger = CreateTrigger(TriggerTypes.BESTOW_ITEM_OF_TYPE);
+            var bestowItemTrigger = CreateTrigger(TriggerTypes.BESTOW_INVENTORY);
             bestowItemTrigger.SetMetadata(Metadatas.ITEM_TYPE, ItemTypes.DAGGER);
+            var bestowedDagger = CreateItem(ItemTypes.DAGGER);
+            bestowItemTrigger.Inventory.AddItem(bestowedDagger);
             var destroyTrigger = CreateTrigger(TriggerTypes.DESTROY_FEATURE_TRIGGER);
             destroyTrigger.SetMetadata(Metadatas.TRIGGER_ID, Triggers.SEARCH);
             bestowItemTrigger.NextTrigger = destroyTrigger;
@@ -207,6 +209,26 @@ namespace FOS.Business
             };
             var result = new Trigger(_data, triggerId);
             TriggerTypes.All[triggerType].Initialize(result);
+            return result;
+        }
+
+        public IItem CreateItem(string itemType)
+        {
+            var itemId = Guid.NewGuid();
+            _data.Items[itemId] = new ItemData
+            {
+                ItemType = itemType
+            };
+            var result = new Item(_data, itemId);
+            ItemTypes.All[itemType].Initialize(result);
+            return result;
+        }
+
+        public IInventory CreateInventory()
+        {
+            var inventoryId = Guid.NewGuid();
+            _data.Inventories[inventoryId] = new InventoryData();
+            var result = new Inventory(_data, inventoryId);
             return result;
         }
     }

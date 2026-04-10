@@ -3,21 +3,17 @@ using TGGD.Business;
 
 namespace FOS.Business
 {
-    internal class Character : Entity<CharacterData>, ICharacter
+    internal class Character : InventoryEntity<CharacterData>, ICharacter
     {
-        private readonly WorldData _data;
         private readonly Guid _characterId;
         private ICharacterType CharacterType => CharacterTypes.All[GetEntityData().CharacterType];
 
-        internal Character(WorldData data, Guid characterId)
+        internal Character(WorldData data, Guid characterId) : base(data)
         {
-            _data = data;
             _characterId = characterId;
         }
 
         public Guid CharacterId => _characterId;
-
-        public IWorld World => new World(_data);
 
         Direction ICharacter.Direction
         {

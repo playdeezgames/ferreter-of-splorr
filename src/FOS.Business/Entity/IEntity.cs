@@ -11,5 +11,6 @@
         bool HasTag(string tagId);
         void ClearTag(string tagId);
         void SetTag(string tagId);
+        IWorld World { get; }
     }
 }

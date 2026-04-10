@@ -15,5 +15,7 @@ namespace FOS.Business
         IFeature CreateFeature(string featureType, string name, ILocation location);
         IFeature GetFeature(Guid featureId);
         ITrigger CreateTrigger(string triggerType);
+        IItem CreateItem(string itemType);
+        IInventory CreateInventory();
     }
 }

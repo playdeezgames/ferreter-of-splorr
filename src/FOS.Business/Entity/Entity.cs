@@ -2,8 +2,12 @@
 
 namespace FOS.Business
 {
-    internal abstract class Entity<TEntityData> : IEntity where TEntityData : EntityData
+    internal abstract class Entity<TEntityData>(WorldData data) : IEntity where TEntityData : EntityData
     {
+        protected readonly WorldData _data = data;
+
+        public IWorld World => new World(_data);
+
         public void ClearMetadata(string metadataId)
         {
             GetEntityData().Metadatas.Remove(metadataId);

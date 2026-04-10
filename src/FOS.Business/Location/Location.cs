@@ -2,12 +2,9 @@
 
 namespace FOS.Business
 {
-    internal class Location : Entity<LocationData>, ILocation
+    internal class Location(WorldData data, Guid locationId) : Entity<LocationData>(data), ILocation
     {
-        private readonly WorldData _data;
-        private readonly Guid _locationId;
-
-        public Guid LocationId => _locationId;
+        public Guid LocationId => locationId;
 
         public string Name => GetEntityData().Name;
 
@@ -16,12 +13,6 @@ namespace FOS.Business
         public IEnumerable<IFeature> Features => GetEntityData().FeatureIds.Select(x => new Feature(_data, x));
 
         public bool HasFeatures => GetEntityData().FeatureIds.Count != 0;
-
-        internal Location(WorldData data, Guid locationId)
-        {
-            _data = data;
-            _locationId = locationId;
-        }
 
         public void AddCharacter(ICharacter character)
         {
@@ -54,7 +45,7 @@ namespace FOS.Business
 
         internal override LocationData GetEntityData()
         {
-            return _data.Locations[_locationId];
+            return _data.Locations[LocationId];
         }
 
         public void AddFeature(IFeature feature)
