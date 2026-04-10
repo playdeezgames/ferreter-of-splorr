@@ -4,10 +4,10 @@
     {
         Guid FeatureId { get; }
         string Name { get; }
-        void FireTrigger(string triggerType, ICharacter character);
-        bool HasTrigger(string triggerType);
-        ITrigger GetTrigger(string triggerType);
-        void SetTrigger(string triggerType, ITrigger trigger);
-        void ClearTrigger(string triggerType);
+        void FireTrigger(string triggerCategory, ICharacter character);
+        bool HasTrigger(string triggerCategory);
+        ITrigger GetTrigger(string triggerCategory);
+        void SetTrigger(string triggerCategory, ITrigger trigger);
+        void ClearTrigger(string triggerCategory);
     }
 }

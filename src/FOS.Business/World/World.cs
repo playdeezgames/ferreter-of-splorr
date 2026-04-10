@@ -170,13 +170,12 @@ namespace FOS.Business
         private void CreateBlueRoomBed(ILocation location)
         {
             var feature = CreateFeature(FeatureTypes.BED, "Yer Bed", location);
-            feature.SetTag(Tags.SEARCHABLE);
-            var clearTagTrigger = CreateTrigger(TriggerTypes.CLEAR_FEATURE_TAG);
-            clearTagTrigger.SetMetadata(Metadatas.TAG_ID, Tags.SEARCHABLE);
             var bestowItemTrigger = CreateTrigger(TriggerTypes.BESTOW_ITEM_OF_TYPE);
             bestowItemTrigger.SetMetadata(Metadatas.ITEM_TYPE, ItemTypes.DAGGER);
-            clearTagTrigger.NextTrigger = bestowItemTrigger;
-            feature.SetTrigger(TriggerTypes.CLEAR_FEATURE_TAG, clearTagTrigger);
+            var destroyTrigger = CreateTrigger(TriggerTypes.DESTROY_FEATURE_TRIGGER);
+            destroyTrigger.SetMetadata(Metadatas.TRIGGER_ID, Triggers.SEARCH);
+            bestowItemTrigger.NextTrigger = destroyTrigger;
+            feature.SetTrigger(Triggers.SEARCH, bestowItemTrigger);
         }
 
         public IFeature CreateFeature(string featureType, string name, ILocation location)
