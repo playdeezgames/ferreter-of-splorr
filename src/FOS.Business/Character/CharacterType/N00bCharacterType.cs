@@ -128,6 +128,10 @@ namespace FOS.Business
             {
                 return "Turn how?";
             }
+            else if (character.GetMetadata(Metadatas.MODE) == Modes.INVENTORY)
+            {
+                return "Inventory:";
+            }
             else if (character.GetMetadata(Metadatas.MODE) == Modes.FEATURES)
             {
                 if (character.HasFeature)

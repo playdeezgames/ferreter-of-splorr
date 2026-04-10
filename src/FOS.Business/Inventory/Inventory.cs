@@ -8,6 +8,8 @@ namespace FOS.Business
 
         public IEnumerable<IItem> Items => GetEntityData().ItemIds.Select(x => new Item(_data, x));
 
+        public bool HasItems => GetEntityData().ItemIds.Count != 0;
+
         public void AddItem(IItem item)
         {
             GetEntityData().ItemIds.Add(item.ItemId);
