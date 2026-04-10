@@ -47,7 +47,7 @@ namespace FOS.Business
             _data.Characters.Clear();
         }
 
-        public ICharacter CreateCharacter(string characterType, ILocation location)
+        public ICharacter CreateCharacter(string characterType, ILocation location, Action<ICharacter>? initializer = null)
         {
             var characterId = Guid.NewGuid();
             _data.Characters[characterId] = new CharacterData
@@ -59,10 +59,14 @@ namespace FOS.Business
             var result = new Character(_data, characterId);
             location.AddCharacter(result);
             CharacterTypes.All[characterType].Initialize(result);
+            initializer?.Invoke(result);
             return result;
         }
 
-        public ILocation CreateLocation(string locationType, string name)
+        public ILocation CreateLocation(
+            string locationType,
+            string name,
+            Action<ILocation>? initializer = null)
         {
             var locationId = Guid.NewGuid();
             _data.Locations[locationId] = new LocationData
@@ -72,10 +76,17 @@ namespace FOS.Business
             };
             var result = new Location(_data, locationId);
             LocationTypes.All[locationType].Initialize(result);
+            initializer?.Invoke(result);
             return result;
         }
 
-        public IRoute CreateRoute(string routeType, string name, Direction direction, ILocation fromLocation, ILocation toLocation)
+        public IRoute CreateRoute(
+            string routeType,
+            string name,
+            Direction direction,
+            ILocation fromLocation,
+            ILocation toLocation,
+            Action<IRoute>? initializer = null)
         {
             var routeId = Guid.NewGuid();
             _data.Routes[routeId] = new RouteData
@@ -87,6 +98,7 @@ namespace FOS.Business
             var result = new Route(_data, direction, routeId);
             fromLocation.SetRoute(direction, result);
             RouteTypes.All[routeType].Initialize(result);
+            initializer?.Invoke(result);
             return result;
         }
 
@@ -228,7 +240,7 @@ namespace FOS.Business
             return result;
         }
 
-        public IItem CreateItem(string itemType)
+        public IItem CreateItem(string itemType, Action<IItem>? initializer = null)
         {
             var itemId = Guid.NewGuid();
             _data.Items[itemId] = new ItemData
@@ -237,6 +249,7 @@ namespace FOS.Business
             };
             var result = new Item(_data, itemId);
             ItemTypes.All[itemType].Initialize(result);
+            initializer?.Invoke(result);
             return result;
         }
 
