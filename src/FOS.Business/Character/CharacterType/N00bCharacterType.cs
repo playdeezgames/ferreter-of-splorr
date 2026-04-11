@@ -10,8 +10,23 @@ namespace FOS.Business
         {
             var choices = new List<IDialogChoice>();
             AddFeaturesChoices(choices, character);
+            AddInventoryChoices(choices, character);
             AddVerbChoices(choices, character);
             return choices;
+        }
+
+        private static void AddInventoryChoices(List<IDialogChoice> choices, ICharacter character)
+        {
+            if (character.HasMetadata(Metadatas.MODE) && !character.HasFocusItem)
+            {
+                if (character.GetMetadata(Metadatas.MODE) == Modes.INVENTORY)
+                {
+                    foreach (var item in character.Inventory.Items)
+                    {
+                        choices.Add(new DialogChoice(item.ItemId.ToString(), item.Name));
+                    }
+                }
+            }
         }
 
         private static void AddVerbChoices(List<IDialogChoice> choices, ICharacter character)
@@ -27,7 +42,7 @@ namespace FOS.Business
 
         private static void AddFeaturesChoices(List<IDialogChoice> choices, ICharacter character)
         {
-            if (character.HasMetadata(Metadatas.MODE) && !character.HasFeature)
+            if (character.HasMetadata(Metadatas.MODE) && !character.HasFocusFeature)
             {
                 if (character.GetMetadata(Metadatas.MODE) == Modes.FEATURES)
                 {
@@ -85,7 +100,7 @@ namespace FOS.Business
 
         private static void GetCurrentFeatureLines(List<IDialogLine> lines, ICharacter character)
         {
-            var feature = character.Feature;
+            var feature = character.FocusFeature;
             if (feature == null)
             {
                 return;
@@ -102,7 +117,15 @@ namespace FOS.Business
                 {
                     if (Guid.TryParse(command, out Guid featureId))
                     {
-                        character.Feature = character.World.GetFeature(featureId);
+                        character.FocusFeature = character.World.GetFeature(featureId);
+                        return;
+                    }
+                }
+                else if (character.GetMetadata(Metadatas.MODE) == Modes.INVENTORY)
+                {
+                    if (Guid.TryParse(command, out Guid itemId))
+                    {
+                        character.FocusItem = character.World.GetItem(itemId);
                         return;
                     }
                 }
@@ -130,13 +153,20 @@ namespace FOS.Business
             }
             else if (character.GetMetadata(Metadatas.MODE) == Modes.INVENTORY)
             {
-                return "Inventory:";
+                if (character.HasFocusItem)
+                {
+                    return $"Interact with {character.FocusItem!.Name}...";
+                }
+                else
+                {
+                    return "Inventory:";
+                }
             }
             else if (character.GetMetadata(Metadatas.MODE) == Modes.FEATURES)
             {
-                if (character.HasFeature)
+                if (character.HasFocusFeature)
                 {
-                    return $"Interact with {character.Feature!.Name}...";
+                    return $"Interact with {character.FocusFeature!.Name}...";
                 }
                 else
                 {

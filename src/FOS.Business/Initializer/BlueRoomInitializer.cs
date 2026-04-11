@@ -14,22 +14,24 @@ namespace FOS.Business.Initializer
                 {
                     world.CreateFeature(FeatureTypes.BED, "Yer Bed", tbr, f =>
                     {
-                        f.SetTrigger(Triggers.SEARCH, world.CreateTrigger(
-                            TriggerTypes.BESTOW_INVENTORY,
-                            bit =>
-                            {
-                                bit.Inventory.AddItem(world.CreateItem(ItemTypes.DAGGER));
-                                bit.NextTrigger = world.CreateTrigger(
-                                    TriggerTypes.ADD_MESSAGE,
-                                    mt =>
-                                    {
-                                        mt.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
-                                        mt.SetMetadata(Metadatas.TEXT, "You find a rusty dagger!");
-                                        mt.NextTrigger = world.CreateTrigger(
-                                            TriggerTypes.DESTROY_FEATURE_TRIGGER,
-                                            dt => dt.SetMetadata(Metadatas.TRIGGER_ID, Triggers.SEARCH));
-                                    });
-                            }));
+                        f.SetTrigger(
+                            Triggers.SEARCH,
+                            world.CreateTrigger(
+                                TriggerTypes.BESTOW_INVENTORY,
+                                bit =>
+                                {
+                                    bit.Inventory.AddItem(world.CreateItem(ItemTypes.DAGGER, "Rusty Dagger"));
+                                    bit.NextTrigger = world.CreateTrigger(
+                                        TriggerTypes.ADD_MESSAGE,
+                                        mt =>
+                                        {
+                                            mt.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
+                                            mt.SetMetadata(Metadatas.TEXT, "You find a rusty dagger!");
+                                            mt.NextTrigger = world.CreateTrigger(
+                                                TriggerTypes.DESTROY_FEATURE_TRIGGER,
+                                                dt => dt.SetMetadata(Metadatas.TRIGGER_ID, Triggers.SEARCH));
+                                        });
+                                }));
                     });
                     world.Avatar = world.CreateCharacter(CharacterTypes.N00B, tbr);
                     world.CreateLocation(

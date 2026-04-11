@@ -31,7 +31,7 @@ namespace FOS.Business
             }
         }
 
-        public IFeature? Feature
+        public IFeature? FocusFeature
         {
             get
             {
@@ -48,9 +48,28 @@ namespace FOS.Business
             }
         }
 
-        public bool HasFeature => GetEntityData().FeatureId.HasValue;
+        public bool HasFocusFeature => GetEntityData().FeatureId.HasValue;
 
         public string Prompt => CharacterType.GetPrompt(this);
+
+        public IItem? FocusItem
+        {
+            get
+            {
+                var itemId = GetEntityData().ItemId;
+                if (itemId.HasValue)
+                {
+                    return new Item(_data, itemId.Value);
+                }
+                return null;
+            }
+            set
+            {
+                GetEntityData().ItemId = value?.ItemId;
+            }
+        }
+
+        public bool HasFocusItem => GetEntityData().ItemId.HasValue;
 
         public IEnumerable<IDialogChoice> GetChoices()
         {

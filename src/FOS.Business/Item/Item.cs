@@ -6,6 +6,8 @@ namespace FOS.Business
     {
         public Guid ItemId => itemId;
 
+        public string Name => GetEntityData().Name;
+
         internal override ItemData GetEntityData()
         {
             return _data.Items[ItemId];

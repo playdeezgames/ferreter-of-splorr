@@ -6,7 +6,7 @@
 
         public void Fire(ITrigger trigger, ICharacter character)
         {
-            var feature = character.Feature!;
+            var feature = character.FocusFeature!;
             var tagId = trigger.GetMetadata(Metadatas.TAG_ID);
             feature.ClearTag(tagId);
         }

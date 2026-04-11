@@ -12,8 +12,10 @@ namespace FOS.Business
         void HandleCommand(string command);
         Direction Direction { get; set; }
         ILocation Location { get; set; }
-        IFeature? Feature { get; set; }
-        bool HasFeature { get; }
+        IFeature? FocusFeature { get; set; }
+        bool HasFocusFeature { get; }
+        IItem? FocusItem { get; set; }
+        bool HasFocusItem { get; }
         void AddMessage(string mood, string text);
     }
 }

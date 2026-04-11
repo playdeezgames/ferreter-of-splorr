@@ -14,9 +14,10 @@
         internal readonly static string CANCEL_MODE = nameof(CANCEL_MODE);
         internal readonly static string MOVE_MODE = nameof(MOVE_MODE);
         internal readonly static string FEATURES_MODE = nameof(FEATURES_MODE);
-        internal readonly static string DISENGAGE_FEATURE = nameof(DISENGAGE_FEATURE);
+        internal readonly static string BLUR_FEATURE = nameof(BLUR_FEATURE);
         internal readonly static string SEARCH_FEATURE = nameof(SEARCH_FEATURE);
         internal readonly static string INVENTORY_MODE = nameof(INVENTORY_MODE);
+        internal readonly static string BLUR_ITEM = nameof(BLUR_ITEM);
         internal static IReadOnlyDictionary<string, IVerbType> All =
             new List<IVerbType>
             {
@@ -32,9 +33,10 @@
                 new CancelModeVerbType(),
                 new MoveModeVerbType(),
                 new FeaturesModeVerbType(),
-                new DisengageFeatureVerbType(),
+                new BlurFeatureVerbType(),
                 new SearchFeatureVerbType(),
-                new InventoryModeVerbType()
+                new InventoryModeVerbType(),
+                new BlurItemVerbType()
             }.ToDictionary(x => x.Identifier, x => x);
     }
 }

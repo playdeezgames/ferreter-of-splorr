@@ -6,7 +6,7 @@
 
         public bool CanPerform(ICharacter character)
         {
-            return character.Feature?.HasTrigger(Triggers.SEARCH) ?? false;
+            return character.FocusFeature?.HasTrigger(Triggers.SEARCH) ?? false;
         }
 
         public string GetText(ICharacter character)
@@ -16,7 +16,7 @@
 
         public void Perform(ICharacter character)
         {
-            character.Feature!.FireTrigger(Triggers.SEARCH, character);
+            character.FocusFeature!.FireTrigger(Triggers.SEARCH, character);
         }
     }
 }

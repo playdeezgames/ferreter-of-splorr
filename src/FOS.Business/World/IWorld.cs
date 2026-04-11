@@ -25,10 +25,14 @@ namespace FOS.Business
             Action<IFeature>? initializer = null);
         IFeature GetFeature(Guid featureId);
         ITrigger CreateTrigger(string triggerType, Action<ITrigger>? initializer = null);
-        IItem CreateItem(string itemType, Action<IItem>? initializer = null);
+        IItem CreateItem(
+            string itemType,
+            string name,
+            Action<IItem>? initializer = null);
         IInventory CreateInventory();
         IEnumerable<IMessage> Messages { get; }
         void ClearMessages();
         void AddMessage(string mood, string text);
+        IItem GetItem(Guid itemId);
     }
 }

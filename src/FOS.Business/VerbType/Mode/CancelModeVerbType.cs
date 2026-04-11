@@ -10,9 +10,9 @@
                 character.HasMetadata(Metadatas.MODE) &&
                 (
                     character.GetMetadata(Metadatas.MODE) == Modes.TURN ||
-                    character.GetMetadata(Metadatas.MODE) == Modes.INVENTORY ||
+                    (character.GetMetadata(Metadatas.MODE) == Modes.INVENTORY && !character.HasFocusItem) ||
                     character.GetMetadata(Metadatas.MODE) == Modes.MOVE ||
-                    (character.GetMetadata(Metadatas.MODE) == Modes.FEATURES && !character.HasFeature));
+                    (character.GetMetadata(Metadatas.MODE) == Modes.FEATURES && !character.HasFocusFeature));
         }
         public string GetText(ICharacter character)
         {

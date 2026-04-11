@@ -160,12 +160,16 @@ namespace FOS.Business
             return result;
         }
 
-        public IItem CreateItem(string itemType, Action<IItem>? initializer = null)
+        public IItem CreateItem(
+            string itemType,
+            string name,
+            Action<IItem>? initializer = null)
         {
             var itemId = Guid.NewGuid();
             _data.Items[itemId] = new ItemData
             {
-                ItemType = itemType
+                ItemType = itemType,
+                Name = name
             };
             var result = new Item(_data, itemId);
             ItemTypes.All[itemType].Initialize(result);
@@ -189,6 +193,11 @@ namespace FOS.Business
         public void AddMessage(string mood, string text)
         {
             _data.Messages.Add(new MessageData { Mood = mood, Text = text });
+        }
+
+        public IItem GetItem(Guid itemId)
+        {
+            return new Item(_data, itemId);
         }
     }
 }

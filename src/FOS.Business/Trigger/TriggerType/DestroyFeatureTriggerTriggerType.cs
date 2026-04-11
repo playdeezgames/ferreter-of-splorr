@@ -6,7 +6,7 @@
 
         public void Fire(ITrigger trigger, ICharacter character)
         {
-            character.Feature!.ClearTrigger(trigger.GetMetadata(Metadatas.TRIGGER_ID));
+            character.FocusFeature!.ClearTrigger(trigger.GetMetadata(Metadatas.TRIGGER_ID));
         }
 
         public void Initialize(ITrigger trigger)

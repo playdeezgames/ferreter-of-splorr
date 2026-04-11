@@ -1,22 +1,22 @@
 ﻿namespace FOS.Business
 {
-    internal class DisengageFeatureVerbType : IVerbType
+    internal class BlurItemVerbType : IVerbType
     {
-        public string Identifier => Verbs.DISENGAGE_FEATURE;
+        public string Identifier => Verbs.BLUR_ITEM;
 
         public bool CanPerform(ICharacter character)
         {
-            return character.HasFeature;
+            return character.HasFocusItem;
         }
 
         public string GetText(ICharacter character)
         {
-            return "Disengage";
+            return "Inventory...";
         }
 
         public void Perform(ICharacter character)
         {
-            character.Feature = null;
+            character.FocusItem = null;
         }
     }
 }
