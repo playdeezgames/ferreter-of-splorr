@@ -2,25 +2,16 @@
 
 namespace FOS.Business
 {
-    internal class Route : IRoute
+    internal class Route(WorldData data, IGrimoire grimoire, Direction direction, Guid routeId) : IRoute
     {
-        private readonly WorldData _data;
-        private readonly Guid _routeId;
-        private readonly Direction _direction;
-        private RouteData RouteData => _data.Routes[_routeId];
-        internal Route(WorldData data, Direction direction, Guid routeId)
-        {
-            _data = data;
-            _routeId = routeId;
-            _direction = direction;
-        }
+        private RouteData RouteData => data.Routes[routeId];
 
-        public Guid RouteId => _routeId;
+        public Guid RouteId => routeId;
 
-        public Direction Direction => _direction;
+        public Direction Direction => direction;
 
         public string Name => RouteData.Name;
 
-        public ILocation Destination => new Location(_data, RouteData.ToLocationId);
+        public ILocation Destination => new Location(data, grimoire, RouteData.ToLocationId);
     }
 }

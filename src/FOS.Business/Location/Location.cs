@@ -2,15 +2,17 @@
 
 namespace FOS.Business
 {
-    internal class Location(WorldData data, Guid locationId) : InventoryEntity<LocationData>(data), ILocation
+#pragma warning disable CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
+    internal class Location(WorldData data, IGrimoire grimoire, Guid locationId) : InventoryEntity<LocationData>(data, grimoire), ILocation
+#pragma warning restore CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
     {
         public Guid LocationId => locationId;
 
         public string Name => GetEntityData().Name;
 
-        public IEnumerable<IRoute> Routes => GetEntityData().RouteIds.Select(x => new Route(_data, x.Key, x.Value));
+        public IEnumerable<IRoute> Routes => GetEntityData().RouteIds.Select(x => new Route(data, grimoire, x.Key, x.Value));
 
-        public IEnumerable<IFeature> Features => GetEntityData().FeatureIds.Select(x => new Feature(_data, x));
+        public IEnumerable<IFeature> Features => GetEntityData().FeatureIds.Select(x => new Feature(data, grimoire, x));
 
         public bool HasFeatures => GetEntityData().FeatureIds.Count != 0;
 
@@ -40,12 +42,12 @@ namespace FOS.Business
             {
                 return null;
             }
-            return new Route(_data, direction, GetEntityData().RouteIds[direction]);
+            return new Route(data, grimoire, direction, GetEntityData().RouteIds[direction]);
         }
 
         internal override LocationData GetEntityData()
         {
-            return _data.Locations[LocationId];
+            return data.Locations[LocationId];
         }
 
         public void AddFeature(IFeature feature)

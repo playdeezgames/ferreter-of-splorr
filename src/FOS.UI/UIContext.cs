@@ -8,7 +8,7 @@ namespace FOS.UI
     public class UIContext : IUIContext
     {
         private IUIState? _uiState = null;
-        private readonly IWorld _world = World.Create(new WorldData());
+        private readonly IWorld _world = new World(new WorldData(), new Grimoire());
 
         public string Prompt => _uiState?.Prompt ?? string.Empty;
 

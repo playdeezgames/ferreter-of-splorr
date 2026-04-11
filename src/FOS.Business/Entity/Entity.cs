@@ -2,11 +2,9 @@
 
 namespace FOS.Business
 {
-    internal abstract class Entity<TEntityData>(WorldData data) : IEntity where TEntityData : EntityData
+    internal abstract class Entity<TEntityData>(WorldData data, IGrimoire grimoire) : IEntity where TEntityData : EntityData
     {
-        protected readonly WorldData _data = data;
-
-        public IWorld World => new World(_data);
+        public IWorld World => new World(data, grimoire);
 
         public void ClearMetadata(string metadataId)
         {

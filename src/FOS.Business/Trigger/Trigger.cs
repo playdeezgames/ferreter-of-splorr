@@ -2,7 +2,9 @@
 
 namespace FOS.Business
 {
-    internal class Trigger(WorldData data, Guid triggerId) : InventoryEntity<TriggerData>(data), ITrigger
+#pragma warning disable CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
+    internal class Trigger(WorldData data, IGrimoire grimoire, Guid triggerId) : InventoryEntity<TriggerData>(data, grimoire), ITrigger
+#pragma warning restore CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
     {
         public Guid TriggerId => triggerId;
 
@@ -13,7 +15,7 @@ namespace FOS.Business
                 var nextTriggerId = GetEntityData().NextTriggerId;
                 if (nextTriggerId.HasValue)
                 {
-                    return new Trigger(_data, nextTriggerId.Value);
+                    return new Trigger(data, grimoire, nextTriggerId.Value);
                 }
                 return null;
             }
@@ -31,7 +33,7 @@ namespace FOS.Business
 
         internal override TriggerData GetEntityData()
         {
-            return _data.Triggers[TriggerId];
+            return data.Triggers[TriggerId];
         }
     }
 }
