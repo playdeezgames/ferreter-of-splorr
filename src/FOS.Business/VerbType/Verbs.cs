@@ -20,6 +20,7 @@
         internal readonly static string BLUR_ITEM = nameof(BLUR_ITEM);
         internal readonly static string DROP_ITEM = nameof(DROP_ITEM);
         internal readonly static string GROUND_INVENTORY_MODE = nameof(GROUND_INVENTORY_MODE);
+        internal readonly static string TAKE_ITEM = nameof(TAKE_ITEM);
         internal static IReadOnlyDictionary<string, IVerbType> All =
             new List<IVerbType>
             {
@@ -40,7 +41,8 @@
                 new InventoryModeVerbType(),
                 new BlurItemVerbType(),
                 new DropItemVerbType(),
-                new GroundInventoryModeVerbType()
+                new GroundInventoryModeVerbType(),
+                new TakeItemVerbType()
             }.ToDictionary(x => x.Identifier, x => x);
     }
 }
