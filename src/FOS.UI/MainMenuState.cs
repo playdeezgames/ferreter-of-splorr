@@ -4,7 +4,7 @@ using TGGD.UI;
 
 namespace FOS.UI
 {
-    internal class MainMenuState(IWorld world) : UIState(world, GenerateLines(), GenerateChoices())
+    internal class MainMenuState(IWorld world) : UIState(GenerateLines(), GenerateChoices())
     {
         public override string Prompt => "Main Menu:";
 
@@ -22,8 +22,8 @@ namespace FOS.UI
         {
             if (command == Commands.EMBARK)
             {
-                _world.Initialize(WorldInitializer.Run);
-                return new InPlayState(_world);
+                world.Initialize(WorldInitializer.Run);
+                return new InPlayState(world);
             }
             return this;
         }

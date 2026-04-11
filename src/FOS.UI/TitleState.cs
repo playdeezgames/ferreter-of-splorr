@@ -4,7 +4,7 @@ using TGGD.UI;
 
 namespace FOS.UI
 {
-    internal class TitleState(IWorld world) : UIState(world, GenerateLines(), GenerateChoices())
+    internal class TitleState(IWorld world) : UIState(GenerateLines(), GenerateChoices())
     {
         public override string Prompt => string.Empty;
 
@@ -20,7 +20,7 @@ namespace FOS.UI
 
         public override IUIState HandleCommand(string command)
         {
-            return new MainMenuState(_world);
+            return new MainMenuState(world);
         }
     }
 }

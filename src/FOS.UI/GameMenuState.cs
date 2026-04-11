@@ -4,7 +4,7 @@ using TGGD.UI;
 
 namespace FOS.UI
 {
-    internal class GameMenuState(IWorld world) : UIState(world, GenerateLines(), GenerateChoices())
+    internal class GameMenuState(IWorld world) : UIState(GenerateLines(), GenerateChoices())
     {
         public override string Prompt => "Game Menu:";
 
@@ -25,11 +25,11 @@ namespace FOS.UI
         {
             if (command == Commands.RESUME_GAME)
             {
-                return new InPlayState(_world);
+                return new InPlayState(world);
             }
             else if (command == Commands.ABANDON_GAME)
             {
-                return new MainMenuState(_world);
+                return new MainMenuState(world);
             }
             return this;
         }
