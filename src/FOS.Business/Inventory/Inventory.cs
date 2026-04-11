@@ -2,11 +2,11 @@
 
 namespace FOS.Business
 {
-    internal class Inventory(WorldData data, Guid inventoryId) : Entity<InventoryData>(data), IInventory
+    internal class Inventory(WorldData data, Guid inventoryId) : IInventory
     {
         public Guid InventoryId => inventoryId;
 
-        public IEnumerable<IItem> Items => GetEntityData().ItemIds.Select(x => new Item(_data, x));
+        public IEnumerable<IItem> Items => GetEntityData().ItemIds.Select(x => new Item(data, x));
 
         public bool HasItems => GetEntityData().ItemIds.Count != 0;
 
@@ -20,9 +20,9 @@ namespace FOS.Business
             GetEntityData().ItemIds.Remove(item.ItemId);
         }
 
-        internal override InventoryData GetEntityData()
+        internal InventoryData GetEntityData()
         {
-            return _data.Inventories[InventoryId];
+            return data.Inventories[InventoryId];
         }
     }
 }

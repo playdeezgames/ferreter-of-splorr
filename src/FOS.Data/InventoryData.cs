@@ -1,6 +1,6 @@
 ﻿namespace FOS.Data
 {
-    public class InventoryData : EntityData
+    public class InventoryData
     {
         public HashSet<Guid> ItemIds { get; set; } = [];
     }
