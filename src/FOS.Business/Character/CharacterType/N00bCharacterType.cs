@@ -11,8 +11,23 @@ namespace FOS.Business
             var choices = new List<IDialogChoice>();
             AddFeaturesChoices(choices, character);
             AddInventoryChoices(choices, character);
+            AddGroundInventoryChoices(choices, character);
             AddVerbChoices(choices, character);
             return choices;
+        }
+
+        private static void AddGroundInventoryChoices(List<IDialogChoice> choices, ICharacter character)
+        {
+            if (character.HasMetadata(Metadatas.MODE) && !character.HasFocusItem)
+            {
+                if (character.GetMetadata(Metadatas.MODE) == Modes.GROUND_INVENTORY)
+                {
+                    foreach (var item in character.Location.Inventory.Items)
+                    {
+                        choices.Add(new DialogChoice(item.ItemId.ToString(), item.Name));
+                    }
+                }
+            }
         }
 
         private static void AddInventoryChoices(List<IDialogChoice> choices, ICharacter character)
@@ -113,7 +128,8 @@ namespace FOS.Business
             character.World.ClearMessages();
             if (character.HasMetadata(Metadatas.MODE))
             {
-                if (character.GetMetadata(Metadatas.MODE) == Modes.FEATURES)
+                var mode = character.GetMetadata(Metadatas.MODE);
+                if (mode == Modes.FEATURES)
                 {
                     if (Guid.TryParse(command, out Guid featureId))
                     {
@@ -121,7 +137,7 @@ namespace FOS.Business
                         return;
                     }
                 }
-                else if (character.GetMetadata(Metadatas.MODE) == Modes.INVENTORY)
+                else if (mode == Modes.INVENTORY || mode == Modes.GROUND_INVENTORY)
                 {
                     if (Guid.TryParse(command, out Guid itemId))
                     {
@@ -160,6 +176,17 @@ namespace FOS.Business
                 else
                 {
                     return "Inventory:";
+                }
+            }
+            else if (character.GetMetadata(Metadatas.MODE) == Modes.GROUND_INVENTORY)
+            {
+                if (character.HasFocusItem)
+                {
+                    return $"Interact with {character.FocusItem!.Name}...";
+                }
+                else
+                {
+                    return "Ground Inventory:";
                 }
             }
             else if (character.GetMetadata(Metadatas.MODE) == Modes.FEATURES)
