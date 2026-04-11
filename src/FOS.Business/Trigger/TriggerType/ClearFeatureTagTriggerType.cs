@@ -10,9 +10,5 @@
             var tagId = trigger.GetMetadata(Metadatas.TAG_ID);
             feature.ClearTag(tagId);
         }
-
-        public void Initialize(ITrigger trigger)
-        {
-        }
     }
 }

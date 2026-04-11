@@ -12,9 +12,5 @@
                 character.Inventory.AddItem(item);
             }
         }
-
-        public void Initialize(ITrigger trigger)
-        {
-        }
     }
 }

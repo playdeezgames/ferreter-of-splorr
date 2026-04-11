@@ -59,7 +59,6 @@ namespace FOS.Business
                 Name = name
             };
             var result = new Location(data, grimoire, locationId);
-            LocationTypes.All[locationType].Initialize(result);
             initializer?.Invoke(result);
             return result;
         }
@@ -81,7 +80,6 @@ namespace FOS.Business
             };
             var result = new Route(data, grimoire, direction, routeId);
             fromLocation.SetRoute(direction, result);
-            RouteTypes.All[routeType].Initialize(result);
             initializer?.Invoke(result);
             return result;
         }
@@ -120,7 +118,6 @@ namespace FOS.Business
                 TriggerType = triggerType
             };
             var result = new Trigger(data, grimoire, triggerId);
-            TriggerTypes.All[triggerType].Initialize(result);
             initializer?.Invoke(result);
             return result;
         }
@@ -137,7 +134,6 @@ namespace FOS.Business
                 Name = name
             };
             var result = new Item(data, grimoire, itemId);
-            ItemTypes.All[itemType].Initialize(result);
             initializer?.Invoke(result);
             return result;
         }

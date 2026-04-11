@@ -8,9 +8,5 @@
         {
             character.AddMessage(trigger.GetMetadata(Metadatas.MOOD), trigger.GetMetadata(Metadatas.TEXT));
         }
-
-        public void Initialize(ITrigger trigger)
-        {
-        }
     }
 }

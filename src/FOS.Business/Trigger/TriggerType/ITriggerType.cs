@@ -4,6 +4,5 @@
     {
         string Identifier { get; }
         void Fire(ITrigger trigger, ICharacter character);
-        void Initialize(ITrigger trigger);
     }
 }
