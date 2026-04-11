@@ -2,5 +2,6 @@
 {
     public interface IGrimoire
     {
+        ICharacterType GetCharacterType(string characterTypeId);
     }
 }

@@ -43,7 +43,6 @@ namespace FOS.Business
             };
             var result = new Character(data, grimoire, characterId);
             location.AddCharacter(result);
-            CharacterTypes.All[characterType].Initialize(result);
             initializer?.Invoke(result);
             return result;
         }
@@ -104,7 +103,6 @@ namespace FOS.Business
             };
             var result = new Feature(data, grimoire, featureId);
             location.AddFeature(result);
-            FeatureTypes.All[featureType].Initialize(result);
             initializer?.Invoke(result);
             return result;
         }
