@@ -2,9 +2,12 @@
 {
     public class Grimoire : IGrimoire
     {
-        public ICharacterType GetCharacterType(string characterTypeId)
+        public void AddMessage(ICharacter character, string mood, string text)
         {
-            return CharacterTypes.All[characterTypeId];
+            if (character.HasTag(Tags.N00B))
+            {
+                character.World.AddMessage(mood, text);
+            }
         }
     }
 }

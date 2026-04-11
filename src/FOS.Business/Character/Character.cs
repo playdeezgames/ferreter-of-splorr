@@ -6,8 +6,6 @@ namespace FOS.Business
     internal class Character(WorldData data, IGrimoire grimoire, Guid characterId) : InventoryEntity<CharacterData>(data: data, grimoire: grimoire), ICharacter
 #pragma warning restore CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
     {
-        private ICharacterType CharacterType => grimoire.GetCharacterType(GetEntityData().CharacterType);
-
         public Guid CharacterId => characterId;
 
         Direction ICharacter.Direction
@@ -71,7 +69,7 @@ namespace FOS.Business
 
         public void AddMessage(string mood, string text)
         {
-            CharacterType.AddMessage(this, mood, text);
+            grimoire.AddMessage(this, mood, text);
         }
     }
 }

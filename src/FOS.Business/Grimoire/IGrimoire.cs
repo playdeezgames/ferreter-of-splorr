@@ -2,6 +2,6 @@
 {
     public interface IGrimoire
     {
-        ICharacterType GetCharacterType(string characterTypeId);
+        void AddMessage(ICharacter character, string mood, string text);
     }
 }

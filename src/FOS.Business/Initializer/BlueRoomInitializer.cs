@@ -33,7 +33,7 @@ namespace FOS.Business.Initializer
                                         });
                                 }));
                     });
-                    world.Avatar = world.CreateCharacter(CharacterTypes.N00B, tbr);
+                    world.Avatar = world.CreateCharacter(CharacterTypes.N00B, tbr, c => c.SetTag(Tags.N00B));
                     world.CreateLocation(
                         LocationTypes.LOFT,
                         "The Loft",
