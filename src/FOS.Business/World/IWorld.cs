@@ -6,18 +6,16 @@ namespace FOS.Business
     {
         void Clear();
         void Initialize(Action<IWorld> initializer);
-        ICharacter CreateCharacter(string characterType, ILocation location, Action<ICharacter>? initializer = null);
+        ICharacter CreateCharacter(ILocation location, Action<ICharacter>? initializer = null);
         ICharacter? Avatar { get; set; }
-        ILocation CreateLocation(string locationType, string name, Action<ILocation>? initializer = null);
+        ILocation CreateLocation(string name, Action<ILocation>? initializer = null);
         IRoute CreateRoute(
-            string routeType,
             string name,
             Direction direction,
             ILocation fromLocation,
             ILocation toLocation,
             Action<IRoute>? initializer = null);
         IFeature CreateFeature(
-            string featureType,
             string name,
             ILocation location,
             Action<IFeature>? initializer = null);

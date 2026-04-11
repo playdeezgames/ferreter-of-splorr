@@ -32,12 +32,11 @@ namespace FOS.Business
             data.Characters.Clear();
         }
 
-        public ICharacter CreateCharacter(string characterType, ILocation location, Action<ICharacter>? initializer = null)
+        public ICharacter CreateCharacter(ILocation location, Action<ICharacter>? initializer = null)
         {
             var characterId = Guid.NewGuid();
             data.Characters[characterId] = new CharacterData
             {
-                CharacterType = characterType,
                 Direction = Direction.NORTH,
                 LocationId = location.LocationId
             };
@@ -48,14 +47,12 @@ namespace FOS.Business
         }
 
         public ILocation CreateLocation(
-            string locationType,
             string name,
             Action<ILocation>? initializer = null)
         {
             var locationId = Guid.NewGuid();
             data.Locations[locationId] = new LocationData
             {
-                LocationType = locationType,
                 Name = name
             };
             var result = new Location(data, grimoire, locationId);
@@ -64,7 +61,6 @@ namespace FOS.Business
         }
 
         public IRoute CreateRoute(
-            string routeType,
             string name,
             Direction direction,
             ILocation fromLocation,
@@ -74,7 +70,6 @@ namespace FOS.Business
             var routeId = Guid.NewGuid();
             data.Routes[routeId] = new RouteData
             {
-                RouteType = routeType,
                 ToLocationId = toLocation.LocationId,
                 Name = name
             };
@@ -90,12 +85,11 @@ namespace FOS.Business
             initializer.Invoke(this);
         }
 
-        public IFeature CreateFeature(string featureType, string name, ILocation location, Action<IFeature>? initializer = null)
+        public IFeature CreateFeature(string name, ILocation location, Action<IFeature>? initializer = null)
         {
             var featureId = Guid.NewGuid();
             data.Features[featureId] = new FeatureData
             {
-                FeatureType = featureType,
                 Name = name,
                 LocationId = location.LocationId
             };

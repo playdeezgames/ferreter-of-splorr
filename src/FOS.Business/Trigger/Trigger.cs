@@ -25,9 +25,11 @@ namespace FOS.Business
             }
         }
 
+        public string TriggerType => GetEntityData().TriggerType;
+
         public void Fire(ICharacter character)
         {
-            TriggerTypes.All[GetEntityData().TriggerType].Fire(this, character);
+            grimoire.FireTrigger(this, character);
             NextTrigger?.Fire(character);
         }
 

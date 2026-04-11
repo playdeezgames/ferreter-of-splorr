@@ -3,6 +3,9 @@
     <Project Path="FOS.Business/FOS.Business.csproj" Id="c9d401df-4c9b-4a67-b04e-f1268baa9f45" />
     <Project Path="TGGD.Business/TGGD.Business.csproj" Id="dfc04016-a942-48b2-aaf9-7359a9d4f8ff" />
   </Folder>
+  <Folder Name="/Model/">
+    <Project Path="FOS.Model/FOS.Model.csproj" Id="e816ed8f-5b13-4aa8-bdb4-21b5bb894177" />
+  </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
   </Folder>
