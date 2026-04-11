@@ -2,7 +2,7 @@
 
 namespace FOS.Business
 {
-    internal class Location(WorldData data, Guid locationId) : Entity<LocationData>(data), ILocation
+    internal class Location(WorldData data, Guid locationId) : InventoryEntity<LocationData>(data), ILocation
     {
         public Guid LocationId => locationId;
 

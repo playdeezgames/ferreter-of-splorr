@@ -1,6 +1,6 @@
 ﻿namespace FOS.Data
 {
-    public class LocationData : EntityData
+    public class LocationData : InventoryEntityData
     {
         public required string LocationType { get; set; }
         public required string Name { get; set; }

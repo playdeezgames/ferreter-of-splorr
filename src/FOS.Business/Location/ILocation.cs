@@ -2,7 +2,7 @@
 
 namespace FOS.Business
 {
-    public interface ILocation : IEntity
+    public interface ILocation : IInventoryEntity
     {
         Guid LocationId { get; }
         void AddCharacter(ICharacter character);

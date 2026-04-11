@@ -18,6 +18,7 @@
         internal readonly static string SEARCH_FEATURE = nameof(SEARCH_FEATURE);
         internal readonly static string INVENTORY_MODE = nameof(INVENTORY_MODE);
         internal readonly static string BLUR_ITEM = nameof(BLUR_ITEM);
+        internal readonly static string DROP_ITEM = nameof(DROP_ITEM);
         internal static IReadOnlyDictionary<string, IVerbType> All =
             new List<IVerbType>
             {
@@ -36,7 +37,8 @@
                 new BlurFeatureVerbType(),
                 new SearchFeatureVerbType(),
                 new InventoryModeVerbType(),
-                new BlurItemVerbType()
+                new BlurItemVerbType(),
+                new DropItemVerbType()
             }.ToDictionary(x => x.Identifier, x => x);
     }
 }
