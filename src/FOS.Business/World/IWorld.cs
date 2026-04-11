@@ -1,15 +1,13 @@
 ﻿using FOS.Data;
-using TGGD.Business;
 
 namespace FOS.Business
 {
-    public interface IWorld : IDialog
+    public interface IWorld
     {
         void Clear();
         void Initialize(Action<IWorld> initializer);
         ICharacter CreateCharacter(string characterType, ILocation location, Action<ICharacter>? initializer = null);
         ICharacter? Avatar { get; set; }
-        void HandleCommand(string command);
         ILocation CreateLocation(string locationType, string name, Action<ILocation>? initializer = null);
         IRoute CreateRoute(
             string routeType,

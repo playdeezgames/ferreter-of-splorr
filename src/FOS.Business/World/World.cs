@@ -1,6 +1,5 @@
 ﻿using FOS.Data;
 using System.Data;
-using TGGD.Business;
 
 namespace FOS.Business
 {
@@ -31,8 +30,6 @@ namespace FOS.Business
                 }
             }
         }
-
-        public string Prompt => Avatar?.Prompt ?? string.Empty;
 
         public IEnumerable<IMessage> Messages => Enumerable.Range(0, _data.Messages.Count).Select(x => new Message(_data, x));
 
@@ -100,24 +97,6 @@ namespace FOS.Business
             RouteTypes.All[routeType].Initialize(result);
             initializer?.Invoke(result);
             return result;
-        }
-
-        public IEnumerable<IDialogChoice> GetChoices()
-        {
-            return Avatar?.GetChoices() ?? [];
-        }
-
-        public IEnumerable<IDialogLine> GetLines()
-        {
-            return Avatar?.GetLines() ??
-                [
-                    new DialogLine(Moods.NORMAL,"No avatar!")
-                ];
-        }
-
-        public void HandleCommand(string command)
-        {
-            Avatar?.HandleCommand(command);
         }
 
         public void Initialize(Action<IWorld> initializer)

@@ -1,15 +1,9 @@
-﻿using TGGD.Business;
-
-namespace FOS.Business
+﻿namespace FOS.Business
 {
     internal interface ICharacterType
     {
         string Identifier { get; }
         void Initialize(ICharacter character);
-        IEnumerable<IDialogLine> GetLines(ICharacter character);
-        IEnumerable<IDialogChoice> GetChoices(ICharacter character);
-        string GetPrompt(ICharacter character);
-        void HandleCommand(ICharacter character, string command);
-        void AddMessage(Character character, string mood, string text);
+        void AddMessage(ICharacter character, string mood, string text);
     }
 }

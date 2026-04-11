@@ -1,5 +1,4 @@
 ﻿using FOS.Data;
-using TGGD.Business;
 
 namespace FOS.Business
 {
@@ -50,8 +49,6 @@ namespace FOS.Business
 
         public bool HasFocusFeature => GetEntityData().FeatureId.HasValue;
 
-        public string Prompt => CharacterType.GetPrompt(this);
-
         public IItem? FocusItem
         {
             get
@@ -70,21 +67,6 @@ namespace FOS.Business
         }
 
         public bool HasFocusItem => GetEntityData().ItemId.HasValue;
-
-        public IEnumerable<IDialogChoice> GetChoices()
-        {
-            return CharacterType.GetChoices(this);
-        }
-
-        public IEnumerable<IDialogLine> GetLines()
-        {
-            return CharacterType.GetLines(this);
-        }
-
-        public void HandleCommand(string command)
-        {
-            CharacterType.HandleCommand(this, command);
-        }
 
         internal override CharacterData GetEntityData()
         {

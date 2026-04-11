@@ -1,4 +1,5 @@
-﻿using TGGD.Business;
+﻿using FOS.Business.Dialog;
+using TGGD.Business;
 
 namespace FOS.Business
 {
@@ -6,22 +7,22 @@ namespace FOS.Business
     {
         public static IEnumerable<IDialogChoice> GetChoices(IWorld world)
         {
-            return world.GetChoices();
+            return N00bDialog.GetChoices(world.Avatar!);
         }
 
         public static IEnumerable<IDialogLine> GetLines(IWorld world)
         {
-            return world.GetLines();
+            return N00bDialog.GetLines(world.Avatar!);
         }
 
         public static string GetPrompt(IWorld world)
         {
-            return world.Prompt;
+            return N00bDialog.GetPrompt(world.Avatar!);
         }
 
         public static void HandleCommand(IWorld world, string command)
         {
-            world.HandleCommand(command);
+            N00bDialog.HandleCommand(world.Avatar!, command);
         }
     }
 }
