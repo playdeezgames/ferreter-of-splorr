@@ -87,5 +87,23 @@ namespace FOS.Business
             initializer?.Invoke(result);
             return result;
         }
+
+        public IRoute CreateRoute(
+            string name,
+            string direction,
+            ILocation toLocation,
+            Action<IRoute>? initializer = null)
+        {
+            var routeId = Guid.NewGuid();
+            Data.Routes[routeId] = new RouteData
+            {
+                ToLocationId = toLocation.LocationId,
+                Name = name
+            };
+            var result = new Route(Data, Grimoire, direction, routeId);
+            SetRoute(direction, result);
+            initializer?.Invoke(result);
+            return result;
+        }
     }
 }

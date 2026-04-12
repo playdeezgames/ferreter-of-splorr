@@ -8,7 +8,7 @@ namespace FOS.Model.Initializer
         internal static void Run(IWorld world, List<ILocation> town)
         {
             world.CreateLocation(
-                "Justdatip Inn",
+                "Jusdatip Inn",
                 jil =>
                 {
                     var jitl = RNG.FromEnumerable(town.Where(x => !x.HasRoute(Directions.IN)));
@@ -17,14 +17,15 @@ namespace FOS.Model.Initializer
                         "Inn Sign",
                         f =>
                         {
-                            f.AppendTrigger(
-                                Triggers.EXAMINE,
-                                TriggerTypes.ADD_MESSAGE,
-                                t =>
-                                {
-                                    t.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
-                                    t.SetMetadata(Metadatas.TEXT, "Justdatip Inn");
-                                }).
+                            f.
+                                AppendTrigger(
+                                    Triggers.EXAMINE,
+                                    TriggerTypes.ADD_MESSAGE,
+                                    t =>
+                                    {
+                                        t.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
+                                        t.SetMetadata(Metadatas.TEXT, "Justdatip Inn");
+                                    }).
                                 AppendTrigger(
                                     TriggerTypes.ADD_MESSAGE,
                                     t =>

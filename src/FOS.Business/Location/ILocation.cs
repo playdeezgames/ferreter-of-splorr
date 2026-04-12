@@ -19,5 +19,10 @@
         ICharacter CreateCharacter(
             string direction,
             Action<ICharacter>? initializer = null);
+        IRoute CreateRoute(
+            string name,
+            string direction,
+            ILocation toLocation,
+            Action<IRoute>? initializer = null);
     }
 }
