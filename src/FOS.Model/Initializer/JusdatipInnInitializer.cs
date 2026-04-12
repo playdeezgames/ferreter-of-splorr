@@ -42,6 +42,19 @@ namespace FOS.Model.Initializer
                         "Inn Exit",
                         Directions.OUT,
                         jitl);
+                    world.CreateLocation(
+                        "Inn Cellar",
+                        icl =>
+                        {
+                            jil.CreateRoute(
+                                "Stairs to Cellar",
+                                Directions.DOWN,
+                                icl);
+                            icl.CreateRoute(
+                                "Stairs from Cellar",
+                                Directions.UP,
+                                jil);
+                        });
                 });
         }
     }
