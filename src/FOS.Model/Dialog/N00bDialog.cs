@@ -74,7 +74,7 @@ namespace FOS.Model.Dialog
             lines.AddRange(
                 [
                     new DialogLine(Moods.NORMAL, "Yer the n00b!"),
-                    new DialogLine(Moods.NORMAL, $"Yer facing {character.GetDirectionName()}."),
+                    new DialogLine(Moods.NORMAL, $"Yer facing {character.Grimoire.GetDirectionName(character.Direction)}."),
                     new DialogLine(Moods.NORMAL, $"Location: {location.Name}.")
                 ]);
             GetCurrentFeatureLines(lines, character);

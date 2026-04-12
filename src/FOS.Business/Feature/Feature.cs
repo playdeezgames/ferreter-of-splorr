@@ -2,9 +2,7 @@
 
 namespace FOS.Business
 {
-#pragma warning disable CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
     internal class Feature(WorldData data, IGrimoire grimoire, Guid featureId) : Entity<FeatureData>(data, grimoire), IFeature
-#pragma warning restore CS9107 // Parameter is captured into the state of the enclosing type and its value is also passed to the base constructor. The value might be captured by the base class as well.
     {
         public Guid FeatureId => featureId;
 
@@ -26,7 +24,7 @@ namespace FOS.Business
 
         public ITrigger GetTrigger(string triggerCategory)
         {
-            return new Trigger(data, grimoire, GetEntityData().TriggerIds[triggerCategory]);
+            return new Trigger(Data, Grimoire, GetEntityData().TriggerIds[triggerCategory]);
         }
 
         public bool HasTrigger(string triggerCategory)
@@ -41,7 +39,7 @@ namespace FOS.Business
 
         internal override FeatureData GetEntityData()
         {
-            return data.Features[FeatureId];
+            return Data.Features[FeatureId];
         }
     }
 }

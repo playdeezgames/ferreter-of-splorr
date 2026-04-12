@@ -11,6 +11,5 @@
         IItem? FocusItem { get; set; }
         bool HasFocusItem { get; }
         void AddMessage(string mood, string text);
-        string GetDirectionName();
     }
 }
