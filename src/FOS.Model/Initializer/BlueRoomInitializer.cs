@@ -33,13 +33,7 @@ namespace FOS.Model.Initializer
                                 }));
                     });
                     world.Avatar = world.CreateCharacter(Directions.NORTH, tbr, c => c.SetTag(Tags.N00B));
-                    world.CreateLocation(
-                        "The Loft",
-                        l =>
-                        {
-                            world.CreateRoute("Ladder to Loft", Directions.UP, tbr, l);
-                            world.CreateRoute("Ladder from Loft", Directions.DOWN, l, tbr);
-                        });
+                    BlueRoomLoftInitializer.Run(world, tbr);
                     var brtl = RNG.FromEnumerable(town.Where(x => !x.HasRoute(Directions.IN)));
                     town.Remove(brtl);
                     world.CreateRoute(
