@@ -4,22 +4,28 @@ namespace FOS.Model
 {
     public static class Directions
     {
-        public static readonly Direction[] Cardinal = [Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST];
-        public static string GetName(this Direction direction)
-        {
-            return direction switch
+        internal static readonly string NORTH = nameof(NORTH);
+        internal static readonly string EAST = nameof(EAST);
+        internal static readonly string SOUTH = nameof(SOUTH);
+        internal static readonly string WEST = nameof(WEST);
+        internal static readonly string UP = nameof(UP);
+        internal static readonly string DOWN = nameof(DOWN);
+        internal static readonly string IN = nameof(IN);
+        internal static readonly string OUT = nameof(OUT);
+        internal static IReadOnlyDictionary<string, IDirectionType> All =
+            new List<IDirectionType>
             {
-                Direction.NORTH => "North",
-                Direction.EAST => "East",
-                Direction.SOUTH => "South",
-                Direction.WEST => "West",
-                Direction.DOWN => "Down",
-                Direction.UP => "Up",
-                Direction.IN => "In",
-                Direction.OUT => "Out",
-                _ => throw new NotImplementedException(),
-            };
-        }
+                new NorthDirectionType(),
+                new EastDirectionType(),
+                new SouthDirectionType(),
+                new WestDirectionType(),
+                new UpDirectionType(),
+                new DownDirectionType(),
+                new InDirectionType(),
+                new OutDirectionType()
+            }.ToDictionary(x => x.Identifier, x => x);
+        ////////////////////
+        public static readonly Direction[] Cardinal = [Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST];
         public static Direction GetPreviousDirection(this Direction direction)
         {
             return direction switch

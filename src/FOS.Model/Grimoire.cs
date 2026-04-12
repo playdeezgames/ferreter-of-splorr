@@ -16,5 +16,10 @@ namespace FOS.Model
         {
             TriggerTypes.All[trigger.TriggerType].Fire(trigger, character);
         }
+
+        public string GetDirectionName(string directionId)
+        {
+            return Directions.All[directionId].Name;
+        }
     }
 }

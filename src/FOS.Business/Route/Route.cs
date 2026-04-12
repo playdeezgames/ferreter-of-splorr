@@ -13,5 +13,10 @@ namespace FOS.Business
         public string Name => RouteData.Name;
 
         public ILocation Destination => new Location(data, grimoire, RouteData.ToLocationId);
+
+        public object GetDirectionName()
+        {
+            return grimoire.GetDirectionName(this.Direction.ToString());
+        }
     }
 }

@@ -8,5 +8,7 @@ namespace FOS.Business
         Direction Direction { get; }
         string Name { get; }
         ILocation Destination { get; }
+
+        object GetDirectionName();
     }
 }

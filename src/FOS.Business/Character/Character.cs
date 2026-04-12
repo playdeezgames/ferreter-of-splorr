@@ -71,5 +71,10 @@ namespace FOS.Business
         {
             grimoire.AddMessage(this, mood, text);
         }
+
+        public string GetDirectionName()
+        {
+            return grimoire.GetDirectionName(GetEntityData().Direction.ToString());
+        }
     }
 }

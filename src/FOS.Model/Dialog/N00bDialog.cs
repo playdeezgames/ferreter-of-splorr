@@ -74,7 +74,7 @@ namespace FOS.Model.Dialog
             lines.AddRange(
                 [
                     new DialogLine(Moods.NORMAL, "Yer the n00b!"),
-                    new DialogLine(Moods.NORMAL, $"Yer facing {character.Direction.GetName()}."),
+                    new DialogLine(Moods.NORMAL, $"Yer facing {character.GetDirectionName()}."),
                     new DialogLine(Moods.NORMAL, $"Location: {location.Name}.")
                 ]);
             GetCurrentFeatureLines(lines, character);
@@ -107,7 +107,7 @@ namespace FOS.Model.Dialog
             }
             foreach (var route in routes)
             {
-                lines.Add(new DialogLine(Moods.NORMAL, $"{route.Direction.GetName()}: {route.Name}"));
+                lines.Add(new DialogLine(Moods.NORMAL, $"{route.GetDirectionName()}: {route.Name}"));
             }
         }
         private static void GetCurrentFeatureLines(List<IDialogLine> lines, ICharacter character)
