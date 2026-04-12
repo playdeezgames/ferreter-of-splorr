@@ -37,10 +37,9 @@ namespace FOS.Model
                             town.Single(x =>
                                 x.GetStatistic(StatisticTypes.COLUMN) == nextColumn &&
                                 x.GetStatistic(StatisticTypes.ROW) == nextRow);
-                        world.CreateRoute(
+                        townLocation.CreateRoute(
                             $"Road to {nextTownLocation.Name}",
                             direction.Identifier,
-                            townLocation,
                             nextTownLocation);
                     }
                 }

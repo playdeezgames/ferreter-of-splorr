@@ -10,8 +10,14 @@ namespace FOS.Model.Initializer
                 "The Loft",
                 l =>
                 {
-                    world.CreateRoute("Ladder to Loft", Directions.UP, blueRoom, l);
-                    world.CreateRoute("Ladder from Loft", Directions.DOWN, l, blueRoom);
+                    blueRoom.CreateRoute(
+                        "Ladder to Loft",
+                        Directions.UP,
+                        l);
+                    l.CreateRoute(
+                        "Ladder from Loft",
+                        Directions.DOWN,
+                        blueRoom);
                     l.CreateFeature(
                         "Crate",
                         f =>

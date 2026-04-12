@@ -34,17 +34,14 @@ namespace FOS.Model.Initializer
                                         t.SetMetadata(Metadatas.TEXT, "Gorachan, Proprietor");
                                     });
                         });
-                    world.CreateRoute(
+                    jitl.CreateRoute(
                         "Inn Entrance",
                         Directions.IN,
-                        jitl,
                         jil);
-                    world.CreateRoute(
+                    jil.CreateRoute(
                         "Inn Exit",
                         Directions.OUT,
-                        jil,
                         jitl);
-
                 });
         }
     }

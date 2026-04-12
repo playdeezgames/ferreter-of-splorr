@@ -6,12 +6,6 @@
         void Initialize(Action<IWorld> initializer);
         ICharacter? Avatar { get; set; }
         ILocation CreateLocation(string name, Action<ILocation>? initializer = null);
-        IRoute CreateRoute(
-            string name,
-            string direction,
-            ILocation fromLocation,
-            ILocation toLocation,
-            Action<IRoute>? initializer = null);
         IFeature GetFeature(Guid featureId);
         IItem CreateItem(
             string itemType,

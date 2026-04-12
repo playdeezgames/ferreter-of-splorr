@@ -35,15 +35,13 @@ namespace FOS.Model.Initializer
                     BlueRoomLoftInitializer.Run(world, tbr);
                     var brtl = RNG.FromEnumerable(town.Where(x => !x.HasRoute(Directions.IN)));
                     town.Remove(brtl);
-                    world.CreateRoute(
+                    brtl.CreateRoute(
                         "The Blue Room Entrance",
                         Directions.IN,
-                        brtl,
                         tbr);
-                    world.CreateRoute(
+                    tbr.CreateRoute(
                         "The Blue Room Exit",
                         Directions.OUT,
-                        tbr,
                         brtl);
                 });
         }
