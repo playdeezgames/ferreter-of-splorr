@@ -32,12 +32,12 @@ namespace FOS.Business
             data.Characters.Clear();
         }
 
-        public ICharacter CreateCharacter(ILocation location, Action<ICharacter>? initializer = null)
+        public ICharacter CreateCharacter(string direction, ILocation location, Action<ICharacter>? initializer = null)
         {
             var characterId = Guid.NewGuid();
             data.Characters[characterId] = new CharacterData
             {
-                Direction = Direction.NORTH,
+                Direction = direction,
                 LocationId = location.LocationId
             };
             var result = new Character(data, grimoire, characterId);
@@ -62,7 +62,7 @@ namespace FOS.Business
 
         public IRoute CreateRoute(
             string name,
-            Direction direction,
+            string direction,
             ILocation fromLocation,
             ILocation toLocation,
             Action<IRoute>? initializer = null)

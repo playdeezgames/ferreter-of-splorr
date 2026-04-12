@@ -18,7 +18,7 @@ namespace FOS.Model
 
         public void Perform(ICharacter character)
         {
-            character.Direction = character.Direction.GetOppositeDirection();
+            character.Direction = character.Grimoire.GetOppositeDirection(character.Direction);
             character.ClearMetadata(Metadatas.MODE);
             character.AddMessage(Moods.NORMAL, "You turn around.");
         }

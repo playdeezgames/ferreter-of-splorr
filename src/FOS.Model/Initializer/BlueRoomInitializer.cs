@@ -1,5 +1,4 @@
 ﻿using FOS.Business;
-using FOS.Data;
 using TGGD.Business;
 
 namespace FOS.Model.Initializer
@@ -33,24 +32,24 @@ namespace FOS.Model.Initializer
                                         });
                                 }));
                     });
-                    world.Avatar = world.CreateCharacter(tbr, c => c.SetTag(Tags.N00B));
+                    world.Avatar = world.CreateCharacter(Directions.NORTH, tbr, c => c.SetTag(Tags.N00B));
                     world.CreateLocation(
                         "The Loft",
                         l =>
                         {
-                            world.CreateRoute("Ladder to Loft", Direction.UP, tbr, l);
-                            world.CreateRoute("Ladder from Loft", Direction.DOWN, l, tbr);
+                            world.CreateRoute("Ladder to Loft", Directions.UP, tbr, l);
+                            world.CreateRoute("Ladder from Loft", Directions.DOWN, l, tbr);
                         });
-                    var brtl = RNG.FromEnumerable(town.Where(x => !x.HasRoute(Direction.IN)));
+                    var brtl = RNG.FromEnumerable(town.Where(x => !x.HasRoute(Directions.IN)));
                     town.Remove(brtl);
                     world.CreateRoute(
                         "The Blue Room Entrance",
-                        Direction.IN,
+                        Directions.IN,
                         brtl,
                         tbr);
                     world.CreateRoute(
                         "The Blue Room Exit",
-                        Direction.OUT,
+                        Directions.OUT,
                         tbr,
                         brtl);
                 });

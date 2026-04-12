@@ -27,7 +27,7 @@ namespace FOS.Model
             {
                 var column = townLocation.GetStatistic(StatisticTypes.COLUMN);
                 var row = townLocation.GetStatistic(StatisticTypes.ROW);
-                foreach (var direction in Directions.Cardinal)
+                foreach (var direction in Directions.All.Values.Where(x => x.IsCardinal))
                 {
                     var nextColumn = direction.GetNextColumn(column);
                     var nextRow = direction.GetNextRow(row);
@@ -39,7 +39,7 @@ namespace FOS.Model
                                 x.GetStatistic(StatisticTypes.ROW) == nextRow);
                         world.CreateRoute(
                             $"Road to {nextTownLocation.Name}",
-                            direction,
+                            direction.Identifier,
                             townLocation,
                             nextTownLocation);
                     }

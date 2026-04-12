@@ -12,5 +12,6 @@
         void ClearTag(string tagId);
         void SetTag(string tagId);
         IWorld World { get; }
+        IGrimoire Grimoire { get; }
     }
 }

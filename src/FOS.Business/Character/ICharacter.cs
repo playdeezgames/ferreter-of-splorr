@@ -1,12 +1,10 @@
-﻿using FOS.Data;
-
-namespace FOS.Business
+﻿namespace FOS.Business
 {
     public interface ICharacter : IInventoryEntity
     {
         Guid CharacterId { get; }
 
-        Direction Direction { get; set; }
+        string Direction { get; set; }
         ILocation Location { get; set; }
         IFeature? FocusFeature { get; set; }
         bool HasFocusFeature { get; }

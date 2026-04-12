@@ -6,6 +6,10 @@ namespace FOS.Business
     {
         public IWorld World => new World(data, grimoire);
 
+        protected WorldData Data => data;
+
+        public IGrimoire Grimoire => grimoire;
+
         public void ClearMetadata(string metadataId)
         {
             GetEntityData().Metadatas.Remove(metadataId);

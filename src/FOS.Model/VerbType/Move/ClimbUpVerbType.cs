@@ -11,7 +11,7 @@ namespace FOS.Model
             return
                 character.HasMetadata(Metadatas.MODE) &&
                 character.GetMetadata(Metadatas.MODE) == Modes.MOVE &&
-                character.Location.HasRoute(Data.Direction.UP);
+                character.Location.HasRoute(Directions.UP);
         }
 
         public string GetText(ICharacter character)
@@ -21,7 +21,7 @@ namespace FOS.Model
 
         public void Perform(ICharacter character)
         {
-            var route = character.Location.GetRoute(Data.Direction.UP)!;
+            var route = character.Location.GetRoute(Directions.UP)!;
             character.AddMessage(Moods.NORMAL, $"You climb up {route.Name}.");
             character.Location = route.Destination;
             character.ClearMetadata(Metadatas.MODE);

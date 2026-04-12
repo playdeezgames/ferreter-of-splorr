@@ -8,11 +8,6 @@ namespace FOS.Business
     {
         public Guid CharacterId => characterId;
 
-        Direction ICharacter.Direction
-        {
-            get => GetEntityData().Direction;
-            set => GetEntityData().Direction = value;
-        }
         public ILocation Location
         {
             get => new Location(data, grimoire, GetEntityData().LocationId);
@@ -61,6 +56,12 @@ namespace FOS.Business
         }
 
         public bool HasFocusItem => GetEntityData().ItemId.HasValue;
+
+        public string Direction
+        {
+            get => GetEntityData().Direction;
+            set => GetEntityData().Direction = value;
+        }
 
         internal override CharacterData GetEntityData()
         {

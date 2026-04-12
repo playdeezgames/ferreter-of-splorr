@@ -1,17 +1,15 @@
-﻿using FOS.Data;
-
-namespace FOS.Business
+﻿namespace FOS.Business
 {
     public interface ILocation : IInventoryEntity
     {
         Guid LocationId { get; }
         void AddCharacter(ICharacter character);
         void RemoveCharacter(ICharacter character);
-        void SetRoute(Direction direction, IRoute result);
+        void SetRoute(string direction, IRoute result);
         string Name { get; }
         IEnumerable<IRoute> Routes { get; }
-        bool HasRoute(Direction direction);
-        IRoute? GetRoute(Direction direction);
+        bool HasRoute(string direction);
+        IRoute? GetRoute(string direction);
         void AddFeature(IFeature feature);
         IEnumerable<IFeature> Features { get; }
         bool HasFeatures { get; }

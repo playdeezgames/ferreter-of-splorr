@@ -1,5 +1,4 @@
 ﻿using FOS.Business;
-using FOS.Data;
 
 namespace FOS.Model
 {
@@ -12,7 +11,7 @@ namespace FOS.Model
             return
                 character.HasMetadata(Metadatas.MODE) &&
                 character.GetMetadata(Metadatas.MODE) == Modes.MOVE &&
-                character.Location.HasRoute(Direction.IN);
+                character.Location.HasRoute(Directions.IN);
         }
 
         public string GetText(ICharacter character)
@@ -22,7 +21,7 @@ namespace FOS.Model
 
         public void Perform(ICharacter character)
         {
-            var route = character.Location.GetRoute(Direction.IN)!;
+            var route = character.Location.GetRoute(Directions.IN)!;
             character.AddMessage(Moods.NORMAL, $"You enter through {route.Name}.");
             character.Location = route.Destination;
             character.ClearMetadata(Metadatas.MODE);

@@ -21,5 +21,20 @@ namespace FOS.Model
         {
             return Directions.All[directionId].Name;
         }
+
+        public string GetNextDirection(string directionId)
+        {
+            return Directions.All[directionId].Next;
+        }
+
+        public string GetOppositeDirection(string directionId)
+        {
+            return Directions.All[directionId].Opposite;
+        }
+
+        public string GetPreviousDirection(string directionId)
+        {
+            return Directions.All[directionId].Previous;
+        }
     }
 }

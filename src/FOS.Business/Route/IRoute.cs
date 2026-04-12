@@ -1,11 +1,9 @@
-﻿using FOS.Data;
-
-namespace FOS.Business
+﻿namespace FOS.Business
 {
     public interface IRoute
     {
         Guid RouteId { get; }
-        Direction Direction { get; }
+        string Direction { get; }
         string Name { get; }
         ILocation Destination { get; }
 

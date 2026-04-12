@@ -1,17 +1,18 @@
-﻿using FOS.Data;
-
-namespace FOS.Business
+﻿namespace FOS.Business
 {
     public interface IWorld
     {
         void Clear();
         void Initialize(Action<IWorld> initializer);
-        ICharacter CreateCharacter(ILocation location, Action<ICharacter>? initializer = null);
+        ICharacter CreateCharacter(
+            string direction,
+            ILocation location,
+            Action<ICharacter>? initializer = null);
         ICharacter? Avatar { get; set; }
         ILocation CreateLocation(string name, Action<ILocation>? initializer = null);
         IRoute CreateRoute(
             string name,
-            Direction direction,
+            string direction,
             ILocation fromLocation,
             ILocation toLocation,
             Action<IRoute>? initializer = null);
@@ -20,7 +21,8 @@ namespace FOS.Business
             ILocation location,
             Action<IFeature>? initializer = null);
         IFeature GetFeature(Guid featureId);
-        ITrigger CreateTrigger(string triggerType, Action<ITrigger>? initializer = null);
+        ITrigger CreateTrigger(string triggerType,
+            Action<ITrigger>? initializer = null);
         IItem CreateItem(
             string itemType,
             string name,

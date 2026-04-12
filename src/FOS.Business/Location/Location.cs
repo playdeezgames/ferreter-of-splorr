@@ -21,7 +21,7 @@ namespace FOS.Business
             GetEntityData().CharacterIds.Add(character.CharacterId);
         }
 
-        public void SetRoute(Direction direction, IRoute result)
+        public void SetRoute(string direction, IRoute result)
         {
             GetEntityData().RouteIds[direction] = result.RouteId;
         }
@@ -31,12 +31,12 @@ namespace FOS.Business
             GetEntityData().CharacterIds.Remove(character.CharacterId);
         }
 
-        public bool HasRoute(Direction direction)
+        public bool HasRoute(string direction)
         {
             return GetEntityData().RouteIds.ContainsKey(direction);
         }
 
-        public IRoute? GetRoute(Direction direction)
+        public IRoute? GetRoute(string direction)
         {
             if (!HasRoute(direction))
             {
