@@ -17,22 +17,21 @@ namespace FOS.Model.Initializer
                         "Inn Sign",
                         f =>
                         {
-                            f.SetTrigger(
+                            f.AppendTrigger(
                                 Triggers.EXAMINE,
-                                world.CreateTrigger(
+                                TriggerTypes.ADD_MESSAGE,
+                                t =>
+                                {
+                                    t.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
+                                    t.SetMetadata(Metadatas.TEXT, "Justdatip Inn");
+                                }).
+                                AppendTrigger(
                                     TriggerTypes.ADD_MESSAGE,
-                                    et =>
+                                    t =>
                                     {
-                                        et.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
-                                        et.SetMetadata(Metadatas.TEXT, "Justdatip Inn");
-                                        et.NextTrigger = world.CreateTrigger(
-                                            TriggerTypes.ADD_MESSAGE,
-                                            et2 =>
-                                            {
-                                                et2.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
-                                                et2.SetMetadata(Metadatas.TEXT, "Gorachan, Proprietor");
-                                            });
-                                    }));
+                                        t.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
+                                        t.SetMetadata(Metadatas.TEXT, "Gorachan, Proprietor");
+                                    });
                         });
                     world.CreateRoute(
                         "Inn Entrance",

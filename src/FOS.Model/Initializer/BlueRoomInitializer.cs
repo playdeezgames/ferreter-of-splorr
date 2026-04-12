@@ -13,24 +13,23 @@ namespace FOS.Model.Initializer
                 {
                     tbr.CreateFeature("Yer Bed", f =>
                     {
-                        f.SetTrigger(
+                        f.AppendTrigger(
                             Triggers.SEARCH,
-                            world.CreateTrigger(
                                 TriggerTypes.BESTOW_INVENTORY,
-                                bit =>
+                                t =>
                                 {
-                                    bit.Inventory.AddItem(world.CreateItem(ItemTypes.DAGGER, "Rusty Dagger"));
-                                    bit.NextTrigger = world.CreateTrigger(
-                                        TriggerTypes.ADD_MESSAGE,
-                                        mt =>
-                                        {
-                                            mt.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
-                                            mt.SetMetadata(Metadatas.TEXT, "You find a rusty dagger!");
-                                            mt.NextTrigger = world.CreateTrigger(
-                                                TriggerTypes.DESTROY_FEATURE_TRIGGER,
-                                                dt => dt.SetMetadata(Metadatas.TRIGGER_ID, Triggers.SEARCH));
-                                        });
-                                }));
+                                    t.Inventory.AddItem(world.CreateItem(ItemTypes.DAGGER, "Rusty Dagger"));
+                                }).
+                            AppendTrigger(
+                                TriggerTypes.ADD_MESSAGE,
+                                t =>
+                                {
+                                    t.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
+                                    t.SetMetadata(Metadatas.TEXT, "You find a rusty dagger!");
+                                    t.AppendTrigger(
+                                        TriggerTypes.DESTROY_FEATURE_TRIGGER,
+                                        dt => dt.SetMetadata(Metadatas.TRIGGER_ID, Triggers.SEARCH));
+                                });
                     });
                     world.Avatar = tbr.CreateCharacter(Directions.NORTH, c => c.SetTag(Tags.N00B));
                     BlueRoomLoftInitializer.Run(world, tbr);

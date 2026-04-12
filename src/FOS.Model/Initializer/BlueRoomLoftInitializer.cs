@@ -16,31 +16,29 @@ namespace FOS.Model.Initializer
                         "Crate",
                         f =>
                         {
-                            f.SetTrigger(
+                            f.AppendTrigger(
                                 Triggers.SEARCH,
-                                world.CreateTrigger(
-                                    TriggerTypes.BESTOW_INVENTORY,
-                                    bit =>
-                                    {
-                                        bit.Inventory.AddItem(
-                                            world.CreateItem(
-                                                ItemTypes.GOLD,
-                                                "Gold Pieces",
-                                                i =>
-                                                {
-                                                    i.SetStatistic(StatisticTypes.QUANTITY, 5);
-                                                }));
-                                        bit.NextTrigger = world.CreateTrigger(
-                                            TriggerTypes.ADD_MESSAGE,
-                                            mt =>
+                                TriggerTypes.BESTOW_INVENTORY,
+                                t =>
+                                {
+                                    t.Inventory.AddItem(
+                                        world.CreateItem(
+                                            ItemTypes.GOLD,
+                                            "Gold Pieces",
+                                            i =>
                                             {
-                                                mt.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
-                                                mt.SetMetadata(Metadatas.TEXT, "You find a 5 gold pieces!");
-                                                mt.NextTrigger = world.CreateTrigger(
-                                                    TriggerTypes.DESTROY_FEATURE_TRIGGER,
-                                                    dt => dt.SetMetadata(Metadatas.TRIGGER_ID, Triggers.SEARCH));
-                                            });
-                                    }));
+                                                i.SetStatistic(StatisticTypes.QUANTITY, 5);
+                                            }));
+                                }).AppendTrigger(
+                                    TriggerTypes.ADD_MESSAGE,
+                                    t =>
+                                    {
+                                        t.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
+                                        t.SetMetadata(Metadatas.TEXT, "You find a 5 gold pieces!");
+                                        t.AppendTrigger(
+                                            TriggerTypes.DESTROY_FEATURE_TRIGGER,
+                                            dt => dt.SetMetadata(Metadatas.TRIGGER_ID, Triggers.SEARCH));
+                                    });
                         });
                 });
         }

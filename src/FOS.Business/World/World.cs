@@ -76,18 +76,6 @@ namespace FOS.Business
             return new Feature(data, grimoire, featureId);
         }
 
-        public ITrigger CreateTrigger(string triggerType, Action<ITrigger>? initializer = null)
-        {
-            var triggerId = Guid.NewGuid();
-            data.Triggers[triggerId] = new TriggerData
-            {
-                TriggerType = triggerType
-            };
-            var result = new Trigger(data, grimoire, triggerId);
-            initializer?.Invoke(result);
-            return result;
-        }
-
         public IItem CreateItem(
             string itemType,
             string name,

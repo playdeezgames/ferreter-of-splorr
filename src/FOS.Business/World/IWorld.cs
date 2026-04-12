@@ -13,8 +13,6 @@
             ILocation toLocation,
             Action<IRoute>? initializer = null);
         IFeature GetFeature(Guid featureId);
-        ITrigger CreateTrigger(string triggerType,
-            Action<ITrigger>? initializer = null);
         IItem CreateItem(
             string itemType,
             string name,

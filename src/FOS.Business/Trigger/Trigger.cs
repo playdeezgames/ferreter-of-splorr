@@ -47,6 +47,7 @@ namespace FOS.Business
                 };
                 var result = new Trigger(Data, Grimoire, triggerId);
                 initializer?.Invoke(result);
+                GetEntityData().NextTriggerId = result.TriggerId;
                 return result;
             }
         }
