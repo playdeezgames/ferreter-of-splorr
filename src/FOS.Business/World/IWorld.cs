@@ -4,10 +4,6 @@
     {
         void Clear();
         void Initialize(Action<IWorld> initializer);
-        ICharacter CreateCharacter(
-            string direction,
-            ILocation location,
-            Action<ICharacter>? initializer = null);
         ICharacter? Avatar { get; set; }
         ILocation CreateLocation(string name, Action<ILocation>? initializer = null);
         IRoute CreateRoute(

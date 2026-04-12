@@ -32,20 +32,6 @@ namespace FOS.Business
             data.Characters.Clear();
         }
 
-        public ICharacter CreateCharacter(string direction, ILocation location, Action<ICharacter>? initializer = null)
-        {
-            var characterId = Guid.NewGuid();
-            data.Characters[characterId] = new CharacterData
-            {
-                Direction = direction,
-                LocationId = location.LocationId
-            };
-            var result = new Character(data, grimoire, characterId);
-            location.AddCharacter(result);
-            initializer?.Invoke(result);
-            return result;
-        }
-
         public ILocation CreateLocation(
             string name,
             Action<ILocation>? initializer = null)

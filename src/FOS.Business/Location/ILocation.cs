@@ -16,5 +16,8 @@
         IFeature CreateFeature(
             string name,
             Action<IFeature>? initializer = null);
+        ICharacter CreateCharacter(
+            string direction,
+            Action<ICharacter>? initializer = null);
     }
 }

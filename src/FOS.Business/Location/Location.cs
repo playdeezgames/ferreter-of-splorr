@@ -73,5 +73,19 @@ namespace FOS.Business
             initializer?.Invoke(result);
             return result;
         }
+
+        public ICharacter CreateCharacter(string direction, Action<ICharacter>? initializer = null)
+        {
+            var characterId = Guid.NewGuid();
+            Data.Characters[characterId] = new CharacterData
+            {
+                Direction = direction,
+                LocationId = LocationId
+            };
+            var result = new Character(Data, Grimoire, characterId);
+            AddCharacter(result);
+            initializer?.Invoke(result);
+            return result;
+        }
     }
 }
