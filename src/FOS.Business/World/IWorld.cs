@@ -16,10 +16,6 @@
             ILocation fromLocation,
             ILocation toLocation,
             Action<IRoute>? initializer = null);
-        IFeature CreateFeature(
-            string name,
-            ILocation location,
-            Action<IFeature>? initializer = null);
         IFeature GetFeature(Guid featureId);
         ITrigger CreateTrigger(string triggerType,
             Action<ITrigger>? initializer = null);

@@ -11,7 +11,7 @@ namespace FOS.Model.Initializer
                 "The Blue Room",
                 tbr =>
                 {
-                    world.CreateFeature("Yer Bed", tbr, f =>
+                    tbr.CreateFeature("Yer Bed", f =>
                     {
                         f.SetTrigger(
                             Triggers.SEARCH,

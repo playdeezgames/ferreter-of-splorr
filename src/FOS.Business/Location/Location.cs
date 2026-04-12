@@ -2,7 +2,14 @@
 
 namespace FOS.Business
 {
-    internal class Location(WorldData data, IGrimoire grimoire, Guid locationId) : InventoryEntity<LocationData>(data, grimoire), ILocation
+    internal class Location(
+        WorldData data,
+        IGrimoire grimoire,
+        Guid locationId) :
+            InventoryEntity<LocationData>(
+                data,
+                grimoire),
+            ILocation
     {
         public Guid LocationId => locationId;
 
@@ -51,6 +58,20 @@ namespace FOS.Business
         public void AddFeature(IFeature feature)
         {
             GetEntityData().FeatureIds.Add(feature.FeatureId);
+        }
+
+        public IFeature CreateFeature(string name, Action<IFeature>? initializer = null)
+        {
+            var featureId = Guid.NewGuid();
+            Data.Features[featureId] = new FeatureData
+            {
+                Name = name,
+                LocationId = LocationId
+            };
+            var result = new Feature(Data, Grimoire, featureId);
+            AddFeature(result);
+            initializer?.Invoke(result);
+            return result;
         }
     }
 }

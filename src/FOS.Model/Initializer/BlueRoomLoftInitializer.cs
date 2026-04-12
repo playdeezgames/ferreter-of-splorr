@@ -12,9 +12,8 @@ namespace FOS.Model.Initializer
                 {
                     world.CreateRoute("Ladder to Loft", Directions.UP, blueRoom, l);
                     world.CreateRoute("Ladder from Loft", Directions.DOWN, l, blueRoom);
-                    world.CreateFeature(
+                    l.CreateFeature(
                         "Crate",
-                        l,
                         f =>
                         {
                             f.SetTrigger(

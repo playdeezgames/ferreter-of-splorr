@@ -13,5 +13,8 @@
         void AddFeature(IFeature feature);
         IEnumerable<IFeature> Features { get; }
         bool HasFeatures { get; }
+        IFeature CreateFeature(
+            string name,
+            Action<IFeature>? initializer = null);
     }
 }

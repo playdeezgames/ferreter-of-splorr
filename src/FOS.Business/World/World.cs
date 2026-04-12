@@ -85,20 +85,6 @@ namespace FOS.Business
             initializer.Invoke(this);
         }
 
-        public IFeature CreateFeature(string name, ILocation location, Action<IFeature>? initializer = null)
-        {
-            var featureId = Guid.NewGuid();
-            data.Features[featureId] = new FeatureData
-            {
-                Name = name,
-                LocationId = location.LocationId
-            };
-            var result = new Feature(data, grimoire, featureId);
-            location.AddFeature(result);
-            initializer?.Invoke(result);
-            return result;
-        }
-
         public IFeature GetFeature(Guid featureId)
         {
             return new Feature(data, grimoire, featureId);
