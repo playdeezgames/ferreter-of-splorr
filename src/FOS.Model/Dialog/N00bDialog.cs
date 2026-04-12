@@ -68,26 +68,32 @@ namespace FOS.Model.Dialog
         }
         internal static IEnumerable<IDialogLine> GetLines(ICharacter character)
         {
-            var location = character.Location;
             var lines = new List<IDialogLine>();
             lines.AddRange(character.World.Messages.Select(x => new DialogLine(x.Mood, x.Text)));
+            GetLocationLines(lines, character);
+            GetCurrentFeatureLines(lines, character);
+            GetFeaturesLines(lines, character);
+            GetRoutesLines(lines, character);
+            return lines;
+        }
+
+        private static void GetLocationLines(List<IDialogLine> lines, ICharacter character)
+        {
             lines.AddRange(
                 [
                     new DialogLine(Moods.NORMAL, "Yer the n00b!"),
                     new DialogLine(Moods.NORMAL, $"Yer facing {character.Grimoire.GetDirectionName(character.Direction)}."),
-                    new DialogLine(Moods.NORMAL, $"Location: {location.Name}.")
+                    new DialogLine(Moods.NORMAL, $"Location: {character.Location.Name}.")
                 ]);
-            GetCurrentFeatureLines(lines, character);
-            GetFeaturesLines(lines, location);
-            GetRoutesLines(lines, location);
-
-            return lines;
         }
 
-
-        private static void GetFeaturesLines(List<IDialogLine> lines, ILocation location)
+        private static void GetFeaturesLines(List<IDialogLine> lines, ICharacter character)
         {
-            var features = location.Features;
+            if (character.HasMetadata(Metadatas.MODE) && character.GetMetadata(Metadatas.MODE) != Modes.FEATURES)
+            {
+                return;
+            }
+            var features = character.Location.Features;
             if (features.Any())
             {
                 lines.Add(new DialogLine(Moods.NORMAL, "Features:"));
@@ -98,9 +104,13 @@ namespace FOS.Model.Dialog
             }
         }
 
-        private static void GetRoutesLines(List<IDialogLine> lines, ILocation location)
+        private static void GetRoutesLines(List<IDialogLine> lines, ICharacter character)
         {
-            var routes = location.Routes;
+            if (character.HasMetadata(Metadatas.MODE) && character.GetMetadata(Metadatas.MODE) != Modes.MOVE)
+            {
+                return;
+            }
+            var routes = character.Location.Routes;
             if (routes.Any())
             {
                 lines.Add(new DialogLine(Moods.NORMAL, "Exits:"));
