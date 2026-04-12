@@ -2,7 +2,14 @@
 
 namespace FOS.Business
 {
-    internal class Trigger(WorldData data, IGrimoire grimoire, Guid triggerId) : InventoryEntity<TriggerData>(data, grimoire), ITrigger
+    internal class Trigger(
+        WorldData data,
+        IGrimoire grimoire,
+        Guid triggerId) :
+            InventoryEntity<TriggerData>(
+                data,
+                grimoire),
+            ITrigger
     {
         public Guid TriggerId => triggerId;
 
@@ -24,6 +31,25 @@ namespace FOS.Business
         }
 
         public string TriggerType => GetEntityData().TriggerType;
+
+        public ITrigger AppendTrigger(string triggerType, Action<ITrigger>? initializer = null)
+        {
+            if (NextTrigger != null)
+            {
+                return NextTrigger.AppendTrigger(triggerType, initializer);
+            }
+            else
+            {
+                var triggerId = Guid.NewGuid();
+                Data.Triggers[triggerId] = new TriggerData
+                {
+                    TriggerType = triggerType
+                };
+                var result = new Trigger(Data, Grimoire, triggerId);
+                initializer?.Invoke(result);
+                return result;
+            }
+        }
 
         public void Fire(ICharacter character)
         {

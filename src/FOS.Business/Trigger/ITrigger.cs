@@ -6,5 +6,6 @@
         string TriggerType { get; }
         void Fire(ICharacter character);
         ITrigger? NextTrigger { get; set; }
+        ITrigger AppendTrigger(string triggerType, Action<ITrigger>? initializer = null);
     }
 }
