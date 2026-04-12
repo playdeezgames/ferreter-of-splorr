@@ -8,7 +8,8 @@ namespace FOS.Business
 
         protected WorldData Data => data;
 
-        public IGrimoire Grimoire => grimoire;
+        public IGrimoire Grimoire =>
+            grimoire;
 
         public void ClearMetadata(string metadataId)
         {
