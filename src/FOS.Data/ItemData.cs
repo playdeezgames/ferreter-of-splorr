@@ -4,5 +4,6 @@
     {
         public required string ItemType { get; set; }
         public required string Name { get; set; }
+        public Guid? InventoryId { get; set; } = null;
     }
 }

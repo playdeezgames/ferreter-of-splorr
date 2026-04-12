@@ -4,5 +4,6 @@
     {
         Guid ItemId { get; }
         string Name { get; }
+        IInventory? Inventory { get; set; }
     }
 }

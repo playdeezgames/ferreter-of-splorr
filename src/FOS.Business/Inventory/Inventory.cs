@@ -13,11 +13,13 @@ namespace FOS.Business
         public void AddItem(IItem item)
         {
             GetEntityData().ItemIds.Add(item.ItemId);
+            item.Inventory = this;
         }
 
         public void RemoveItem(IItem item)
         {
             GetEntityData().ItemIds.Remove(item.ItemId);
+            item.Inventory = null;
         }
 
         internal InventoryData GetEntityData()
