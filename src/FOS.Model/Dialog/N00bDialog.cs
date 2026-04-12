@@ -68,31 +68,44 @@ namespace FOS.Model.Dialog
         }
         internal static IEnumerable<IDialogLine> GetLines(ICharacter character)
         {
-            var lines = new List<IDialogLine>();
-            lines.AddRange(character.World.Messages.Select(x => new DialogLine(x.Mood, x.Text)));
-            GetLocationLines(lines, character);
-            GetCurrentFeatureLines(lines, character);
-            GetFeaturesLines(lines, character);
-            GetRoutesLines(lines, character);
-            return lines;
+            return
+                [
+                    .. character.World.Messages.Select(x => new DialogLine(x.Mood, x.Text)),
+                    .. GetLocationLines(character),
+                    .. GetFocusFeatureLines(character),
+                    .. GetFocusItemLines(character),
+                    .. GetFeaturesLines(character),
+                    .. GetRoutesLines(character)
+                ];
         }
 
-        private static void GetLocationLines(List<IDialogLine> lines, ICharacter character)
+        private static IEnumerable<IDialogLine> GetFocusItemLines(ICharacter character)
         {
-            lines.AddRange(
+            var focusItem = character.FocusItem;
+            if (focusItem == null)
+            {
+                return [];
+            }
+            return [new DialogLine(Moods.NORMAL, $"Interacting with {focusItem.Name}.")];
+        }
+
+        private static IEnumerable<DialogLine> GetLocationLines(ICharacter character)
+        {
+            return
                 [
                     new DialogLine(Moods.NORMAL, "Yer the n00b!"),
                     new DialogLine(Moods.NORMAL, $"Yer facing {character.Grimoire.GetDirectionName(character.Direction)}."),
                     new DialogLine(Moods.NORMAL, $"Location: {character.Location.Name}.")
-                ]);
+                ];
         }
 
-        private static void GetFeaturesLines(List<IDialogLine> lines, ICharacter character)
+        private static IEnumerable<IDialogLine> GetFeaturesLines(ICharacter character)
         {
             if (character.HasMetadata(Metadatas.MODE) && character.GetMetadata(Metadatas.MODE) != Modes.FEATURES)
             {
-                return;
+                return [];
             }
+            List<IDialogLine> lines = new();
             var features = character.Location.Features;
             if (features.Any())
             {
@@ -102,15 +115,17 @@ namespace FOS.Model.Dialog
             {
                 lines.Add(new DialogLine(Moods.NORMAL, $"{feature.Name}"));
             }
+            return lines;
         }
 
-        private static void GetRoutesLines(List<IDialogLine> lines, ICharacter character)
+        private static IEnumerable<IDialogLine> GetRoutesLines(ICharacter character)
         {
             if (character.HasMetadata(Metadatas.MODE) && character.GetMetadata(Metadatas.MODE) != Modes.MOVE)
             {
-                return;
+                return [];
             }
             var routes = character.Location.Routes;
+            List<IDialogLine> lines = new();
             if (routes.Any())
             {
                 lines.Add(new DialogLine(Moods.NORMAL, "Exits:"));
@@ -119,15 +134,16 @@ namespace FOS.Model.Dialog
             {
                 lines.Add(new DialogLine(Moods.NORMAL, $"{route.GetDirectionName()}: {route.Name}"));
             }
+            return lines;
         }
-        private static void GetCurrentFeatureLines(List<IDialogLine> lines, ICharacter character)
+        private static IEnumerable<IDialogLine> GetFocusFeatureLines(ICharacter character)
         {
             var feature = character.FocusFeature;
             if (feature == null)
             {
-                return;
+                return [];
             }
-            lines.Add(new DialogLine(Moods.NORMAL, $"Interacting with: {feature.Name}"));
+            return [new DialogLine(Moods.NORMAL, $"Interacting with: {feature.Name}")];
         }
         internal static string GetPrompt(ICharacter character)
         {
