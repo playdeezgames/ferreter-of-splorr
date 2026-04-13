@@ -2,7 +2,7 @@
 
 namespace FOS.Model.Dialog
 {
-    internal static class N00bDialogCommandHandler
+    internal static class N00bCommandHandler
     {
         internal static void HandleCommand(ICharacter character, string command)
         {

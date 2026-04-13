@@ -3,7 +3,7 @@ using TGGD.Business;
 
 namespace FOS.Model.Dialog
 {
-    internal static class N00bDialogLines
+    internal static class N00bLines
     {
         internal static IEnumerable<IDialogLine> GetLines(ICharacter character)
         {

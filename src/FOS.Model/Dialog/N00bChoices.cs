@@ -3,7 +3,7 @@ using TGGD.Business;
 
 namespace FOS.Model.Dialog
 {
-    internal static class N00bDialogChoices
+    internal static class N00bChoices
     {
         internal static IEnumerable<IDialogChoice> GetChoices(ICharacter character)
         {
