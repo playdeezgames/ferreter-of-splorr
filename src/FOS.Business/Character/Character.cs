@@ -28,7 +28,7 @@ namespace FOS.Business
         {
             get
             {
-                var featureId = GetEntityData().FeatureId;
+                var featureId = GetEntityData().FocusFeatureId;
                 if (featureId.HasValue)
                 {
                     return new Feature(Data, Grimoire, featureId.Value);
@@ -37,17 +37,17 @@ namespace FOS.Business
             }
             set
             {
-                GetEntityData().FeatureId = value?.FeatureId;
+                GetEntityData().FocusFeatureId = value?.FeatureId;
             }
         }
 
-        public bool HasFocusFeature => GetEntityData().FeatureId.HasValue;
+        public bool HasFocusFeature => GetEntityData().FocusFeatureId.HasValue;
 
         public IItem? FocusItem
         {
             get
             {
-                var itemId = GetEntityData().ItemId;
+                var itemId = GetEntityData().FocusItemId;
                 if (itemId.HasValue)
                 {
                     return new Item(Data, Grimoire, itemId.Value);
@@ -56,11 +56,11 @@ namespace FOS.Business
             }
             set
             {
-                GetEntityData().ItemId = value?.ItemId;
+                GetEntityData().FocusItemId = value?.ItemId;
             }
         }
 
-        public bool HasFocusItem => GetEntityData().ItemId.HasValue;
+        public bool HasFocusItem => GetEntityData().FocusItemId.HasValue;
 
         public string Direction
         {
@@ -69,6 +69,25 @@ namespace FOS.Business
         }
 
         public string Name => GetEntityData().Name;
+
+        public ICharacter? FocusCharacter
+        {
+            get
+            {
+                var characterId = GetEntityData().FocusCharacterId;
+                if (characterId.HasValue)
+                {
+                    return new Character(Data, Grimoire, characterId.Value);
+                }
+                return null;
+            }
+            set
+            {
+                GetEntityData().FocusCharacterId = value?.CharacterId;
+            }
+        }
+
+        public bool HasFocusCharacter => GetEntityData().FocusCharacterId.HasValue;
 
         internal override CharacterData GetEntityData()
         {

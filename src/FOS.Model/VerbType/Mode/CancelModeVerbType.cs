@@ -14,6 +14,7 @@ namespace FOS.Model
                     character.GetMetadata(Metadatas.MODE) == Modes.TURN ||
                     (character.GetMetadata(Metadatas.MODE) == Modes.GROUND_INVENTORY && !character.HasFocusItem) ||
                     (character.GetMetadata(Metadatas.MODE) == Modes.INVENTORY && !character.HasFocusItem) ||
+                    (character.GetMetadata(Metadatas.MODE) == Modes.CHARACTERS && !character.HasFocusCharacter) ||
                     character.GetMetadata(Metadatas.MODE) == Modes.MOVE ||
                     (character.GetMetadata(Metadatas.MODE) == Modes.FEATURES && !character.HasFocusFeature));
         }

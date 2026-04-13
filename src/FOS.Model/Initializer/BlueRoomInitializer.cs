@@ -43,6 +43,10 @@ namespace FOS.Model.Initializer
                         "The Blue Room Exit",
                         Directions.OUT,
                         brtl);
+#if DEBUG
+                    tbr.CreateCharacter("Yermom", Directions.EAST, ym => { });
+                    tbr.CreateCharacter("Nacho Mama", Directions.WEST, nm => { });
+#endif
                 });
         }
     }

@@ -26,5 +26,6 @@
             ILocation toLocation,
             Action<IRoute>? initializer = null);
         IEnumerable<ICharacter> GetOtherCharacters(ICharacter character);
+        bool HasOtherCharacters(ICharacter character);
     }
 }

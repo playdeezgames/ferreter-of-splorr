@@ -22,6 +22,7 @@
         internal readonly static string GROUND_INVENTORY_MODE = nameof(GROUND_INVENTORY_MODE);
         internal readonly static string TAKE_ITEM = nameof(TAKE_ITEM);
         internal readonly static string EXAMINE_FEATURE = nameof(EXAMINE_FEATURE);
+        internal readonly static string CHARACTERS_MODE = nameof(CHARACTERS_MODE);
         internal static IReadOnlyDictionary<string, IVerbType> All =
             new List<IVerbType>
             {
@@ -44,7 +45,8 @@
                 new DropItemVerbType(),
                 new GroundInventoryModeVerbType(),
                 new TakeItemVerbType(),
-                new ExamineFeatureVerbType()
+                new ExamineFeatureVerbType(),
+                new CharactersModeVerbType()
             }.ToDictionary(x => x.Identifier, x => x);
     }
 }

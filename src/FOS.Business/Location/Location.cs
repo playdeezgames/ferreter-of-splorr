@@ -114,5 +114,10 @@ namespace FOS.Business
                 Where(x => x != character.CharacterId).
                 Select(x => new Character(Data, Grimoire, x));
         }
+
+        public bool HasOtherCharacters(ICharacter character)
+        {
+            return GetEntityData().CharacterIds.Any(x => x != character.CharacterId);
+        }
     }
 }
