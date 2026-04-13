@@ -42,6 +42,12 @@ namespace FOS.Model.Initializer
                         "Inn Exit",
                         Directions.OUT,
                         jitl);
+                    jil.CreateCharacter(
+                        Directions.SOUTH,
+                        gc =>
+                        {
+                            //TODO: this is Gorachan
+                        });
                     world.CreateLocation(
                         "Inn Cellar",
                         icl =>
