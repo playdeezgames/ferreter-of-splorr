@@ -8,22 +8,22 @@ namespace FOS.Model
     {
         public static IEnumerable<IDialogChoice> GetChoices(IWorld world)
         {
-            return N00bDialog.GetChoices(world.Avatar!);
+            return N00bDialogChoices.GetChoices(world.Avatar!);
         }
 
         public static IEnumerable<IDialogLine> GetLines(IWorld world)
         {
-            return N00bDialog.GetLines(world.Avatar!);
+            return N00bDialogLines.GetLines(world.Avatar!);
         }
 
         public static string GetPrompt(IWorld world)
         {
-            return N00bDialog.GetPrompt(world.Avatar!);
+            return N00bDialogPrompt.GetPrompt(world.Avatar!);
         }
 
         public static void HandleCommand(IWorld world, string command)
         {
-            N00bDialog.HandleCommand(world.Avatar!, command);
+            N00bDialogCommandHandler.HandleCommand(world.Avatar!, command);
         }
     }
 }
