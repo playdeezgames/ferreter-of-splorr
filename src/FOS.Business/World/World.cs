@@ -114,5 +114,10 @@ namespace FOS.Business
         {
             return new Item(data, grimoire, itemId);
         }
+
+        public ICharacter GetCharacter(Guid characterId)
+        {
+            return new Character(data, grimoire, characterId);
+        }
     }
 }

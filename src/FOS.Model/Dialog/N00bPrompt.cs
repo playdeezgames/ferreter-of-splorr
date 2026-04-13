@@ -17,6 +17,7 @@ namespace FOS.Model.Dialog
                 new PromptDeterminer(x=>x.GetMetadata(Metadatas.MODE)==Modes.GROUND_INVENTORY, x=>"Ground Inventory:"),
                 new PromptDeterminer(x=>x.GetMetadata(Metadatas.MODE)==Modes.FEATURES && x.HasFocusFeature, x=>$"Interact with {x.FocusFeature!.Name}..."),
                 new PromptDeterminer(x=>x.GetMetadata(Metadatas.MODE)==Modes.FEATURES, x=>"Which Feature?"),
+                new PromptDeterminer(x=>x.GetMetadata(Metadatas.MODE)==Modes.CHARACTERS && x.HasFocusCharacter, x=>$"Interact with {x.FocusCharacter!.Name}..."),
                 new PromptDeterminer(x=>x.GetMetadata(Metadatas.MODE)==Modes.CHARACTERS, x=>"Which Character?")
             ];
 
