@@ -43,6 +43,7 @@ namespace FOS.Model.Initializer
                         Directions.OUT,
                         jitl);
                     jil.CreateCharacter(
+                        "Gorachan",
                         Directions.SOUTH,
                         gc =>
                         {

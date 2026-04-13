@@ -74,11 +74,12 @@ namespace FOS.Business
             return result;
         }
 
-        public ICharacter CreateCharacter(string direction, Action<ICharacter>? initializer = null)
+        public ICharacter CreateCharacter(string name, string direction, Action<ICharacter>? initializer = null)
         {
             var characterId = Guid.NewGuid();
             Data.Characters[characterId] = new CharacterData
             {
+                Name = name,
                 Direction = direction,
                 LocationId = LocationId
             };
@@ -104,6 +105,14 @@ namespace FOS.Business
             SetRoute(direction, result);
             initializer?.Invoke(result);
             return result;
+        }
+
+        public IEnumerable<ICharacter> GetOtherCharacters(ICharacter character)
+        {
+            return GetEntityData().
+                CharacterIds.
+                Where(x => x != character.CharacterId).
+                Select(x => new Character(Data, Grimoire, x));
         }
     }
 }

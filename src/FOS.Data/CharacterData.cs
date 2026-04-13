@@ -4,6 +4,7 @@
     {
         public required string Direction { get; set; }
         public required Guid LocationId { get; set; }
+        public required string Name { get; set; }
         public Guid? FeatureId { get; set; }
         public Guid? ItemId { get; set; }
     }

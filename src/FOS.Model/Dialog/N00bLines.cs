@@ -14,8 +14,24 @@ namespace FOS.Model.Dialog
                     .. GetFocusFeatureLines(character),
                     .. GetFocusItemLines(character),
                     .. GetFeaturesLines(character),
+                    .. GetCharactersLines(character),
                     .. GetRoutesLines(character)
                 ];
+        }
+
+        private static IEnumerable<IDialogLine> GetCharactersLines(ICharacter character)
+        {
+            List<IDialogLine> lines = [];
+            var otherCharacters = character.Location.GetOtherCharacters(character);
+            if (otherCharacters.Any())
+            {
+                lines.Add(new DialogLine(Moods.NORMAL, "Other Characters:"));
+            }
+            foreach (var otherCharacter in otherCharacters)
+            {
+                lines.Add(new DialogLine(Moods.NORMAL, $"{otherCharacter.Name}"));
+            }
+            return lines.AsEnumerable();
         }
 
         private static IEnumerable<IDialogLine> GetFocusItemLines(ICharacter character)
@@ -32,7 +48,7 @@ namespace FOS.Model.Dialog
         {
             return
                 [
-                    new DialogLine(Moods.NORMAL, "Yer the n00b!"),
+                    new DialogLine(Moods.NORMAL, $"Yer name is {character.Name}!"),
                     new DialogLine(Moods.NORMAL, $"Yer facing {character.Grimoire.GetDirectionName(character.Direction)}."),
                     new DialogLine(Moods.NORMAL, $"Location: {character.Location.Name}.")
                 ];
@@ -44,7 +60,7 @@ namespace FOS.Model.Dialog
             {
                 return [];
             }
-            List<IDialogLine> lines = new();
+            List<IDialogLine> lines = [];
             var features = character.Location.Features;
             if (features.Any())
             {
@@ -54,7 +70,7 @@ namespace FOS.Model.Dialog
             {
                 lines.Add(new DialogLine(Moods.NORMAL, $"{feature.Name}"));
             }
-            return lines;
+            return lines.AsEnumerable();
         }
 
         private static IEnumerable<IDialogLine> GetRoutesLines(ICharacter character)
@@ -64,7 +80,7 @@ namespace FOS.Model.Dialog
                 return [];
             }
             var routes = character.Location.Routes;
-            List<IDialogLine> lines = new();
+            List<IDialogLine> lines = [];
             if (routes.Any())
             {
                 lines.Add(new DialogLine(Moods.NORMAL, "Exits:"));
@@ -73,7 +89,7 @@ namespace FOS.Model.Dialog
             {
                 lines.Add(new DialogLine(Moods.NORMAL, $"{route.GetDirectionName()}: {route.Name}"));
             }
-            return lines;
+            return lines.AsEnumerable();
         }
         private static IEnumerable<IDialogLine> GetFocusFeatureLines(ICharacter character)
         {

@@ -17,6 +17,7 @@
             string name,
             Action<IFeature>? initializer = null);
         ICharacter CreateCharacter(
+            string name,
             string direction,
             Action<ICharacter>? initializer = null);
         IRoute CreateRoute(
@@ -24,5 +25,6 @@
             string direction,
             ILocation toLocation,
             Action<IRoute>? initializer = null);
+        IEnumerable<ICharacter> GetOtherCharacters(ICharacter character);
     }
 }

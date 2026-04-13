@@ -2,7 +2,14 @@
 
 namespace FOS.Business
 {
-    internal class Character(WorldData data, IGrimoire grimoire, Guid characterId) : InventoryEntity<CharacterData>(data, grimoire), ICharacter
+    internal class Character(
+        WorldData data,
+        IGrimoire grimoire,
+        Guid characterId) :
+            InventoryEntity<CharacterData>(
+                data,
+                grimoire),
+            ICharacter
     {
         public Guid CharacterId => characterId;
 
@@ -60,6 +67,8 @@ namespace FOS.Business
             get => GetEntityData().Direction;
             set => GetEntityData().Direction = value;
         }
+
+        public string Name => GetEntityData().Name;
 
         internal override CharacterData GetEntityData()
         {
