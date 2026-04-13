@@ -13,13 +13,27 @@ namespace FOS.Business
         public void AddItem(IItem item)
         {
             GetEntityData().ItemIds.Add(item.ItemId);
-            item.Inventory = this;
+            data.Items[item.ItemId].InventoryId = inventoryId;
+        }
+
+        public IItem CreateItem(string itemType, string name, Action<IItem>? initializer = null)
+        {
+            var itemId = Guid.NewGuid();
+            data.Items[itemId] = new ItemData
+            {
+                ItemType = itemType,
+                Name = name
+            };
+            var result = new Item(data, grimoire, itemId);
+            AddItem(result);
+            initializer?.Invoke(result);
+            return result;
         }
 
         public void RemoveItem(IItem item)
         {
             GetEntityData().ItemIds.Remove(item.ItemId);
-            item.Inventory = null;
+            data.Items[item.ItemId].InventoryId = null;
         }
 
         internal InventoryData GetEntityData()

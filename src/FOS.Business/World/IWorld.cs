@@ -8,10 +8,6 @@
         ICharacter GetCharacter(Guid characterId);
         ILocation CreateLocation(string name, Action<ILocation>? initializer = null);
         IFeature GetFeature(Guid featureId);
-        IItem CreateItem(
-            string itemType,
-            string name,
-            Action<IItem>? initializer = null);
         IInventory CreateInventory();
         IEnumerable<IMessage> Messages { get; }
         void ClearMessages();

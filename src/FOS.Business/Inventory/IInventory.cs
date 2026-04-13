@@ -7,5 +7,9 @@
         void AddItem(IItem item);
         void RemoveItem(IItem item);
         bool HasItems { get; }
+        IItem CreateItem(
+            string itemType,
+            string name,
+            Action<IItem>? initializer = null);
     }
 }

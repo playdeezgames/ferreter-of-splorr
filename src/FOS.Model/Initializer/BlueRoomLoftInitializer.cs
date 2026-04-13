@@ -27,14 +27,13 @@ namespace FOS.Model.Initializer
                                 TriggerTypes.BESTOW_INVENTORY,
                                 t =>
                                 {
-                                    t.Inventory.AddItem(
-                                        world.CreateItem(
+                                    t.Inventory.CreateItem(
                                             ItemTypes.GOLD,
                                             "Gold Pieces",
                                             i =>
                                             {
                                                 i.SetStatistic(StatisticTypes.QUANTITY, 5);
-                                            }));
+                                            });
                                 }).AppendTrigger(
                                     TriggerTypes.ADD_MESSAGE,
                                     t =>

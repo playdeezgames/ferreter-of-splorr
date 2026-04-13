@@ -18,7 +18,7 @@ namespace FOS.Model.Initializer
                                 TriggerTypes.BESTOW_INVENTORY,
                                 t =>
                                 {
-                                    t.Inventory.AddItem(world.CreateItem(ItemTypes.DAGGER, "Rusty Dagger"));
+                                    t.Inventory.CreateItem(ItemTypes.DAGGER, "Rusty Dagger");
                                 }).
                             AppendTrigger(
                                 TriggerTypes.ADD_MESSAGE,
