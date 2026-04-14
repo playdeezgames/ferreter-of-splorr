@@ -2,29 +2,21 @@
 
 namespace FOS.Model
 {
-    internal class MoveAheadVerbType : IVerbType
+    internal class MoveAheadVerbType() : MoveVerbType(Verbs.MOVE_AHEAD), IVerbType
     {
-        public string Identifier => Verbs.MOVE_AHEAD;
-
-        public bool CanPerform(ICharacter character)
+        public override string GetDirection(ICharacter character)
         {
-            return
-                character.HasMode() &&
-                character.GetMode() == Modes.MOVE &&
-                character.Location.HasRoute(character.Direction);
+            return character.Direction;
         }
 
-        public string GetText(ICharacter character)
+        public override string GetText(ICharacter character)
         {
             return "Move Ahead";
         }
 
-        public void Perform(ICharacter character)
+        protected override string GetSuccessMessage(ICharacter character, IRoute route)
         {
-            var route = character.Location.GetRoute(character.Direction)!;
-            character.AddMessage(Moods.NORMAL, $"You move ahead thru {route.Name}.");
-            character.Location = route.Destination;
-            character.ClearMode();
+            return $"{character.Name} moves ahead thru {route.Name}.";
         }
     }
 }

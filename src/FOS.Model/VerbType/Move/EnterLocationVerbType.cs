@@ -2,29 +2,21 @@
 
 namespace FOS.Model
 {
-    internal class EnterLocationVerbType : IVerbType
+    internal class EnterLocationVerbType() : MoveVerbType(Verbs.ENTER_LOCATION), IVerbType
     {
-        public string Identifier => Verbs.ENTER_LOCATION;
-
-        public bool CanPerform(ICharacter character)
+        public override string GetDirection(ICharacter character)
         {
-            return
-                character.HasMode() &&
-                character.GetMode() == Modes.MOVE &&
-                character.Location.HasRoute(Directions.IN);
+            return Directions.IN;
         }
 
-        public string GetText(ICharacter character)
+        public override string GetText(ICharacter character)
         {
             return "Enter";
         }
 
-        public void Perform(ICharacter character)
+        protected override string GetSuccessMessage(ICharacter character, IRoute route)
         {
-            var route = character.Location.GetRoute(Directions.IN)!;
-            character.AddMessage(Moods.NORMAL, $"You enter through {route.Name}.");
-            character.Location = route.Destination;
-            character.ClearMode();
+            return $"You enter thru {route.Name}.";
         }
     }
 }

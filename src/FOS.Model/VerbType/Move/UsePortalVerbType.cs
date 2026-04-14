@@ -2,28 +2,21 @@
 
 namespace FOS.Model
 {
-    internal class UsePortalVerbType : IVerbType
+    internal class UsePortalVerbType() : MoveVerbType(Verbs.USE_PORTAL), IVerbType
     {
-        public string Identifier => Verbs.USE_PORTAL;
-
-        public bool CanPerform(ICharacter character)
+        public override string GetDirection(ICharacter character)
         {
-            return
-                character.IsInMode(Modes.MOVE) &&
-                character.Location.HasRoute(Directions.PORTAL);
+            return Directions.PORTAL;
         }
 
-        public string GetText(ICharacter character)
+        public override string GetText(ICharacter character)
         {
             return "Use Portal";
         }
 
-        public void Perform(ICharacter character)
+        protected override string GetSuccessMessage(ICharacter character, IRoute route)
         {
-            var route = character.Location.GetRoute(Directions.PORTAL)!;
-            character.AddMessage(Moods.NORMAL, $"You enter {route.Name}.");
-            character.Location = route.Destination;
-            character.ClearMode();
+            return $"You use {route.Name}.";
         }
     }
 }

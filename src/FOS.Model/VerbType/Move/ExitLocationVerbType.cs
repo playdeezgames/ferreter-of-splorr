@@ -2,29 +2,21 @@
 
 namespace FOS.Model
 {
-    internal class ExitLocationVerbType : IVerbType
+    internal class ExitLocationVerbType() : MoveVerbType(Verbs.EXIT_LOCATION), IVerbType
     {
-        public string Identifier => Verbs.EXIT_LOCATION;
-
-        public bool CanPerform(ICharacter character)
+        public override string GetDirection(ICharacter character)
         {
-            return
-                character.HasMode() &&
-                character.GetMode() == Modes.MOVE &&
-                character.Location.HasRoute(Directions.OUT);
+            return Directions.OUT;
         }
 
-        public string GetText(ICharacter character)
+        public override string GetText(ICharacter character)
         {
             return "Exit";
         }
 
-        public void Perform(ICharacter character)
+        protected override string GetSuccessMessage(ICharacter character, IRoute route)
         {
-            var route = character.Location.GetRoute(Directions.OUT)!;
-            character.AddMessage(Moods.NORMAL, $"You exit through {route.Name}.");
-            character.Location = route.Destination;
-            character.ClearMode();
+            return $"You exit thru {route.Name}.";
         }
     }
 }

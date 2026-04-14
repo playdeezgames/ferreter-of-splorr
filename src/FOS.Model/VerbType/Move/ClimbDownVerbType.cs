@@ -2,29 +2,21 @@
 
 namespace FOS.Model
 {
-    internal class ClimbDownVerbType : IVerbType
+    internal class ClimbDownVerbType() : MoveVerbType(Verbs.CLIMB_DOWN), IVerbType
     {
-        public string Identifier => Verbs.CLIMB_DOWN;
-
-        public bool CanPerform(ICharacter character)
+        public override string GetDirection(ICharacter character)
         {
-            return
-                character.HasMode() &&
-                character.GetMode() == Modes.MOVE &&
-                character.Location.HasRoute(Directions.DOWN);
+            return Directions.DOWN;
         }
 
-        public string GetText(ICharacter character)
+        public override string GetText(ICharacter character)
         {
             return "Climb Down";
         }
 
-        public void Perform(ICharacter character)
+        protected override string GetSuccessMessage(ICharacter character, IRoute route)
         {
-            var route = character.Location.GetRoute(Directions.DOWN)!;
-            character.AddMessage(Moods.NORMAL, $"You climb down {route.Name}.");
-            character.Location = route.Destination;
-            character.ClearMode();
+            return $"You climb down {route.Name}.";
         }
     }
 }

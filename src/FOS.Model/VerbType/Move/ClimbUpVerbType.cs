@@ -2,29 +2,21 @@
 
 namespace FOS.Model
 {
-    internal class ClimbUpVerbType : IVerbType
+    internal class ClimbUpVerbType() : MoveVerbType(Verbs.CLIMB_UP), IVerbType
     {
-        public string Identifier => Verbs.CLIMB_UP;
-
-        public bool CanPerform(ICharacter character)
+        public override string GetDirection(ICharacter character)
         {
-            return
-                character.HasMode() &&
-                character.GetMode() == Modes.MOVE &&
-                character.Location.HasRoute(Directions.UP);
+            return Directions.UP;
         }
 
-        public string GetText(ICharacter character)
+        public override string GetText(ICharacter character)
         {
             return "Climb Up";
         }
 
-        public void Perform(ICharacter character)
+        protected override string GetSuccessMessage(ICharacter character, IRoute route)
         {
-            var route = character.Location.GetRoute(Directions.UP)!;
-            character.AddMessage(Moods.NORMAL, $"You climb up {route.Name}.");
-            character.Location = route.Destination;
-            character.ClearMode();
+            return $"You climb up {route.Name}.";
         }
     }
 }
