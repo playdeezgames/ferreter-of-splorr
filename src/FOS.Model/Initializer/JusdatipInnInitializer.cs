@@ -47,7 +47,7 @@ namespace FOS.Model.Initializer
                         Directions.SOUTH,
                         gc =>
                         {
-                            //TODO: this is Gorachan
+                            gc.SetTag(Tags.GORACHAN);
                         });
                     world.CreateLocation(
                         "Inn Cellar",

@@ -5,6 +5,7 @@
         internal readonly static string BLUR_CHARACTER = nameof(BLUR_CHARACTER);
         internal static readonly IReadOnlyList<IVerbType> All =
             [
+                .. GorachanVerbs.All,
                 new BlurCharacterVerbType()
             ];
     }

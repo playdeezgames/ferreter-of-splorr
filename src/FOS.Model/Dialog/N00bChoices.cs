@@ -67,7 +67,10 @@ namespace FOS.Model.Dialog
             {
                 return [];
             }
-            return character.Location.GetOtherCharacters(character).Select(x => new DialogChoice(x.CharacterId.ToString(), x.Name));
+            return character.
+                Location.
+                GetOtherCharacters(character).
+                Select(x => new DialogChoice(x.CharacterId.ToString(), x.Name));
         }
     }
 }
