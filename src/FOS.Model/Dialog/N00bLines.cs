@@ -15,12 +15,30 @@ namespace FOS.Model.Dialog
                     .. GetFocusItemLines(character),
                     .. GetFeaturesLines(character),
                     .. GetCharactersLines(character),
+                    .. GetStatisticsLines(character),
                     .. GetRoutesLines(character)
                 ];
         }
 
+        private static IEnumerable<IDialogLine> GetStatisticsLines(ICharacter character)
+        {
+            if (!character.IsInMode(Modes.STATISTICS))
+            {
+                return [];
+            }
+            List<IDialogLine> lines =
+                [
+                    new DialogLine(Moods.NORMAL, $"Jools: {character.GetStatistic(StatisticTypes.JOOLS)}")
+                ];
+            return lines.AsEnumerable();
+        }
+
         private static IEnumerable<IDialogLine> GetCharactersLines(ICharacter character)
         {
+            if (character.HasMode() && character.GetMode() != Modes.CHARACTERS)
+            {
+                return [];
+            }
             List<IDialogLine> lines = [];
             var otherCharacters = character.Location.GetOtherCharacters(character);
             if (otherCharacters.Any())
@@ -56,7 +74,7 @@ namespace FOS.Model.Dialog
 
         private static IEnumerable<IDialogLine> GetFeaturesLines(ICharacter character)
         {
-            if (character.HasMetadata(Metadatas.MODE) && character.GetMetadata(Metadatas.MODE) != Modes.FEATURES)
+            if (character.HasMode() && character.GetMode() != Modes.FEATURES)
             {
                 return [];
             }
@@ -75,7 +93,7 @@ namespace FOS.Model.Dialog
 
         private static IEnumerable<IDialogLine> GetRoutesLines(ICharacter character)
         {
-            if (character.HasMetadata(Metadatas.MODE) && character.GetMetadata(Metadatas.MODE) != Modes.MOVE)
+            if (character.HasMode() && character.GetMode() != Modes.MOVE)
             {
                 return [];
             }

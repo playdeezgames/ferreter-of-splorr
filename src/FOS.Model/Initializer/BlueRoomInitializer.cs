@@ -37,7 +37,7 @@ namespace FOS.Model.Initializer
                         c =>
                         {
                             c.SetTag(Tags.N00B);
-                            c.SetStatistic(StatisticTypes.MONEY, 0);
+                            c.SetStatistic(StatisticTypes.JOOLS, 0);
                         });
                     BlueRoomLoftInitializer.Run(world, tbr);
                     var brtl = RNG.FromEnumerable(town.Where(x => !x.HasRoute(Directions.IN)));

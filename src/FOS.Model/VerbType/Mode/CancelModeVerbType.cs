@@ -9,23 +9,35 @@ namespace FOS.Model
         public bool CanPerform(ICharacter character)
         {
             return
-                character.HasMetadata(Metadatas.MODE) &&
+                character.HasMode() &&
                 (
-                    character.GetMetadata(Metadatas.MODE) == Modes.TURN ||
-                    (character.GetMetadata(Metadatas.MODE) == Modes.GROUND_INVENTORY && !character.HasFocusItem) ||
-                    (character.GetMetadata(Metadatas.MODE) == Modes.INVENTORY && !character.HasFocusItem) ||
-                    (character.GetMetadata(Metadatas.MODE) == Modes.CHARACTERS && !character.HasFocusCharacter) ||
-                    character.GetMetadata(Metadatas.MODE) == Modes.MOVE ||
-                    (character.GetMetadata(Metadatas.MODE) == Modes.FEATURES && !character.HasFocusFeature));
+                    character.GetMode() == Modes.TURN ||
+                    character.GetMode() == Modes.STATISTICS ||
+                    (character.GetMode() == Modes.GROUND_INVENTORY && !character.HasFocusItem) ||
+                    (character.GetMode() == Modes.INVENTORY && !character.HasFocusItem) ||
+                    (character.GetMode() == Modes.CHARACTERS && !character.HasFocusCharacter) ||
+                    character.GetMode() == Modes.MOVE ||
+                    (character.GetMode() == Modes.FEATURES && !character.HasFocusFeature));
         }
+        private static readonly IReadOnlyDictionary<string, string> verbTexts =
+            new Dictionary<string, string>
+            {
+                [Modes.TURN] = "Don't Turn",
+                [Modes.STATISTICS] = "Leave Statistics",
+                [Modes.GROUND_INVENTORY] = "Leave Ground Inventory",
+                [Modes.INVENTORY] = "Leave Inventory",
+                [Modes.CHARACTERS] = "Disengage Characters",
+                [Modes.MOVE] = "Don't Move",
+                [Modes.FEATURES] = "Disengage Features"
+            };
         public string GetText(ICharacter character)
         {
-            return "Cancel";
+            return verbTexts[character.GetMode()];
         }
 
         public void Perform(ICharacter character)
         {
-            character.ClearMetadata(Metadatas.MODE);
+            character.ClearMode();
         }
     }
 }

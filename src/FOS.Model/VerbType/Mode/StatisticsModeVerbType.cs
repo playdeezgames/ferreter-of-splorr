@@ -2,23 +2,23 @@
 
 namespace FOS.Model
 {
-    internal class FeaturesModeVerbType : IVerbType
+    internal class StatisticsModeVerbType : IVerbType
     {
-        public string Identifier => Verbs.FEATURES_MODE;
+        public string Identifier => Verbs.STATISTICS_MODE;
 
         public bool CanPerform(ICharacter character)
         {
-            return !character.HasMode() && character.Location.HasFeatures;
+            return !character.HasMode();
         }
 
         public string GetText(ICharacter character)
         {
-            return "Features...";
+            return "Statistics...";
         }
 
         public void Perform(ICharacter character)
         {
-            character.SetMode(Modes.FEATURES);
+            character.SetMode(Modes.STATISTICS);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace FOS.Model
 
         public bool CanPerform(ICharacter character)
         {
-            return character.HasMetadata(Metadatas.MODE) && character.GetMetadata(Metadatas.MODE) == Modes.TURN;
+            return character.HasMode() && character.GetMode() == Modes.TURN;
         }
 
         public string GetText(ICharacter character)
@@ -19,7 +19,7 @@ namespace FOS.Model
         public void Perform(ICharacter character)
         {
             character.Direction = character.Grimoire.GetOppositeDirection(character.Direction);
-            character.ClearMetadata(Metadatas.MODE);
+            character.ClearMode();
             character.AddMessage(Moods.NORMAL, "You turn around.");
         }
     }

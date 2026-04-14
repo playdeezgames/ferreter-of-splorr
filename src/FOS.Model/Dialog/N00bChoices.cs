@@ -18,8 +18,8 @@ namespace FOS.Model.Dialog
         private static IEnumerable<IDialogChoice> AddGroundInventoryChoices(ICharacter character)
         {
             if (
-                !character.HasMetadata(Metadatas.MODE) ||
-                character.GetMetadata(Metadatas.MODE) != Modes.GROUND_INVENTORY ||
+                !character.HasMode() ||
+                character.GetMode() != Modes.GROUND_INVENTORY ||
                 character.HasFocusItem)
             {
                 return [];
@@ -30,8 +30,8 @@ namespace FOS.Model.Dialog
         private static IEnumerable<IDialogChoice> AddInventoryChoices(ICharacter character)
         {
             if (
-                !character.HasMetadata(Metadatas.MODE) ||
-                character.GetMetadata(Metadatas.MODE) != Modes.INVENTORY ||
+                !character.HasMode() ||
+                character.GetMode() != Modes.INVENTORY ||
                 character.HasFocusItem)
             {
                 return [];
@@ -49,8 +49,8 @@ namespace FOS.Model.Dialog
         private static IEnumerable<IDialogChoice> AddFeaturesChoices(ICharacter character)
         {
             if (
-                !character.HasMetadata(Metadatas.MODE) ||
-                character.GetMetadata(Metadatas.MODE) != Modes.FEATURES ||
+                !character.HasMode() ||
+                character.GetMode() != Modes.FEATURES ||
                 character.HasFocusFeature)
             {
                 return [];
@@ -61,8 +61,8 @@ namespace FOS.Model.Dialog
         private static IEnumerable<IDialogChoice> AddCharactersChoices(ICharacter character)
         {
             if (
-                !character.HasMetadata(Metadatas.MODE) ||
-                character.GetMetadata(Metadatas.MODE) != Modes.CHARACTERS ||
+                !character.HasMode() ||
+                character.GetMode() != Modes.CHARACTERS ||
                 character.HasFocusCharacter)
             {
                 return [];

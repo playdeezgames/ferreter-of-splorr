@@ -29,21 +29,20 @@ namespace FOS.Model.Initializer
                                 {
                                     t.Inventory.CreateItem(
                                             ItemTypes.GOLD,
-                                            "Gold Pieces",
+                                            "Handful of Jools",
                                             i =>
                                             {
-                                                i.SetStatistic(StatisticTypes.MONEY, 5);
+                                                i.SetStatistic(StatisticTypes.JOOLS, 5);
                                             });
                                 }).AppendTrigger(
                                     TriggerTypes.ADD_MESSAGE,
                                     t =>
                                     {
                                         t.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
-                                        t.SetMetadata(Metadatas.TEXT, "You find a 5 gold pieces!");
-                                        t.AppendTrigger(
+                                        t.SetMetadata(Metadatas.TEXT, "You find a handful of jools!");
+                                    }).AppendTrigger(
                                             TriggerTypes.DESTROY_FEATURE_TRIGGER,
                                             dt => dt.SetMetadata(Metadatas.TRIGGER_ID, Triggers.SEARCH));
-                                    });
                         });
                 });
         }

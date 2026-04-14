@@ -9,8 +9,8 @@ namespace FOS.Model
         public bool CanPerform(ICharacter character)
         {
             return
-                character.HasMetadata(Metadatas.MODE) &&
-                character.GetMetadata(Metadatas.MODE) == Modes.MOVE &&
+                character.HasMode() &&
+                character.GetMode() == Modes.MOVE &&
                 character.Location.HasRoute(Directions.DOWN);
         }
 
@@ -24,7 +24,7 @@ namespace FOS.Model
             var route = character.Location.GetRoute(Directions.DOWN)!;
             character.AddMessage(Moods.NORMAL, $"You climb down {route.Name}.");
             character.Location = route.Destination;
-            character.ClearMetadata(Metadatas.MODE);
+            character.ClearMode();
         }
     }
 }

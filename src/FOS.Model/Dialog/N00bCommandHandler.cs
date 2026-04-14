@@ -10,20 +10,20 @@ namespace FOS.Model.Dialog
             [
                 new CommandHandler(
                     (x,s)=>
-                        x.HasMetadata(Metadatas.MODE) &&
-                        x.GetMetadata(Metadatas.MODE)== Modes.FEATURES &&
+                        x.HasMode() &&
+                        x.GetMode()== Modes.FEATURES &&
                         Guid.TryParse(s, out _),
                     (x,s)=>x.FocusFeature = x.World.GetFeature(Guid.Parse(s))),
                 new CommandHandler(
                     (x,s)=>
-                        x.HasMetadata(Metadatas.MODE) &&
-                        x.GetMetadata(Metadatas.MODE)== Modes.CHARACTERS &&
+                        x.HasMode() &&
+                        x.GetMode()== Modes.CHARACTERS &&
                         Guid.TryParse(s, out _),
                     (x,s)=>x.FocusCharacter = x.World.GetCharacter(Guid.Parse(s))),
                 new CommandHandler(
                     (x,s)=>
-                        x.HasMetadata(Metadatas.MODE) &&
-                        (x.GetMetadata(Metadatas.MODE)== Modes.INVENTORY || x.GetMetadata(Metadatas.MODE)== Modes.GROUND_INVENTORY) &&
+                        x.HasMode() &&
+                        (x.GetMode()== Modes.INVENTORY || x.GetMode()== Modes.GROUND_INVENTORY) &&
                         Guid.TryParse(s, out _),
                     (x,s)=>x.FocusItem = x.World.GetItem(Guid.Parse(s))),
                 new CommandHandler((_,_) => true, (x,s) => Verbs.All[s].Perform(x))

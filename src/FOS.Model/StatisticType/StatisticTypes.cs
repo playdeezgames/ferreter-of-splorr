@@ -4,6 +4,6 @@
     {
         internal static readonly string COLUMN = nameof(COLUMN);
         internal static readonly string ROW = nameof(ROW);
-        internal static readonly string MONEY = nameof(MONEY);
+        internal static readonly string JOOLS = nameof(JOOLS);
     }
 }

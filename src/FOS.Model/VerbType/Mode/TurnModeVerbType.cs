@@ -8,7 +8,7 @@ namespace FOS.Model
 
         public bool CanPerform(ICharacter character)
         {
-            return !character.HasMetadata(Metadatas.MODE);
+            return !character.HasMode();
         }
 
         public string GetText(ICharacter character)
@@ -18,7 +18,7 @@ namespace FOS.Model
 
         public void Perform(ICharacter character)
         {
-            character.SetMetadata(Metadatas.MODE, Modes.TURN);
+            character.SetMode(Modes.TURN);
         }
     }
 }

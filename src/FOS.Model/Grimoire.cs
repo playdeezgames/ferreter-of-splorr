@@ -42,10 +42,10 @@ namespace FOS.Model
         private static readonly IReadOnlyList<ItemInterceptor> characterItemInterceptors =
             [
                 new ItemInterceptor(
-                    (c,i)=>c.HasStatistic(StatisticTypes.MONEY) && i.HasStatistic(StatisticTypes.MONEY),
+                    (c,i)=>c.HasStatistic(StatisticTypes.JOOLS) && i.HasStatistic(StatisticTypes.JOOLS),
                     (c,i)=>
                     {
-                        c.ChangeStatistic(StatisticTypes.MONEY, i.GetStatistic(StatisticTypes.MONEY));
+                        c.ChangeStatistic(StatisticTypes.JOOLS, i.GetStatistic(StatisticTypes.JOOLS));
                     })
             ];
 

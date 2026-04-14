@@ -9,8 +9,8 @@ namespace FOS.Model
         public bool CanPerform(ICharacter character)
         {
             return
-                character.HasMetadata(Metadatas.MODE) &&
-                character.GetMetadata(Metadatas.MODE) == Modes.INVENTORY &&
+                character.HasMode() &&
+                character.GetMode() == Modes.INVENTORY &&
                 character.HasFocusItem;
         }
 
