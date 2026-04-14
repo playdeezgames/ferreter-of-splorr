@@ -8,5 +8,6 @@
         string GetNextDirection(string directionId);
         string GetOppositeDirection(string directionId);
         string GetPreviousDirection(string directionId);
+        bool InterceptCharacterItem(ICharacter character, IItem item);
     }
 }

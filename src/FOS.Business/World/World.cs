@@ -92,10 +92,10 @@ namespace FOS.Business
             return result;
         }
 
-        public IInventory CreateInventory()
+        public IInventory CreateInventory(InventoryType inventoryType, Guid parentId)
         {
             var inventoryId = Guid.NewGuid();
-            data.Inventories[inventoryId] = new InventoryData();
+            data.Inventories[inventoryId] = new InventoryData { InventoryType = inventoryType, ParentId = parentId };
             var result = new Inventory(data, grimoire, inventoryId);
             return result;
         }
@@ -118,6 +118,16 @@ namespace FOS.Business
         public ICharacter GetCharacter(Guid characterId)
         {
             return new Character(data, grimoire, characterId);
+        }
+
+        public ILocation GetLocation(Guid locationId)
+        {
+            return new Location(data, grimoire, locationId);
+        }
+
+        public ITrigger GetTrigger(Guid triggerId)
+        {
+            return new Trigger(data, grimoire, triggerId);
         }
     }
 }

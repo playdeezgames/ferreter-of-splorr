@@ -2,7 +2,14 @@
 
 namespace FOS.Business
 {
-    internal class Item(WorldData data, IGrimoire grimoire, Guid itemId) : Entity<ItemData>(data, grimoire), IItem
+    internal class Item(
+        WorldData data,
+        IGrimoire grimoire,
+        Guid itemId) :
+            Entity<ItemData>(
+                data,
+                grimoire),
+            IItem
     {
         public Guid ItemId => itemId;
 
@@ -12,6 +19,12 @@ namespace FOS.Business
         {
             get => (GetEntityData().InventoryId.HasValue) ? (new Inventory(Data, Grimoire, GetEntityData().InventoryId!.Value)) : (null);
             set => GetEntityData().InventoryId = value?.InventoryId;
+        }
+
+        public void Destroy()
+        {
+            Inventory?.RemoveItem(this);
+            Data.Items.Remove(ItemId);
         }
 
         internal override ItemData GetEntityData()

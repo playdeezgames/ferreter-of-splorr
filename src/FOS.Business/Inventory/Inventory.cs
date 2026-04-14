@@ -12,8 +12,15 @@ namespace FOS.Business
 
         public void AddItem(IItem item)
         {
-            GetEntityData().ItemIds.Add(item.ItemId);
-            data.Items[item.ItemId].InventoryId = inventoryId;
+            if (!InventoryParent.InterceptItem(item))
+            {
+                GetEntityData().ItemIds.Add(item.ItemId);
+                data.Items[item.ItemId].InventoryId = inventoryId;
+            }
+            else
+            {
+                item.Destroy();
+            }
         }
 
         public IItem CreateItem(string itemType, string name, Action<IItem>? initializer = null)
@@ -39,6 +46,22 @@ namespace FOS.Business
         internal InventoryData GetEntityData()
         {
             return data.Inventories[InventoryId];
+        }
+
+        private World World => new(data, grimoire);
+
+        private IInventoryEntity InventoryParent
+        {
+            get
+            {
+                return GetEntityData().InventoryType switch
+                {
+                    InventoryType.CHARACTER => World.GetCharacter(GetEntityData().ParentId),
+                    InventoryType.LOCATION => World.GetLocation(GetEntityData().ParentId),
+                    InventoryType.TRIGGER => World.GetTrigger(GetEntityData().ParentId),
+                    _ => throw new NotImplementedException()
+                };
+            }
         }
     }
 }

@@ -31,7 +31,14 @@ namespace FOS.Model.Initializer
                                         dt => dt.SetMetadata(Metadatas.TRIGGER_ID, Triggers.SEARCH));
                                 });
                     });
-                    world.Avatar = tbr.CreateCharacter("N00b", Directions.NORTH, c => c.SetTag(Tags.N00B));
+                    world.Avatar = tbr.CreateCharacter(
+                        "N00b",
+                        Directions.NORTH,
+                        c =>
+                        {
+                            c.SetTag(Tags.N00B);
+                            c.SetStatistic(StatisticTypes.MONEY, 0);
+                        });
                     BlueRoomLoftInitializer.Run(world, tbr);
                     var brtl = RNG.FromEnumerable(town.Where(x => !x.HasRoute(Directions.IN)));
                     town.Remove(brtl);

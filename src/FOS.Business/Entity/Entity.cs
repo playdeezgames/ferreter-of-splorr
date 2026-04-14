@@ -57,5 +57,16 @@ namespace FOS.Business
         }
 
         internal abstract TEntityData GetEntityData();
+
+        public int ChangeStatistic(string statisticTypeId, int delta)
+        {
+            SetStatistic(statisticTypeId, GetStatistic(statisticTypeId) + delta);
+            return GetStatistic(statisticTypeId);
+        }
+
+        public bool HasStatistic(string statisticTypeId)
+        {
+            return GetEntityData().Statistics.ContainsKey(statisticTypeId);
+        }
     }
 }

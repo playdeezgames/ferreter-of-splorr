@@ -5,5 +5,6 @@
         Guid ItemId { get; }
         string Name { get; }
         IInventory? Inventory { get; }
+        void Destroy();
     }
 }

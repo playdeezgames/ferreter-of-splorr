@@ -36,5 +36,24 @@ namespace FOS.Model
         {
             return Directions.All[directionId].Previous;
         }
+
+        private record ItemInterceptor(Func<ICharacter, IItem, bool> Condition, Action<ICharacter, IItem> Operation);
+
+        private static readonly IReadOnlyList<ItemInterceptor> characterItemInterceptors =
+            [
+                new ItemInterceptor(
+                    (c,i)=>c.HasStatistic(StatisticTypes.MONEY) && i.HasStatistic(StatisticTypes.MONEY),
+                    (c,i)=>
+                    {
+                        c.ChangeStatistic(StatisticTypes.MONEY, i.GetStatistic(StatisticTypes.MONEY));
+                    })
+            ];
+
+        public bool InterceptCharacterItem(ICharacter character, IItem item)
+        {
+            var interceptor = characterItemInterceptors.FirstOrDefault(x => x.Condition(character, item));
+            interceptor?.Operation(character, item);
+            return interceptor != null;
+        }
     }
 }

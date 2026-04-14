@@ -89,6 +89,10 @@ namespace FOS.Business
 
         public bool HasFocusCharacter => GetEntityData().FocusCharacterId.HasValue;
 
+        protected override InventoryType InventoryType => InventoryType.CHARACTER;
+
+        protected override Guid InventoryParentId => CharacterId;
+
         internal override CharacterData GetEntityData()
         {
             return Data.Characters[CharacterId];
@@ -97,6 +101,11 @@ namespace FOS.Business
         public void AddMessage(string mood, string text)
         {
             Grimoire.AddMessage(this, mood, text);
+        }
+
+        public override bool InterceptItem(IItem item)
+        {
+            return Grimoire.InterceptCharacterItem(this, item);
         }
     }
 }

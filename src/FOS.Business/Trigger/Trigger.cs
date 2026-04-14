@@ -32,6 +32,10 @@ namespace FOS.Business
 
         public string TriggerType => GetEntityData().TriggerType;
 
+        protected override InventoryType InventoryType => InventoryType.TRIGGER;
+
+        protected override Guid InventoryParentId => TriggerId;
+
         public ITrigger AppendTrigger(string triggerType, Action<ITrigger>? initializer = null)
         {
             if (NextTrigger != null)
@@ -56,6 +60,11 @@ namespace FOS.Business
         {
             Grimoire.FireTrigger(this, character);
             NextTrigger?.Fire(character);
+        }
+
+        public override bool InterceptItem(IItem item)
+        {
+            return false;
         }
 
         internal override TriggerData GetEntityData()

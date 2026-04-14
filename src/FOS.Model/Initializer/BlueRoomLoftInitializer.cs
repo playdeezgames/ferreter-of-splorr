@@ -32,7 +32,7 @@ namespace FOS.Model.Initializer
                                             "Gold Pieces",
                                             i =>
                                             {
-                                                i.SetStatistic(StatisticTypes.QUANTITY, 5);
+                                                i.SetStatistic(StatisticTypes.MONEY, 5);
                                             });
                                 }).AppendTrigger(
                                     TriggerTypes.ADD_MESSAGE,

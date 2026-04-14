@@ -21,6 +21,10 @@ namespace FOS.Business
 
         public bool HasFeatures => GetEntityData().FeatureIds.Count != 0;
 
+        protected override InventoryType InventoryType => InventoryType.LOCATION;
+
+        protected override Guid InventoryParentId => LocationId;
+
         public void AddCharacter(ICharacter character)
         {
             GetEntityData().CharacterIds.Add(character.CharacterId);
@@ -118,6 +122,11 @@ namespace FOS.Business
         public bool HasOtherCharacters(ICharacter character)
         {
             return GetEntityData().CharacterIds.Any(x => x != character.CharacterId);
+        }
+
+        public override bool InterceptItem(IItem item)
+        {
+            return false;
         }
     }
 }
