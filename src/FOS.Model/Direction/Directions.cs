@@ -10,6 +10,7 @@
         internal static readonly string DOWN = nameof(DOWN);
         internal static readonly string IN = nameof(IN);
         internal static readonly string OUT = nameof(OUT);
+        internal static readonly string PORTAL = nameof(PORTAL);
         internal static IReadOnlyDictionary<string, IDirectionType> All =
             new List<IDirectionType>
             {
@@ -20,7 +21,8 @@
                 new UpDirectionType(),
                 new DownDirectionType(),
                 new InDirectionType(),
-                new OutDirectionType()
+                new OutDirectionType(),
+                new PortalDirectionType()
             }.ToDictionary(x => x.Identifier, x => x);
     }
 }

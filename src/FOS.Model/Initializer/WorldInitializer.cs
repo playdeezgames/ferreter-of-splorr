@@ -11,8 +11,8 @@ namespace FOS.Model
                 world,
                 t =>
                 {
-                    BlueRoomInitializer.Run(world, t);
-                    JusdatipInnInitializer.Run(world, t);
+                    var inn = JusdatipInnInitializer.Run(world, t);
+                    BlueRoomInitializer.Run(world, t, inn);
                 });
         }
     }

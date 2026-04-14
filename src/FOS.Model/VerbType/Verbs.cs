@@ -25,6 +25,7 @@
         internal readonly static string CHARACTERS_MODE = nameof(CHARACTERS_MODE);
         internal readonly static string BLUR_CHARACTER = nameof(BLUR_CHARACTER);
         internal readonly static string STATISTICS_MODE = nameof(STATISTICS_MODE);
+        internal readonly static string USE_PORTAL = nameof(USE_PORTAL);
         internal static IReadOnlyDictionary<string, IVerbType> All =
             new List<IVerbType>
             {
@@ -50,7 +51,8 @@
                 new ExamineFeatureVerbType(),
                 new CharactersModeVerbType(),
                 new BlurCharacterVerbType(),
-                new StatisticsModeVerbType()
+                new StatisticsModeVerbType(),
+                new UsePortalVerbType()
             }.ToDictionary(x => x.Identifier, x => x);
     }
 }

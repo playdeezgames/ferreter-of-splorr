@@ -5,9 +5,9 @@ namespace FOS.Model.Initializer
 {
     internal static class JusdatipInnInitializer
     {
-        internal static void Run(IWorld world, List<ILocation> town)
+        internal static ILocation Run(IWorld world, List<ILocation> town)
         {
-            world.CreateLocation(
+            return world.CreateLocation(
                 "Jusdatip Inn",
                 jil =>
                 {

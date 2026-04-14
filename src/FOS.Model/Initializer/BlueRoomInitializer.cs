@@ -5,7 +5,7 @@ namespace FOS.Model.Initializer
 {
     internal static class BlueRoomInitializer
     {
-        internal static void Run(IWorld world, List<ILocation> town)
+        internal static void Run(IWorld world, List<ILocation> town, ILocation inn)
         {
             world.CreateLocation(
                 "The Blue Room",
@@ -51,8 +51,10 @@ namespace FOS.Model.Initializer
                         Directions.OUT,
                         brtl);
 #if DEBUG
-                    tbr.CreateCharacter("Yermom", Directions.EAST, ym => { });
-                    tbr.CreateCharacter("Nacho Mama", Directions.WEST, nm => { });
+                    tbr.CreateRoute(
+                        "Portal to Inn",
+                        Directions.PORTAL,
+                        inn);
 #endif
                 });
         }
