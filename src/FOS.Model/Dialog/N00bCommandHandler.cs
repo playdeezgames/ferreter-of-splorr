@@ -26,7 +26,7 @@ namespace FOS.Model.Dialog
                         (x.GetMode()== Modes.INVENTORY || x.GetMode()== Modes.GROUND_INVENTORY) &&
                         Guid.TryParse(s, out _),
                     (x,s)=>x.FocusItem = x.World.GetItem(Guid.Parse(s))),
-                new CommandHandler((_,_) => true, (x,s) => VerbTypes.All[s].Perform(x))
+                new CommandHandler((_,_) => true, (x,s) => Verbs.All[s].Perform(x))
             ];
 
         internal static void HandleCommand(ICharacter character, string command)

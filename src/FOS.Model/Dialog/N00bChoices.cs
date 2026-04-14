@@ -41,7 +41,7 @@ namespace FOS.Model.Dialog
 
         private static IEnumerable<IDialogChoice> AddVerbChoices(ICharacter character)
         {
-            return VerbTypes.All.
+            return Verbs.All.
                 Where(x => x.Value.CanPerform(character)).
                 Select(x => new DialogChoice(x.Key, x.Value.GetText(character)));
         }

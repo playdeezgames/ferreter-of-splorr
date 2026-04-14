@@ -4,7 +4,7 @@ namespace FOS.Model
 {
     internal class TurnLeftVerbType : IVerbType
     {
-        public string Identifier => VerbTypes.TURN_LEFT;
+        public string Identifier => Verbs.TURN_LEFT;
 
         public bool CanPerform(ICharacter character)
         {
