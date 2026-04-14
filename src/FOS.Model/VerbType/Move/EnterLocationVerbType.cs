@@ -14,6 +14,11 @@ namespace FOS.Model
             return "Enter";
         }
 
+        protected override string GetFailureMessage(ICharacter character, IRoute route)
+        {
+            return $"You cannot enter {route.Name}.";
+        }
+
         protected override string GetSuccessMessage(ICharacter character, IRoute route)
         {
             return $"You enter thru {route.Name}.";

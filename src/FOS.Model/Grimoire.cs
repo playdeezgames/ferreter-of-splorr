@@ -55,5 +55,18 @@ namespace FOS.Model
             interceptor?.Operation(character, item);
             return interceptor != null;
         }
+
+        private record RouteBlocker(Func<IRoute, ICharacter, bool> Condition, Action<ICharacter> Operation);
+
+        private static readonly IReadOnlyList<RouteBlocker> routeBlockers =
+            [
+            ];
+
+        public bool DoesRouteAllowCharacter(IRoute route, ICharacter character)
+        {
+            var blocker = routeBlockers.FirstOrDefault(x => x.Condition(route, character));
+            blocker?.Operation(character);
+            return blocker == null;
+        }
     }
 }

@@ -2,7 +2,11 @@
 
 namespace FOS.Business
 {
-    internal class Route(WorldData data, IGrimoire grimoire, string direction, Guid routeId) : IRoute
+    internal class Route(
+        WorldData data,
+        IGrimoire grimoire,
+        string direction,
+        Guid routeId) : IRoute
     {
         private RouteData RouteData => data.Routes[routeId];
 
@@ -17,6 +21,11 @@ namespace FOS.Business
         public object GetDirectionName()
         {
             return grimoire.GetDirectionName(this.Direction.ToString());
+        }
+
+        public bool Allows(ICharacter character)
+        {
+            return grimoire.DoesRouteAllowCharacter(this, character);
         }
     }
 }

@@ -14,6 +14,11 @@ namespace FOS.Model
             return "Climb Down";
         }
 
+        protected override string GetFailureMessage(ICharacter character, IRoute route)
+        {
+            return $"You cannot climb down {route.Name}.";
+        }
+
         protected override string GetSuccessMessage(ICharacter character, IRoute route)
         {
             return $"You climb down {route.Name}.";

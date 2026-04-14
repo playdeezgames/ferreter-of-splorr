@@ -14,6 +14,11 @@ namespace FOS.Model
             return "Use Portal";
         }
 
+        protected override string GetFailureMessage(ICharacter character, IRoute route)
+        {
+            return $"You cannot use {route.Name}.";
+        }
+
         protected override string GetSuccessMessage(ICharacter character, IRoute route)
         {
             return $"You use {route.Name}.";

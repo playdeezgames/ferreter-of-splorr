@@ -105,7 +105,7 @@ namespace FOS.Model.Dialog
             }
             foreach (var route in routes)
             {
-                lines.Add(new DialogLine(Moods.NORMAL, $"{route.GetDirectionName()}: {route.Name}"));
+                lines.Add(new DialogLine(Moods.NORMAL, $"{Directions.All[route.Direction].Name}: {route.Name}"));
             }
             return lines.AsEnumerable();
         }

@@ -14,12 +14,20 @@ namespace FOS.Model
         public abstract string GetText(ICharacter character);
         public abstract string GetDirection(ICharacter character);
         protected abstract string GetSuccessMessage(ICharacter character, IRoute route);
+        protected abstract string GetFailureMessage(ICharacter character, IRoute route);
         public void Perform(ICharacter character)
         {
             var route = character.Location.GetRoute(GetDirection(character))!;
-            character.AddMessage(Moods.NORMAL, GetSuccessMessage(character, route));
-            character.Location = route.Destination;
-            character.ClearMode();
+            if (route.Allows(character))
+            {
+                character.AddMessage(Moods.NORMAL, GetSuccessMessage(character, route));
+                character.Location = route.Destination;
+                character.ClearMode();
+            }
+            else
+            {
+                character.AddMessage(Moods.NORMAL, GetFailureMessage(character, route));
+            }
         }
     }
 }
