@@ -4,7 +4,7 @@ namespace FOS.Model
 {
     internal class BlurCharacterVerbType : IVerbType
     {
-        public string Identifier => Verbs.BLUR_CHARACTER;
+        public string Identifier => VerbTypes.BLUR_CHARACTER;
 
         public bool CanPerform(ICharacter character) => character.HasFocusCharacter;
 

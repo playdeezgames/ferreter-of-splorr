@@ -2,7 +2,7 @@
 
 namespace FOS.Model
 {
-    internal class UsePortalVerbType() : MoveVerbType(Verbs.USE_PORTAL), IVerbType
+    internal class UsePortalVerbType() : MoveVerbType(VerbTypes.USE_PORTAL), IVerbType
     {
         public override string GetDirection(ICharacter character)
         {

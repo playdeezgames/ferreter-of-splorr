@@ -4,7 +4,7 @@ namespace FOS.Model
 {
     internal class GroundInventoryModeVerbType : IVerbType
     {
-        public string Identifier => Verbs.GROUND_INVENTORY_MODE;
+        public string Identifier => VerbTypes.GROUND_INVENTORY_MODE;
 
         public bool CanPerform(ICharacter character)
         {

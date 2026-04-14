@@ -2,7 +2,7 @@
 
 namespace FOS.Model
 {
-    internal class ClimbDownVerbType() : MoveVerbType(Verbs.CLIMB_DOWN), IVerbType
+    internal class ClimbDownVerbType() : MoveVerbType(VerbTypes.CLIMB_DOWN), IVerbType
     {
         public override string GetDirection(ICharacter character)
         {

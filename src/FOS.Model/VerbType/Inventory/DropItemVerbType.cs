@@ -4,7 +4,7 @@ namespace FOS.Model
 {
     internal class DropItemVerbType : IVerbType
     {
-        public string Identifier => Verbs.DROP_ITEM;
+        public string Identifier => VerbTypes.DROP_ITEM;
 
         public bool CanPerform(ICharacter character)
         {

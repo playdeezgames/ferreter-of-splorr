@@ -4,7 +4,7 @@ namespace FOS.Model
 {
     internal class StatisticsModeVerbType : IVerbType
     {
-        public string Identifier => Verbs.STATISTICS_MODE;
+        public string Identifier => VerbTypes.STATISTICS_MODE;
 
         public bool CanPerform(ICharacter character)
         {

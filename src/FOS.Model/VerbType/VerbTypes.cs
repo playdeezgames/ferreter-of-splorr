@@ -1,6 +1,6 @@
 ﻿namespace FOS.Model
 {
-    internal static class Verbs
+    internal static class VerbTypes
     {
         internal readonly static string TURN_LEFT = nameof(TURN_LEFT);
         internal readonly static string TURN_RIGHT = nameof(TURN_RIGHT);

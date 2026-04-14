@@ -2,7 +2,7 @@
 
 namespace FOS.Model
 {
-    internal class ExitLocationVerbType() : MoveVerbType(Verbs.EXIT_LOCATION), IVerbType
+    internal class ExitLocationVerbType() : MoveVerbType(VerbTypes.EXIT_LOCATION), IVerbType
     {
         public override string GetDirection(ICharacter character)
         {
