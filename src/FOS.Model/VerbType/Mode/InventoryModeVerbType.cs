@@ -4,7 +4,7 @@ namespace FOS.Model
 {
     internal class InventoryModeVerbType : IVerbType
     {
-        public string Identifier => Verbs.INVENTORY_MODE;
+        public string Identifier => ModeVerbs.INVENTORY_MODE;
 
         public bool CanPerform(ICharacter character)
         {

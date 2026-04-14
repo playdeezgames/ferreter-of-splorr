@@ -4,7 +4,7 @@ namespace FOS.Model
 {
     internal class TakeItemVerbType : IVerbType
     {
-        public string Identifier => Verbs.TAKE_ITEM;
+        public string Identifier => ItemVerbs.TAKE_ITEM;
 
         public bool CanPerform(ICharacter character)
         {

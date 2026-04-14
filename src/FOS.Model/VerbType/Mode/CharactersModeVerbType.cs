@@ -4,7 +4,7 @@ namespace FOS.Model
 {
     internal class CharactersModeVerbType : IVerbType
     {
-        public string Identifier => Verbs.CHARACTERS_MODE;
+        public string Identifier => ModeVerbs.CHARACTERS_MODE;
 
         public bool CanPerform(ICharacter character)
         {

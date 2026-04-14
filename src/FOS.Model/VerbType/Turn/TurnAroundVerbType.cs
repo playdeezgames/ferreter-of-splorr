@@ -1,10 +1,11 @@
 ﻿using FOS.Business;
+using FOS.Model.VerbType;
 
 namespace FOS.Model
 {
     internal class TurnAroundVerbType : IVerbType
     {
-        public string Identifier => Verbs.TURN_AROUND;
+        public string Identifier => TurnVerbs.TURN_AROUND;
 
         public bool CanPerform(ICharacter character)
         {

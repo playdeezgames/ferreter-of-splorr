@@ -4,7 +4,7 @@ namespace FOS.Model
 {
     internal class SearchFeatureVerbType : IVerbType
     {
-        public string Identifier => Verbs.SEARCH_FEATURE;
+        public string Identifier => FeatureVerbs.SEARCH_FEATURE;
 
         public bool CanPerform(ICharacter character)
         {

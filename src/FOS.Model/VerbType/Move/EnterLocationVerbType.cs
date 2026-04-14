@@ -1,8 +1,9 @@
 ﻿using FOS.Business;
+using FOS.Model.VerbType;
 
 namespace FOS.Model
 {
-    internal class EnterLocationVerbType() : MoveVerbType(Verbs.ENTER_LOCATION), IVerbType
+    internal class EnterLocationVerbType() : MoveVerbType(MoveVerbs.ENTER_LOCATION), IVerbType
     {
         public override string GetDirection(ICharacter character)
         {

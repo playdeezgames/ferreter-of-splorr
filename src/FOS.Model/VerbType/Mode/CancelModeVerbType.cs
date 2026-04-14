@@ -4,7 +4,7 @@ namespace FOS.Model
 {
     internal class CancelModeVerbType : IVerbType
     {
-        public string Identifier => Verbs.CANCEL_MODE;
+        public string Identifier => ModeVerbs.CANCEL_MODE;
 
         public bool CanPerform(ICharacter character)
         {

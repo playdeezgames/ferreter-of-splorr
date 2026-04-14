@@ -1,8 +1,9 @@
 ﻿using FOS.Business;
+using FOS.Model.VerbType;
 
 namespace FOS.Model
 {
-    internal class MoveAheadVerbType() : MoveVerbType(Verbs.MOVE_AHEAD), IVerbType
+    internal class MoveAheadVerbType() : MoveVerbType(MoveVerbs.MOVE_AHEAD), IVerbType
     {
         public override string GetDirection(ICharacter character)
         {
