@@ -1,6 +1,4 @@
-﻿using FOS.Model;
-
-namespace FOS.Model
+﻿namespace FOS.Model
 {
     internal static class Verbs
     {
@@ -10,6 +8,7 @@ namespace FOS.Model
                 .. MoveVerbs.All,
                 .. ModeVerbs.All,
                 .. ItemVerbs.All,
+                .. LocationVerbs.All,
                 .. CharacterVerbs.All,
             ];
         internal static IReadOnlyDictionary<string, IVerbType> All =
