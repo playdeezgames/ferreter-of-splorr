@@ -1,5 +1,4 @@
 ﻿using FOS.Business;
-using FOS.Model;
 
 namespace FOS.Model
 {
@@ -19,7 +18,7 @@ namespace FOS.Model
 
         public void Perform(ICharacter character)
         {
-            character.Direction = character.Grimoire.GetNextDirection(character.Direction);
+            character.Direction = Directions.All[character.Direction].Next;
             character.ClearMode();
             character.AddMessage(Moods.NORMAL, "You turn right.");
         }

@@ -44,26 +44,6 @@ namespace FOS.Model
             return blocker == null;
         }
 
-        public string GetDirectionName(string directionId)
-        {
-            return Directions.All[directionId].Name;
-        }
-
-        public string GetNextDirection(string directionId)
-        {
-            return Directions.All[directionId].Next;
-        }
-
-        public string GetOppositeDirection(string directionId)
-        {
-            return Directions.All[directionId].Opposite;
-        }
-
-        public string GetPreviousDirection(string directionId)
-        {
-            return Directions.All[directionId].Previous;
-        }
-
         private record ItemInterceptor(Func<ICharacter, IItem, bool> Condition, Action<ICharacter, IItem> Operation);
 
         private static readonly IReadOnlyList<ItemInterceptor> characterItemInterceptors =

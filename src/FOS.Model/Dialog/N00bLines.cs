@@ -67,7 +67,7 @@ namespace FOS.Model.Dialog
             return
                 [
                     new DialogLine(Moods.NORMAL, $"Yer name is {character.Name}!"),
-                    new DialogLine(Moods.NORMAL, $"Yer facing {character.Grimoire.GetDirectionName(character.Direction)}."),
+                    new DialogLine(Moods.NORMAL, $"Yer facing {Directions.All[character.Direction].Name}."),
                     new DialogLine(Moods.NORMAL, $"Location: {character.Location.Name}.")
                 ];
         }
