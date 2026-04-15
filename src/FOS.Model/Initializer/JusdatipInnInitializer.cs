@@ -64,7 +64,7 @@ namespace FOS.Model.Initializer
 
         private static void InitializeGorachan(ICharacter character)
         {
-            character.SetTag(Tags.GORACHAN);
+            character.SetTag(CharacterTags.GORACHAN);
         }
     }
 }

@@ -57,7 +57,7 @@ namespace FOS.Model.Initializer
 
         private static void InitializeN00b(ICharacter character)
         {
-            character.SetTag(Tags.N00B);
+            character.SetTag(CharacterTags.N00B);
             character.SetStatistic(StatisticTypes.JOOLS, 0);
         }
     }

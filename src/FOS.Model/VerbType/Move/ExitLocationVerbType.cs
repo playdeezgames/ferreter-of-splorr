@@ -1,5 +1,5 @@
 ﻿using FOS.Business;
-using FOS.Model.VerbType;
+using FOS.Model;
 
 namespace FOS.Model
 {

@@ -1,4 +1,4 @@
-﻿namespace FOS.Model.VerbType
+﻿namespace FOS.Model
 {
     internal static class MoveVerbs
     {
