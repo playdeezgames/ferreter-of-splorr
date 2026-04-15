@@ -70,9 +70,19 @@ namespace FOS.Model.Initializer
                     TriggerTypes.ADD_MESSAGE,
                     t =>
                     {
+                        t.SetTag(TriggerTags.BLOCK_WHEN_OTHER_CHARACTERS);
+                        t.SetMetadata(Metadatas.BLOCK_MOOD, Moods.NORMAL);
+                        t.SetMetadata(Metadatas.BLOCK_TEXT, "You cannot search at this time!");
                         t.SetMetadata(Metadatas.MOOD, Moods.NORMAL);
                         t.SetMetadata(Metadatas.TEXT, "You search the cellar!");
-                    });
+                    }).AppendTrigger(
+                        TriggerTypes.SPAWN_CREATURE,
+                        t =>
+                        {
+                            t.SetTag(TriggerTags.BLOCK_WHEN_OTHER_CHARACTERS);
+                            t.SetMetadata(Metadatas.CREATURE_TYPE, CreatureTypes.CELLAR_RAT);
+                        }
+                    );
             };
         }
 
