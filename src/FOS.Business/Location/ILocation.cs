@@ -1,6 +1,6 @@
 ﻿namespace FOS.Business
 {
-    public interface ILocation : IInventoryEntity
+    public interface ILocation : IInventoryEntity, ITriggerHost
     {
         Guid LocationId { get; }
         void AddCharacter(ICharacter character);

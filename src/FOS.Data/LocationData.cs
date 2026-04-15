@@ -6,5 +6,6 @@
         public HashSet<Guid> CharacterIds { get; set; } = [];
         public Dictionary<string, Guid> RouteIds { get; set; } = [];
         public HashSet<Guid> FeatureIds { get; set; } = [];
+        public Dictionary<string, Guid> TriggerIds = [];
     }
 }

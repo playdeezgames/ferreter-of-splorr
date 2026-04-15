@@ -128,5 +128,51 @@ namespace FOS.Business
         {
             return false;
         }
+
+        public ITrigger AppendTrigger(string triggerCategory, string triggerTypeId, Action<ITrigger>? initializer = null)
+        {
+            if (HasTrigger(triggerCategory))
+            {
+                return GetTrigger(triggerCategory).AppendTrigger(triggerTypeId, initializer);
+            }
+            else
+            {
+                var triggerId = Guid.NewGuid();
+                Data.Triggers[triggerId] = new TriggerData
+                {
+                    TriggerType = triggerTypeId
+                };
+                var result = new Trigger(Data, Grimoire, triggerId);
+                initializer?.Invoke(result);
+                TriggerIds[triggerCategory] = result.TriggerId;
+                return result;
+            }
+        }
+
+        private Dictionary<string, Guid> TriggerIds => GetEntityData().TriggerIds;
+
+        public void ClearTrigger(string triggerCategory)
+        {
+            TriggerIds.Remove(triggerCategory);
+        }
+
+        public void FireTrigger(string triggerCategory, ICharacter character)
+        {
+            if (!HasTrigger(triggerCategory))
+            {
+                return;
+            }
+            GetTrigger(triggerCategory).Fire(character);
+        }
+
+        public ITrigger GetTrigger(string triggerCategory)
+        {
+            return new Trigger(Data, Grimoire, TriggerIds[triggerCategory]);
+        }
+
+        public bool HasTrigger(string triggerCategory)
+        {
+            return TriggerIds.ContainsKey(triggerCategory);
+        }
     }
 }

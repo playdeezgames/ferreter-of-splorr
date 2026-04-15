@@ -1,13 +1,8 @@
 ﻿namespace FOS.Business
 {
-    public interface IFeature : IEntity
+    public interface IFeature : IEntity, ITriggerHost
     {
         Guid FeatureId { get; }
         string Name { get; }
-        void FireTrigger(string triggerCategory, ICharacter character);
-        bool HasTrigger(string triggerCategory);
-        ITrigger GetTrigger(string triggerCategory);
-        ITrigger AppendTrigger(string triggerCategory, string triggerTypeId, Action<ITrigger>? initializer = null);
-        void ClearTrigger(string triggerCategory);
     }
 }

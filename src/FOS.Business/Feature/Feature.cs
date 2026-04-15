@@ -30,14 +30,16 @@ namespace FOS.Business
                 };
                 var result = new Trigger(Data, Grimoire, triggerId);
                 initializer?.Invoke(result);
-                GetEntityData().TriggerIds[triggerCategory] = result.TriggerId;
+                TriggerIds[triggerCategory] = result.TriggerId;
                 return result;
             }
         }
 
+        private Dictionary<string, Guid> TriggerIds => GetEntityData().TriggerIds;
+
         public void ClearTrigger(string triggerCategory)
         {
-            GetEntityData().TriggerIds.Remove(triggerCategory);
+            TriggerIds.Remove(triggerCategory);
         }
 
         public void FireTrigger(string triggerCategory, ICharacter character)
@@ -51,17 +53,12 @@ namespace FOS.Business
 
         public ITrigger GetTrigger(string triggerCategory)
         {
-            return new Trigger(Data, Grimoire, GetEntityData().TriggerIds[triggerCategory]);
+            return new Trigger(Data, Grimoire, TriggerIds[triggerCategory]);
         }
 
         public bool HasTrigger(string triggerCategory)
         {
-            return GetEntityData().TriggerIds.ContainsKey(triggerCategory);
-        }
-
-        public void SetTrigger(string triggerCategory, ITrigger trigger)
-        {
-            GetEntityData().TriggerIds[triggerCategory] = trigger.TriggerId;
+            return TriggerIds.ContainsKey(triggerCategory);
         }
 
         internal override FeatureData GetEntityData()
