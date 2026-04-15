@@ -34,11 +34,7 @@ namespace FOS.Model.Initializer
                     world.Avatar = tbr.CreateCharacter(
                         "N00b",
                         Directions.NORTH,
-                        c =>
-                        {
-                            c.SetTag(Tags.N00B);
-                            c.SetStatistic(StatisticTypes.JOOLS, 0);
-                        });
+                        InitializeN00b);
                     BlueRoomLoftInitializer.Run(world, tbr);
                     var brtl = RNG.FromEnumerable(town.Where(x => !x.HasRoute(Directions.IN)));
                     town.Remove(brtl);
@@ -57,6 +53,12 @@ namespace FOS.Model.Initializer
                         inn);
 #endif
                 });
+        }
+
+        private static void InitializeN00b(ICharacter character)
+        {
+            character.SetTag(Tags.N00B);
+            character.SetStatistic(StatisticTypes.JOOLS, 0);
         }
     }
 }

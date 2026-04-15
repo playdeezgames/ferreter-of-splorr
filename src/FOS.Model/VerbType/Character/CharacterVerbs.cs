@@ -2,7 +2,8 @@
 {
     internal static class CharacterVerbs
     {
-        internal readonly static string BLUR_CHARACTER = nameof(BLUR_CHARACTER);
+        private static string GetName(string name) => $"{nameof(CharacterVerbs)}.{name}";
+        internal readonly static string BLUR_CHARACTER = GetName(nameof(BLUR_CHARACTER));
         internal static readonly IReadOnlyList<IVerbType> All =
             [
                 .. GorachanVerbs.All,

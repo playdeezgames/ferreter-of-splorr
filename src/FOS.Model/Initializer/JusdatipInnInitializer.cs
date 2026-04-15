@@ -45,10 +45,7 @@ namespace FOS.Model.Initializer
                     jil.CreateCharacter(
                         "Gorachan",
                         Directions.SOUTH,
-                        gc =>
-                        {
-                            gc.SetTag(Tags.GORACHAN);
-                        });
+                        InitializeGorachan);
                     world.CreateLocation(
                         "Inn Cellar",
                         icl =>
@@ -63,6 +60,11 @@ namespace FOS.Model.Initializer
                                 jil);
                         });
                 });
+        }
+
+        private static void InitializeGorachan(ICharacter character)
+        {
+            character.SetTag(Tags.GORACHAN);
         }
     }
 }
