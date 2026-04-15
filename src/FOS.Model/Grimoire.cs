@@ -60,6 +60,7 @@ namespace FOS.Model
 
         private static readonly IReadOnlyList<RouteBlocker> routeBlockers =
             [
+                new RouteBlocker((r,c)=>r.HasTag(QuestTags.INN_RATS_ACCEPTED) && !c.HasTag(QuestTags.INN_RATS_ACCEPTED) , c=>{ })
             ];
 
         public bool DoesRouteAllowCharacter(IRoute route, ICharacter character)

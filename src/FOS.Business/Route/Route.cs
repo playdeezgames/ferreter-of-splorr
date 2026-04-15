@@ -6,26 +6,24 @@ namespace FOS.Business
         WorldData data,
         IGrimoire grimoire,
         string direction,
-        Guid routeId) : IRoute
+        Guid routeId) : Entity<RouteData>(data, grimoire), IRoute
     {
-        private RouteData RouteData => data.Routes[routeId];
-
         public Guid RouteId => routeId;
 
         public string Direction => direction;
 
-        public string Name => RouteData.Name;
+        public string Name => GetEntityData().Name;
 
-        public ILocation Destination => new Location(data, grimoire, RouteData.ToLocationId);
-
-        public object GetDirectionName()
-        {
-            return grimoire.GetDirectionName(this.Direction.ToString());
-        }
+        public ILocation Destination => new Location(Data, Grimoire, GetEntityData().ToLocationId);
 
         public bool Allows(ICharacter character)
         {
-            return grimoire.DoesRouteAllowCharacter(this, character);
+            return Grimoire.DoesRouteAllowCharacter(this, character);
+        }
+
+        internal override RouteData GetEntityData()
+        {
+            return Data.Routes[RouteId];
         }
     }
 }

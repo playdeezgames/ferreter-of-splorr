@@ -53,7 +53,8 @@ namespace FOS.Model.Initializer
                             jil.CreateRoute(
                                 "Stairs to Cellar",
                                 Directions.DOWN,
-                                icl);
+                                icl,
+                                r => r.SetTag(QuestTags.INN_RATS_ACCEPTED));
                             icl.CreateRoute(
                                 "Stairs from Cellar",
                                 Directions.UP,

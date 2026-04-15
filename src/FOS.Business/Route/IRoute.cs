@@ -1,6 +1,6 @@
 ﻿namespace FOS.Business
 {
-    public interface IRoute
+    public interface IRoute : IEntity
     {
         Guid RouteId { get; }
         string Direction { get; }
