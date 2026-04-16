@@ -98,11 +98,6 @@ namespace FOS.Business
             return Data.Characters[CharacterId];
         }
 
-        public void AddMessage(string mood, string text)
-        {
-            Grimoire.AddMessage(this, mood, text);
-        }
-
         public override bool InterceptItem(IItem item)
         {
             return Grimoire.InterceptCharacterItem(this, item);

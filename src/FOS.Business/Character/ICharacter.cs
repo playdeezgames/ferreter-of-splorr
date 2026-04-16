@@ -12,7 +12,6 @@
         bool HasFocusItem { get; }
         ICharacter? FocusCharacter { get; set; }
         bool HasFocusCharacter { get; }
-        void AddMessage(string mood, string text);
         string Name { get; }
     }
 }

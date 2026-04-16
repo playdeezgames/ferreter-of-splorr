@@ -2,8 +2,7 @@
 {
     public interface IGrimoire
     {
-        void AddMessage(ICharacter character, string mood, string text);
-        bool DoesRouteAllowCharacter(IRoute route, ICharacter character);
+        bool DoesRouteAllowCharacter(IRoute route, ICharacter character);//TODO: entirely within model
         void FireTrigger(ITrigger trigger, ICharacter character);
         bool InterceptCharacterItem(ICharacter character, IItem item);
     }
