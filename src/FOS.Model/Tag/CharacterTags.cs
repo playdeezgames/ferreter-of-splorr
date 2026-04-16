@@ -5,5 +5,6 @@
         private static string GetName(string name) => $"{nameof(CharacterTags)}.{name}";
         internal static readonly string N00B = GetName(nameof(N00B));
         internal static readonly string GORACHAN = GetName(nameof(GORACHAN));
+        internal static readonly string ENEMY = GetName(nameof(ENEMY));
     }
 }

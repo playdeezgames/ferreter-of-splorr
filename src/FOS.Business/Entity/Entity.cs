@@ -28,7 +28,10 @@ namespace FOS.Business
 
         public int GetStatistic(string statisticTypeId)
         {
-            return GetEntityData().Statistics[statisticTypeId];
+            return Math.Clamp(
+                GetEntityData().Statistics[statisticTypeId],
+                GetStatisticMinimum(statisticTypeId),
+                GetStatisticMaximum(statisticTypeId));
         }
 
         public bool HasMetadata(string metadataId)
@@ -48,7 +51,10 @@ namespace FOS.Business
 
         public void SetStatistic(string statisticTypeId, int statisticValue)
         {
-            GetEntityData().Statistics[statisticTypeId] = statisticValue;
+            GetEntityData().Statistics[statisticTypeId] = Math.Clamp(
+                statisticValue,
+                GetStatisticMinimum(statisticTypeId),
+                GetStatisticMaximum(statisticTypeId));
         }
 
         public void SetTag(string tagId)
@@ -67,6 +73,34 @@ namespace FOS.Business
         public bool HasStatistic(string statisticTypeId)
         {
             return GetEntityData().Statistics.ContainsKey(statisticTypeId);
+        }
+
+        public void SetStatisticMaximum(string statisticTypeId, int statisticMaximum)
+        {
+            GetEntityData().StatisticMaximums[statisticTypeId] = statisticMaximum;
+        }
+
+        public void SetStatisticMinimum(string statisticTypeId, int statisticMinimum)
+        {
+            GetEntityData().StatisticMinimums[statisticTypeId] = statisticMinimum;
+        }
+
+        public int GetStatisticMaximum(string statisticTypeId)
+        {
+            if (GetEntityData().StatisticMaximums.TryGetValue(statisticTypeId, out var statisticMaximum))
+            {
+                return statisticMaximum;
+            }
+            return int.MaxValue;
+        }
+
+        public int GetStatisticMinimum(string statisticTypeId)
+        {
+            if (GetEntityData().StatisticMinimums.TryGetValue(statisticTypeId, out var statisticMinimum))
+            {
+                return statisticMinimum;
+            }
+            return int.MinValue;
         }
     }
 }

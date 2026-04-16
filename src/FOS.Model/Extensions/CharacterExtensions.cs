@@ -11,6 +11,19 @@ namespace FOS.Model
                 character.World.AddMessage(mood, text);
             }
         }
-
+        internal static void InitializeHealth(this ICharacter character, int maximumHealth)
+        {
+            character.SetStatistic(StatisticTypes.HEALTH, maximumHealth);
+            character.SetStatisticMaximum(StatisticTypes.HEALTH, maximumHealth);
+            character.SetStatisticMinimum(StatisticTypes.HEALTH, 0);
+        }
+        internal static int GetHealth(this ICharacter character)
+        {
+            return character.GetStatistic(StatisticTypes.HEALTH);
+        }
+        internal static int GetMaximumHealth(this ICharacter character)
+        {
+            return character.GetStatisticMaximum(StatisticTypes.HEALTH);
+        }
     }
 }

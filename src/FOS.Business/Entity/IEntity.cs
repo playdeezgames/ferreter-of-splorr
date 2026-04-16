@@ -3,7 +3,11 @@
     public interface IEntity
     {
         void SetStatistic(string statisticTypeId, int statisticValue);
+        void SetStatisticMaximum(string statisticTypeId, int statisticMaximum);
+        void SetStatisticMinimum(string statisticTypeId, int statisticMinimum);
         int GetStatistic(string statisticTypeId);
+        int GetStatisticMaximum(string statisticTypeId);
+        int GetStatisticMinimum(string statisticTypeId);
         int ChangeStatistic(string statisticTypeId, int delta);
         bool HasStatistic(string statisticTypeId);
         bool HasMetadata(string metadataId);

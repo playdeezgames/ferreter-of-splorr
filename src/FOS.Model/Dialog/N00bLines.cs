@@ -28,7 +28,8 @@ namespace FOS.Model.Dialog
             }
             List<IDialogLine> lines =
                 [
-                    new DialogLine(Moods.NORMAL, $"Jools: {character.GetStatistic(StatisticTypes.JOOLS)}")
+                    new DialogLine(Moods.NORMAL, $"Jools: {character.GetStatistic(StatisticTypes.JOOLS)}"),
+                    new DialogLine(Moods.NORMAL, $"Health: {character.GetHealth()}/{character.GetMaximumHealth()}")
                 ];
             return lines.AsEnumerable();
         }
