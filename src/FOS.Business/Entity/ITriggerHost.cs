@@ -2,7 +2,6 @@
 {
     public interface ITriggerHost
     {
-        void FireTrigger(string triggerCategory, ICharacter character);
         bool HasTrigger(string triggerCategory);
         ITrigger GetTrigger(string triggerCategory);
         ITrigger AppendTrigger(string triggerCategory, string triggerTypeId, Action<ITrigger>? initializer = null);

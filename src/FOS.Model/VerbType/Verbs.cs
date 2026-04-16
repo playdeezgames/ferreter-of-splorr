@@ -9,6 +9,7 @@
                 .. ModeVerbs.All,
                 .. ItemVerbs.All,
                 .. LocationVerbs.All,
+                .. FeatureVerbs.All,
                 .. CharacterVerbs.All,
             ];
         internal static IReadOnlyDictionary<string, IVerbType> All =

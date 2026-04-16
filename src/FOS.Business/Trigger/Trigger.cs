@@ -56,12 +56,6 @@ namespace FOS.Business
             }
         }
 
-        public void Fire(ICharacter character)
-        {
-            Grimoire.FireTrigger(this, character);
-            NextTrigger?.Fire(character);
-        }
-
         public override bool InterceptItem(IItem item)
         {
             return false;

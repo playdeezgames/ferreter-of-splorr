@@ -156,14 +156,6 @@ namespace FOS.Business
             TriggerIds.Remove(triggerCategory);
         }
 
-        public void FireTrigger(string triggerCategory, ICharacter character)
-        {
-            if (!HasTrigger(triggerCategory))
-            {
-                return;
-            }
-            GetTrigger(triggerCategory).Fire(character);
-        }
 
         public ITrigger GetTrigger(string triggerCategory)
         {
