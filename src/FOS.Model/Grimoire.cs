@@ -55,19 +55,5 @@ namespace FOS.Model
             interceptor?.Operation(character, item);
             return interceptor != null;
         }
-
-        private record RouteBlocker(Func<IRoute, ICharacter, bool> Condition, Action<ICharacter> Operation);
-
-        private static readonly IReadOnlyList<RouteBlocker> routeBlockers =
-            [
-                new RouteBlocker((r,c)=>r.HasTag(QuestTags.INN_RATS_ACCEPTED) && !c.HasTag(QuestTags.INN_RATS_ACCEPTED) , c=>{ })
-            ];
-
-        public bool DoesRouteAllowCharacter(IRoute route, ICharacter character)
-        {
-            var blocker = routeBlockers.FirstOrDefault(x => x.Condition(route, character));
-            blocker?.Operation(character);
-            return blocker == null;
-        }
     }
 }

@@ -16,11 +16,6 @@ namespace FOS.Business
 
         public ILocation Destination => new Location(Data, Grimoire, GetEntityData().ToLocationId);
 
-        public bool Allows(ICharacter character)
-        {
-            return Grimoire.DoesRouteAllowCharacter(this, character);
-        }
-
         internal override RouteData GetEntityData()
         {
             return Data.Routes[RouteId];

@@ -6,6 +6,5 @@
         string Direction { get; }
         string Name { get; }
         ILocation Destination { get; }
-        bool Allows(ICharacter character);
     }
 }
