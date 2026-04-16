@@ -13,11 +13,27 @@ namespace FOS.Model.Dialog
                     .. GetLocationLines(character),
                     .. GetFocusFeatureLines(character),
                     .. GetFocusItemLines(character),
+                    .. GetFocusCharacterLines(character),
                     .. GetFeaturesLines(character),
                     .. GetCharactersLines(character),
                     .. GetStatisticsLines(character),
                     .. GetRoutesLines(character)
                 ];
+        }
+
+        private static IEnumerable<IDialogLine> GetFocusCharacterLines(ICharacter character)
+        {
+            var otherCharacter = character.FocusCharacter;
+            if (otherCharacter == null)
+            {
+                return [];
+            }
+            List<IDialogLine> lines = [new DialogLine(Moods.NORMAL, $"Interacting with: {otherCharacter.Name}")];
+            if (otherCharacter.HasStatistic(StatisticTypes.HEALTH))
+            {
+                lines.Add(new DialogLine(Moods.NORMAL, $"Health: {otherCharacter.GetHealth()}/{otherCharacter.GetMaximumHealth()}"));
+            }
+            return lines.AsEnumerable();
         }
 
         private static IEnumerable<IDialogLine> GetStatisticsLines(ICharacter character)
@@ -36,7 +52,7 @@ namespace FOS.Model.Dialog
 
         private static IEnumerable<IDialogLine> GetCharactersLines(ICharacter character)
         {
-            if (character.HasMode() && character.GetMode() != Modes.CHARACTERS)
+            if (character.HasMode() && character.GetMode() != Modes.CHARACTERS || character.FocusCharacter != null)
             {
                 return [];
             }
