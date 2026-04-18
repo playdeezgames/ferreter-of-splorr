@@ -21,6 +21,8 @@ namespace FOS.Model
         {
             character.SetTag(CharacterTags.ENEMY);
             character.InitializeHealth(1);
+            character.SetStatistic(StatisticTypes.ATTACK_DICE, 1);
+            character.SetStatistic(StatisticTypes.DEFEND_DICE, 1);
         }
 
         private static void SpawnCreature(ILocation location, string creatureType)

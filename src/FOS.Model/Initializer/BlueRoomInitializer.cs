@@ -60,6 +60,8 @@ namespace FOS.Model.Initializer
             character.SetTag(CharacterTags.N00B);
             character.SetStatistic(StatisticTypes.JOOLS, 0);
             character.InitializeHealth(3);
+            character.SetStatistic(StatisticTypes.ATTACK_DICE, 1);
+            character.SetStatistic(StatisticTypes.DEFEND_DICE, 4);
         }
     }
 }

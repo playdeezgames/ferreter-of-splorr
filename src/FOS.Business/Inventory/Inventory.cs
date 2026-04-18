@@ -48,6 +48,15 @@ namespace FOS.Business
             return data.Inventories[InventoryId];
         }
 
+        public void Destroy()
+        {
+            foreach (var item in Items)
+            {
+                item.Destroy();
+            }
+            data.Inventories.Remove(inventoryId);
+        }
+
         private World World => new(data, grimoire);
 
         private IInventoryEntity InventoryParent

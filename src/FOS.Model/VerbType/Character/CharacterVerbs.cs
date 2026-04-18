@@ -24,7 +24,11 @@ namespace FOS.Model
 
         private static void AttackEnemy(ICharacter character)
         {
-            character.AddMessage(Moods.NORMAL, "You attack!");
+            character.Attack(character.FocusCharacter!);
+            if (character.HasFocusCharacter)
+            {
+                character.FocusCharacter!.Attack(character);
+            }
         }
     }
 }

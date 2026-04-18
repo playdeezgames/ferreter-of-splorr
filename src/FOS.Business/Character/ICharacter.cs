@@ -13,5 +13,7 @@
         ICharacter? FocusCharacter { get; set; }
         bool HasFocusCharacter { get; }
         string Name { get; }
+        void Destroy();
+        bool IsAvatar { get; }
     }
 }

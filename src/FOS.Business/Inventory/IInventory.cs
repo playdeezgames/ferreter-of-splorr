@@ -11,5 +11,6 @@
             string itemType,
             string name,
             Action<IItem>? initializer = null);
+        void Destroy();
     }
 }

@@ -93,6 +93,8 @@ namespace FOS.Business
 
         protected override Guid InventoryParentId => CharacterId;
 
+        public bool IsAvatar => Data.AvatarCharacterId.HasValue && Data.AvatarCharacterId.Value == characterId;
+
         internal override CharacterData GetEntityData()
         {
             return Data.Characters[CharacterId];
@@ -101,6 +103,17 @@ namespace FOS.Business
         public override bool InterceptItem(IItem item)
         {
             return Grimoire.InterceptCharacterItem(this, item);
+        }
+
+        public void Destroy()
+        {
+            Inventory.Destroy();
+            Location.RemoveCharacter(this);
+            if (IsAvatar)
+            {
+                Data.AvatarCharacterId = null;
+            }
+            Data.Characters.Remove(CharacterId);
         }
     }
 }
