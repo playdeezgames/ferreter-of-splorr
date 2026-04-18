@@ -62,6 +62,8 @@ namespace FOS.Model.Initializer
             character.InitializeHealth(3);
             character.SetStatistic(StatisticTypes.ATTACK_DICE, 1);
             character.SetStatistic(StatisticTypes.DEFEND_DICE, 4);
+            character.SetStatistic(StatisticTypes.MAXIMUM_ATTACK, 1);
+            character.SetStatistic(StatisticTypes.MAXIMUM_DEFEND, 2);
         }
     }
 }

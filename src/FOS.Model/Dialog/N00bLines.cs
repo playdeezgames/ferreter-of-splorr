@@ -5,7 +5,6 @@ namespace FOS.Model.Dialog
 {
     internal static class N00bLines
     {
-        //TODO: line generator
         private record LineGenerator(Func<ICharacter, bool> Condition, Func<ICharacter, IEnumerable<IDialogLine>> LineSource);
 
         private readonly static IEnumerable<LineGenerator> lineGenerators =
@@ -42,7 +41,9 @@ namespace FOS.Model.Dialog
             List<IDialogLine> lines =
                 [
                     new DialogLine(Moods.NORMAL, $"Jools: {character.GetStatistic(StatisticTypes.JOOLS)}"),
-                    new DialogLine(Moods.NORMAL, $"Health: {character.GetHealth()}/{character.GetMaximumHealth()}")
+                    new DialogLine(Moods.NORMAL, $"Health: {character.GetHealth()}/{character.GetMaximumHealth()}"),
+                    new DialogLine(Moods.NORMAL, $"Attack Dice: {character.GetAttackDice()}(Maximum: {character.GetMaximumAttack()})"),
+                    new DialogLine(Moods.NORMAL, $"Defend Dice: {character.GetDefendDice()}(Maximum: {character.GetMaximumDefend()})")
                 ];
             return lines.AsEnumerable();
         }

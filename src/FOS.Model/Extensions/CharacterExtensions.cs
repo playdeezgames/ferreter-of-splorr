@@ -35,28 +35,38 @@ namespace FOS.Model
             }
         }
 
-        private static int GetAttackDice(this ICharacter character)
+        internal static int GetAttackDice(this ICharacter character)
         {
             return character.GetStatistic(StatisticTypes.ATTACK_DICE);
         }
 
-        private static int GetDefendDice(this ICharacter character)
+        internal static int GetMaximumAttack(this ICharacter character)
+        {
+            return character.GetStatistic(StatisticTypes.MAXIMUM_ATTACK);
+        }
+
+        internal static int GetDefendDice(this ICharacter character)
         {
             return character.GetStatistic(StatisticTypes.DEFEND_DICE);
         }
 
+        internal static int GetMaximumDefend(this ICharacter character)
+        {
+            return character.GetStatistic(StatisticTypes.MAXIMUM_DEFEND);
+        }
+
         private static int RollAttack(this ICharacter character)
         {
-            return Enumerable.Range(0, character.GetAttackDice()).
+            return Math.Min(character.GetMaximumAttack(), Enumerable.Range(0, character.GetAttackDice()).
                 Select(x => RNG.GenerateBool(5, 1)).
-                Count(x => x);
+                Count(x => x));
         }
 
         private static int RollDefend(this ICharacter character)
         {
-            return Enumerable.Range(0, character.GetDefendDice()).
+            return Math.Min(character.GetMaximumDefend(), Enumerable.Range(0, character.GetDefendDice()).
                 Select(x => RNG.GenerateBool(5, 1)).
-                Count(x => x);
+                Count(x => x));
         }
 
         private static void TakeDamage(this ICharacter character, int damage)
@@ -79,7 +89,10 @@ namespace FOS.Model
             {
                 character.Location.Inventory.AddItem(item);
             }
-            character.Destroy();
+            if (!character.IsAvatar)
+            {
+                character.Destroy();
+            }
         }
 
         internal static void Attack(this ICharacter character, ICharacter otherCharacter)

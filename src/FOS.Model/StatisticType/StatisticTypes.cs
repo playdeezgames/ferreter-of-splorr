@@ -8,5 +8,7 @@
         internal static readonly string HEALTH = nameof(HEALTH);
         internal static readonly string ATTACK_DICE = nameof(ATTACK_DICE);
         internal static readonly string DEFEND_DICE = nameof(DEFEND_DICE);
+        internal static readonly string MAXIMUM_ATTACK = nameof(MAXIMUM_ATTACK);
+        internal static readonly string MAXIMUM_DEFEND = nameof(MAXIMUM_DEFEND);
     }
 }
