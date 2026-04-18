@@ -5,29 +5,30 @@ namespace FOS.Model.Dialog
 {
     internal static class N00bLines
     {
+        //TODO: line generator
+        private record Thingie(Func<ICharacter, bool> Condition, Func<ICharacter, IEnumerable<IDialogLine>> LineGenerator);
+
+        private readonly static IEnumerable<Thingie> thingies =
+            [
+                new Thingie(x=>true, x=>x.World.Messages.Select(x => new DialogLine(x.Mood, x.Text))),
+                new Thingie(x=>true, GetLocationLines),
+                new Thingie(x=>x.HasFocusFeature, GetFocusFeatureLines),
+                new Thingie(x=>x.HasFocusItem, GetFocusItemLines),
+                new Thingie(x=>x.HasFocusCharacter, GetFocusCharacterLines),
+                new Thingie(x=>!x.HasMode() || (x.IsInMode(Modes.FEATURES) && !x.HasFocusFeature), GetFeaturesLines),//TODO
+                new Thingie(x=>!x.HasMode() || (x.IsInMode(Modes.CHARACTERS) && !x.HasFocusCharacter), GetCharactersLines),//TODO
+                new Thingie(x=>x.IsInMode(Modes.STATISTICS), GetStatisticsLines),
+                new Thingie(x=>!x.HasMode() || x.IsInMode(Modes.MOVE), GetRoutesLines)
+            ];
+
         internal static IEnumerable<IDialogLine> GetLines(ICharacter character)
         {
-            return
-                [
-                    .. character.World.Messages.Select(x => new DialogLine(x.Mood, x.Text)),
-                    .. GetLocationLines(character),
-                    .. GetFocusFeatureLines(character),
-                    .. GetFocusItemLines(character),
-                    .. GetFocusCharacterLines(character),
-                    .. GetFeaturesLines(character),
-                    .. GetCharactersLines(character),
-                    .. GetStatisticsLines(character),
-                    .. GetRoutesLines(character)
-                ];
+            return thingies.Where(x => x.Condition(character)).Select(x => x.LineGenerator(character)).SelectMany(x => x);
         }
 
         private static IEnumerable<IDialogLine> GetFocusCharacterLines(ICharacter character)
         {
             var otherCharacter = character.FocusCharacter;
-            if (otherCharacter == null)
-            {
-                return [];
-            }
             List<IDialogLine> lines = [new DialogLine(Moods.NORMAL, $"Interacting with: {otherCharacter.Name}")];
             if (otherCharacter.HasStatistic(StatisticTypes.HEALTH))
             {
@@ -38,10 +39,6 @@ namespace FOS.Model.Dialog
 
         private static IEnumerable<IDialogLine> GetStatisticsLines(ICharacter character)
         {
-            if (!character.IsInMode(Modes.STATISTICS))
-            {
-                return [];
-            }
             List<IDialogLine> lines =
                 [
                     new DialogLine(Moods.NORMAL, $"Jools: {character.GetStatistic(StatisticTypes.JOOLS)}"),
@@ -52,10 +49,6 @@ namespace FOS.Model.Dialog
 
         private static IEnumerable<IDialogLine> GetCharactersLines(ICharacter character)
         {
-            if (character.HasMode() && character.GetMode() != Modes.CHARACTERS || character.FocusCharacter != null)
-            {
-                return [];
-            }
             List<IDialogLine> lines = [];
             var otherCharacters = character.Location.GetOtherCharacters(character);
             if (otherCharacters.Any())
@@ -72,10 +65,6 @@ namespace FOS.Model.Dialog
         private static IEnumerable<IDialogLine> GetFocusItemLines(ICharacter character)
         {
             var focusItem = character.FocusItem;
-            if (focusItem == null)
-            {
-                return [];
-            }
             return [new DialogLine(Moods.NORMAL, $"Interacting with {focusItem.Name}.")];
         }
 
@@ -91,10 +80,6 @@ namespace FOS.Model.Dialog
 
         private static IEnumerable<IDialogLine> GetFeaturesLines(ICharacter character)
         {
-            if (character.HasMode() && character.GetMode() != Modes.FEATURES)
-            {
-                return [];
-            }
             List<IDialogLine> lines = [];
             var features = character.Location.Features;
             if (features.Any())
@@ -110,10 +95,6 @@ namespace FOS.Model.Dialog
 
         private static IEnumerable<IDialogLine> GetRoutesLines(ICharacter character)
         {
-            if (character.HasMode() && character.GetMode() != Modes.MOVE)
-            {
-                return [];
-            }
             var routes = character.Location.Routes;
             List<IDialogLine> lines = [];
             if (routes.Any())
@@ -129,10 +110,6 @@ namespace FOS.Model.Dialog
         private static IEnumerable<IDialogLine> GetFocusFeatureLines(ICharacter character)
         {
             var feature = character.FocusFeature;
-            if (feature == null)
-            {
-                return [];
-            }
             return [new DialogLine(Moods.NORMAL, $"Interacting with: {feature.Name}")];
         }
     }
