@@ -6,29 +6,29 @@ namespace FOS.Model.Dialog
     internal static class N00bLines
     {
         //TODO: line generator
-        private record Thingie(Func<ICharacter, bool> Condition, Func<ICharacter, IEnumerable<IDialogLine>> LineGenerator);
+        private record LineGenerator(Func<ICharacter, bool> Condition, Func<ICharacter, IEnumerable<IDialogLine>> LineSource);
 
-        private readonly static IEnumerable<Thingie> thingies =
+        private readonly static IEnumerable<LineGenerator> lineGenerators =
             [
-                new Thingie(x=>true, x=>x.World.Messages.Select(x => new DialogLine(x.Mood, x.Text))),
-                new Thingie(x=>true, GetLocationLines),
-                new Thingie(x=>x.HasFocusFeature, GetFocusFeatureLines),
-                new Thingie(x=>x.HasFocusItem, GetFocusItemLines),
-                new Thingie(x=>x.HasFocusCharacter, GetFocusCharacterLines),
-                new Thingie(x=>!x.HasMode() || (x.IsInMode(Modes.FEATURES) && !x.HasFocusFeature), GetFeaturesLines),//TODO
-                new Thingie(x=>!x.HasMode() || (x.IsInMode(Modes.CHARACTERS) && !x.HasFocusCharacter), GetCharactersLines),//TODO
-                new Thingie(x=>x.IsInMode(Modes.STATISTICS), GetStatisticsLines),
-                new Thingie(x=>!x.HasMode() || x.IsInMode(Modes.MOVE), GetRoutesLines)
+                new LineGenerator(x=>true, x=>x.World.Messages.Select(x => new DialogLine(x.Mood, x.Text))),
+                new LineGenerator(x=>true, GetLocationLines),
+                new LineGenerator(x=>x.HasFocusFeature, GetFocusFeatureLines),
+                new LineGenerator(x=>x.HasFocusItem, GetFocusItemLines),
+                new LineGenerator(x=>x.HasFocusCharacter, GetFocusCharacterLines),
+                new LineGenerator(x=>!x.HasMode() || (x.IsInMode(Modes.FEATURES) && !x.HasFocusFeature), GetFeaturesLines),//TODO
+                new LineGenerator(x=>!x.HasMode() || (x.IsInMode(Modes.CHARACTERS) && !x.HasFocusCharacter), GetCharactersLines),//TODO
+                new LineGenerator(x=>x.IsInMode(Modes.STATISTICS), GetStatisticsLines),
+                new LineGenerator(x=>!x.HasMode() || x.IsInMode(Modes.MOVE), GetRoutesLines)
             ];
 
         internal static IEnumerable<IDialogLine> GetLines(ICharacter character)
         {
-            return thingies.Where(x => x.Condition(character)).Select(x => x.LineGenerator(character)).SelectMany(x => x);
+            return lineGenerators.Where(x => x.Condition(character)).Select(x => x.LineSource(character)).SelectMany(x => x);
         }
 
         private static IEnumerable<IDialogLine> GetFocusCharacterLines(ICharacter character)
         {
-            var otherCharacter = character.FocusCharacter;
+            var otherCharacter = character.FocusCharacter!;
             List<IDialogLine> lines = [new DialogLine(Moods.NORMAL, $"Interacting with: {otherCharacter.Name}")];
             if (otherCharacter.HasStatistic(StatisticTypes.HEALTH))
             {
@@ -64,7 +64,7 @@ namespace FOS.Model.Dialog
 
         private static IEnumerable<IDialogLine> GetFocusItemLines(ICharacter character)
         {
-            var focusItem = character.FocusItem;
+            var focusItem = character.FocusItem!;
             return [new DialogLine(Moods.NORMAL, $"Interacting with {focusItem.Name}.")];
         }
 
@@ -109,7 +109,7 @@ namespace FOS.Model.Dialog
         }
         private static IEnumerable<IDialogLine> GetFocusFeatureLines(ICharacter character)
         {
-            var feature = character.FocusFeature;
+            var feature = character.FocusFeature!;
             return [new DialogLine(Moods.NORMAL, $"Interacting with: {feature.Name}")];
         }
     }
