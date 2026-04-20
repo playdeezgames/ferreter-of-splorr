@@ -87,6 +87,7 @@ namespace FOS.Model
             }
             foreach (var item in character.Inventory.Items)
             {
+                character.Inventory.RemoveItem(item);
                 character.Location.Inventory.AddItem(item);
             }
             if (!character.IsAvatar)

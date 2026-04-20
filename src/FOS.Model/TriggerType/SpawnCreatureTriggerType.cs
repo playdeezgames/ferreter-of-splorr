@@ -25,6 +25,8 @@ namespace FOS.Model
             character.SetStatistic(StatisticTypes.MAXIMUM_ATTACK, 1);
             character.SetStatistic(StatisticTypes.DEFEND_DICE, 1);
             character.SetStatistic(StatisticTypes.MAXIMUM_DEFEND, 1);
+
+            character.Inventory.CreateItem(ItemTypes.RAT_TAIL, "Rat Tail", i => { });
         }
 
         private static void SpawnCreature(ILocation location, string creatureType)
