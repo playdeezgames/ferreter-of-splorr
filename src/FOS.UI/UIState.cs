@@ -37,6 +37,6 @@ namespace FOS.UI
         {
             _lines.Add(new DialogLine(mood, text));
         }
-        public abstract IUIState HandleCommand(IEnumerable<string> command);
+        public abstract IUIState HandleCommand(params string[] command);
     }
 }

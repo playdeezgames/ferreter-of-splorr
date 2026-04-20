@@ -11,7 +11,7 @@ namespace FOS.UI
     {
         public override string Prompt => WorldDialog.GetPrompt(world);
 
-        public override IUIState HandleCommand(IEnumerable<string> command)
+        public override IUIState HandleCommand(params string[] command)
         {
             if (command.FirstOrDefault() == Commands.GAME_MENU)
             {

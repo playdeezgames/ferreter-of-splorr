@@ -23,7 +23,7 @@ namespace FOS.UI
             return _uiState?.GetLines() ?? [];
         }
 
-        public IUIState HandleCommand(IEnumerable<string> command)
+        public IUIState HandleCommand(params string[] command)
         {
             _uiState = _uiState!.HandleCommand(command);
             return this;

@@ -19,7 +19,7 @@ namespace FOS.UI
             return [];
         }
 
-        public override IUIState HandleCommand(IEnumerable<string> command)
+        public override IUIState HandleCommand(params string[] command)
         {
             if (command.FirstOrDefault() == Commands.EMBARK)
             {

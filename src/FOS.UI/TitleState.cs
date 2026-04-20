@@ -18,7 +18,7 @@ namespace FOS.UI
             return [new DialogLine(Moods.TITLE, "Ferreter of SPLORR!")];
         }
 
-        public override IUIState HandleCommand(IEnumerable<string> command)
+        public override IUIState HandleCommand(params string[] command)
         {
             return new MainMenuState(world);
         }

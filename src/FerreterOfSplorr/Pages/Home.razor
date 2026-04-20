@@ -58,6 +58,6 @@
 	}
 	private void Choose(IEnumerable<string> command)
 	{
-		context.HandleCommand(command);
+		context.HandleCommand(command.ToArray());
 	}
 }

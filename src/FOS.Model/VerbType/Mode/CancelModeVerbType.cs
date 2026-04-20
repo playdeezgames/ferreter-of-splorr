@@ -20,8 +20,8 @@ namespace FOS.Model
                     character.GetMode() == Modes.MOVE ||
                     (character.GetMode() == Modes.FEATURES && !character.HasFocusFeature));
         }
-        private static readonly IReadOnlyDictionary<string, string> verbTexts =
-            new Dictionary<string, string>
+        private static readonly Dictionary<string, string> verbTexts =
+            new()
             {
                 [Modes.TURN] = "Don't Turn",
                 [Modes.STATISTICS] = "Leave Statistics",
