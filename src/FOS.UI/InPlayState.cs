@@ -7,13 +7,13 @@ namespace FOS.UI
 {
     internal class InPlayState(IWorld world) : UIState(
         WorldDialog.GetLines(world),
-        WorldDialog.GetChoices(world).Append(new DialogChoice(Commands.GAME_MENU, "Game Menu")))
+        WorldDialog.GetChoices(world).Append(new DialogChoice([Commands.GAME_MENU], "Game Menu")))
     {
         public override string Prompt => WorldDialog.GetPrompt(world);
 
-        public override IUIState HandleCommand(string command)
+        public override IUIState HandleCommand(IEnumerable<string> command)
         {
-            if (command == Commands.GAME_MENU)
+            if (command.FirstOrDefault() == Commands.GAME_MENU)
             {
                 return new GameMenuState(world);
             }

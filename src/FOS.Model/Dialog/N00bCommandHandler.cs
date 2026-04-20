@@ -4,7 +4,7 @@ namespace FOS.Model.Dialog
 {
     internal static class N00bCommandHandler
     {
-        private record CommandHandler(Func<ICharacter, string, bool> Condition, Action<ICharacter, string> Operation);
+        private record CommandHandler(Func<ICharacter, IEnumerable<string>, bool> Condition, Action<ICharacter, IEnumerable<string>> Operation);
 
         private readonly static IReadOnlyList<CommandHandler> commandHandlers =
             [
@@ -12,24 +12,24 @@ namespace FOS.Model.Dialog
                     (x,s)=>
                         x.HasMode() &&
                         x.GetMode()== Modes.FEATURES &&
-                        Guid.TryParse(s, out _),
-                    (x,s)=>x.FocusFeature = x.World.GetFeature(Guid.Parse(s))),
+                        Guid.TryParse(s.FirstOrDefault(), out _),
+                    (x,s)=>x.FocusFeature = x.World.GetFeature(Guid.Parse(s.First()))),
                 new CommandHandler(
                     (x,s)=>
                         x.HasMode() &&
                         x.GetMode()== Modes.CHARACTERS &&
-                        Guid.TryParse(s, out _),
-                    (x,s)=>x.FocusCharacter = x.World.GetCharacter(Guid.Parse(s))),
+                        Guid.TryParse(s.FirstOrDefault(), out _),
+                    (x,s)=>x.FocusCharacter = x.World.GetCharacter(Guid.Parse(s.First()))),
                 new CommandHandler(
                     (x,s)=>
                         x.HasMode() &&
                         (x.GetMode()== Modes.INVENTORY || x.GetMode()== Modes.GROUND_INVENTORY) &&
-                        Guid.TryParse(s, out _),
-                    (x,s)=>x.FocusItem = x.World.GetItem(Guid.Parse(s))),
-                new CommandHandler((_,_) => true, (x,s) => Verbs.All[s].Perform(x))
+                        Guid.TryParse(s.FirstOrDefault(), out _),
+                    (x,s)=>x.FocusItem = x.World.GetItem(Guid.Parse(s.First()))),
+                new CommandHandler((_,_) => true, (x,s) => Verbs.All[s.First()].Perform(x))
             ];
 
-        internal static void HandleCommand(ICharacter character, string command)
+        internal static void HandleCommand(ICharacter character, IEnumerable<string> command)
         {
             character.World.ClearMessages();
             commandHandlers.First(x => x.Condition(character, command)).Operation(character, command);

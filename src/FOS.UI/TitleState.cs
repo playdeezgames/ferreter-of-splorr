@@ -10,7 +10,7 @@ namespace FOS.UI
 
         private static IEnumerable<IDialogChoice> GenerateChoices()
         {
-            return [new DialogChoice(Commands.EMBARK, "OK")];
+            return [new DialogChoice([Commands.EMBARK], "OK")];
         }
 
         private static IEnumerable<IDialogLine> GenerateLines()
@@ -18,7 +18,7 @@ namespace FOS.UI
             return [new DialogLine(Moods.TITLE, "Ferreter of SPLORR!")];
         }
 
-        public override IUIState HandleCommand(string command)
+        public override IUIState HandleCommand(IEnumerable<string> command)
         {
             return new MainMenuState(world);
         }

@@ -21,7 +21,7 @@ namespace FOS.Model
             return N00bPrompt.GetPrompt(world.Avatar!);
         }
 
-        public static void HandleCommand(IWorld world, string command)
+        public static void HandleCommand(IWorld world, IEnumerable<string> command)
         {
             N00bCommandHandler.HandleCommand(world.Avatar!, command);
         }

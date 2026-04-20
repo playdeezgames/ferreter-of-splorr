@@ -2,8 +2,8 @@
 
 namespace TGGD.UI
 {
-    public interface IUIState: IDialog
+    public interface IUIState : IDialog
     {
-        IUIState HandleCommand(string command);
+        IUIState HandleCommand(IEnumerable<string> command);
     }
 }

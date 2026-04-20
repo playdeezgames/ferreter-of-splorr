@@ -11,8 +11,8 @@ namespace FOS.UI
         private static IEnumerable<IDialogChoice> GenerateChoices()
         {
             return [
-                new DialogChoice(Commands.RESUME_GAME, "Resume Game"),
-                new DialogChoice(Commands.ABANDON_GAME, "Abandon Game")
+                new DialogChoice([Commands.RESUME_GAME], "Resume Game"),
+                new DialogChoice([Commands.ABANDON_GAME], "Abandon Game")
             ];
         }
 
@@ -21,13 +21,13 @@ namespace FOS.UI
             return [];
         }
 
-        public override IUIState HandleCommand(string command)
+        public override IUIState HandleCommand(IEnumerable<string> command)
         {
-            if (command == Commands.RESUME_GAME)
+            if (command.FirstOrDefault() == Commands.RESUME_GAME)
             {
                 return new InPlayState(world);
             }
-            else if (command == Commands.ABANDON_GAME)
+            else if (command.FirstOrDefault() == Commands.ABANDON_GAME)
             {
                 return new MainMenuState(world);
             }

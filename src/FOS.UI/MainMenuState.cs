@@ -11,7 +11,7 @@ namespace FOS.UI
 
         private static IEnumerable<IDialogChoice> GenerateChoices()
         {
-            return [new DialogChoice(Commands.EMBARK, "Embark!")];
+            return [new DialogChoice([Commands.EMBARK], "Embark!")];
         }
 
         private static IEnumerable<IDialogLine> GenerateLines()
@@ -19,9 +19,9 @@ namespace FOS.UI
             return [];
         }
 
-        public override IUIState HandleCommand(string command)
+        public override IUIState HandleCommand(IEnumerable<string> command)
         {
-            if (command == Commands.EMBARK)
+            if (command.FirstOrDefault() == Commands.EMBARK)
             {
                 world.Initialize(WorldInitializer.Run);
                 return new InPlayState(world);

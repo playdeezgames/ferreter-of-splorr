@@ -29,7 +29,7 @@ namespace FOS.UI
         {
             _lines.Clear();
         }
-        protected void AddChoice(string command, string text)
+        protected void AddChoice(IEnumerable<string> command, string text)
         {
             _choices.Add(new DialogChoice(command, text));
         }
@@ -37,6 +37,6 @@ namespace FOS.UI
         {
             _lines.Add(new DialogLine(mood, text));
         }
-        public abstract IUIState HandleCommand(string command);
+        public abstract IUIState HandleCommand(IEnumerable<string> command);
     }
 }

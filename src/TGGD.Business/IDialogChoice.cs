@@ -2,7 +2,7 @@
 {
     public interface IDialogChoice
     {
-        public string Command { get; }
+        public IEnumerable<string> Command { get; }
         public string Text { get; }
     }
 }

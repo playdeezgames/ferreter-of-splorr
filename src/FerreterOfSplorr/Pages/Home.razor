@@ -48,7 +48,7 @@
 	{
 		if(inputModel.Text != null)
 		{
-			context.HandleCommand(inputModel.Text);
+			context.HandleCommand([inputModel.Text]);
 			inputModel.Text = null;
 		}
 	}
@@ -56,7 +56,7 @@
 	{
 		public string? Text { get; set; }
 	}
-	private void Choose(string command)
+	private void Choose(IEnumerable<string> command)
 	{
 		context.HandleCommand(command);
 	}

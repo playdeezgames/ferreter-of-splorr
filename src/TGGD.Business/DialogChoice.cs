@@ -1,8 +1,8 @@
 ﻿namespace TGGD.Business
 {
-    public class DialogChoice(string command, string text) : IDialogChoice
+    public class DialogChoice(IEnumerable<string> command, string text) : IDialogChoice
     {
-        public string Command => command;
+        public IEnumerable<string> Command => command;
 
         public string Text => text;
     }
