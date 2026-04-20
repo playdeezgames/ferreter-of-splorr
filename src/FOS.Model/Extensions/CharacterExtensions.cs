@@ -74,7 +74,7 @@ namespace FOS.Model
             character.ChangeStatistic(StatisticTypes.HEALTH, -damage);
         }
 
-        private static bool IsDead(this ICharacter character)
+        internal static bool IsDead(this ICharacter character)
         {
             return character.GetHealth() == character.GetStatisticMinimum(StatisticTypes.HEALTH);
         }

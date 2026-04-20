@@ -8,7 +8,7 @@ namespace FOS.Model
 
         public bool CanPerform(ICharacter character)
         {
-            return character.FocusFeature?.HasTrigger(Triggers.EXAMINE) ?? false;
+            return !character.IsDead() && (character.FocusFeature?.HasTrigger(Triggers.EXAMINE) ?? false);
         }
 
         public string GetText(ICharacter character)

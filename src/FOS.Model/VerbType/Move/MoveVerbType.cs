@@ -8,6 +8,7 @@ namespace FOS.Model
         public bool CanPerform(ICharacter character)
         {
             return
+                !character.IsDead() &&
                 character.IsInMode(Modes.MOVE) &&
                 character.Location.HasRoute(GetDirection(character));
         }

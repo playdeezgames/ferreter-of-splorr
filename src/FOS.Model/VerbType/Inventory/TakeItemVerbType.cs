@@ -9,6 +9,7 @@ namespace FOS.Model
         public bool CanPerform(ICharacter character)
         {
             return
+                !character.IsDead() &&
                 character.HasMode() &&
                 character.GetMode() == Modes.GROUND_INVENTORY &&
                 character.HasFocusItem;

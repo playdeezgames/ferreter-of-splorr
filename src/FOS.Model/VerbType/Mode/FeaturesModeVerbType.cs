@@ -8,7 +8,7 @@ namespace FOS.Model
 
         public bool CanPerform(ICharacter character)
         {
-            return !character.HasMode() && character.Location.HasFeatures;
+            return !character.IsDead() && !character.HasMode() && character.Location.HasFeatures;
         }
 
         public string GetText(ICharacter character)

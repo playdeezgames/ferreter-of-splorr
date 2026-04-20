@@ -10,15 +10,23 @@ namespace FOS.Model.Dialog
         private readonly static IEnumerable<LineGenerator> lineGenerators =
             [
                 new LineGenerator(x=>true, x=>x.World.Messages.Select(x => new DialogLine(x.Mood, x.Text))),
-                new LineGenerator(x=>true, GetLocationLines),
-                new LineGenerator(x=>x.HasFocusFeature, GetFocusFeatureLines),
-                new LineGenerator(x=>x.HasFocusItem, GetFocusItemLines),
-                new LineGenerator(x=>x.HasFocusCharacter, GetFocusCharacterLines),
-                new LineGenerator(x=>!x.HasMode() || (x.IsInMode(Modes.FEATURES) && !x.HasFocusFeature), GetFeaturesLines),//TODO
-                new LineGenerator(x=>!x.HasMode() || (x.IsInMode(Modes.CHARACTERS) && !x.HasFocusCharacter), GetCharactersLines),//TODO
-                new LineGenerator(x=>x.IsInMode(Modes.STATISTICS), GetStatisticsLines),
-                new LineGenerator(x=>!x.HasMode() || x.IsInMode(Modes.MOVE), GetRoutesLines)
+                new LineGenerator(x=>x.IsDead(), GetDeadLines),
+                new LineGenerator(x=>!x.IsDead(), GetLocationLines),
+                new LineGenerator(x=>!x.IsDead() && x.HasFocusFeature, GetFocusFeatureLines),
+                new LineGenerator(x=>!x.IsDead() && x.HasFocusItem, GetFocusItemLines),
+                new LineGenerator(x=>!x.IsDead() && x.HasFocusCharacter, GetFocusCharacterLines),
+                new LineGenerator(x=>!x.IsDead() && (!x.HasMode() || (x.IsInMode(Modes.FEATURES) && !x.HasFocusFeature)), GetFeaturesLines),
+                new LineGenerator(x=>!x.IsDead() && (!x.HasMode() || (x.IsInMode(Modes.CHARACTERS) && !x.HasFocusCharacter)), GetCharactersLines),
+                new LineGenerator(x=>!x.IsDead() && x.IsInMode(Modes.STATISTICS), GetStatisticsLines),
+                new LineGenerator(x=>!x.IsDead() && (!x.HasMode() || x.IsInMode(Modes.MOVE)), GetRoutesLines)
             ];
+
+        private static IEnumerable<IDialogLine> GetDeadLines(ICharacter character)
+        {
+            return [
+                new DialogLine(Moods.NORMAL, "Yer dead!")
+                ];
+        }
 
         internal static IEnumerable<IDialogLine> GetLines(ICharacter character)
         {

@@ -8,9 +8,9 @@
             [
                 new VerbType(
                     SEARCH,
-                    x=>!x.HasMode() && x.Location.HasTrigger(Triggers.SEARCH),
-                    x=>"Search...",
-                    x=>x.Location.FireTrigger(Triggers.SEARCH,x))
+                    x=> !x.IsDead() && !x.HasMode() && x.Location.HasTrigger(Triggers.SEARCH),
+                    x=> "Search...",
+                    x=> x.Location.FireTrigger(Triggers.SEARCH,x))
             ];
     }
 }
