@@ -6,7 +6,7 @@ namespace FOS.Model
     {
         public string Identifier => ModeVerbs.STATISTICS_MODE;
 
-        public bool CanPerform(ICharacter character)
+        public bool CanPerform(ICharacter character, params string[] parameters)
         {
             return !character.HasMode();
         }
@@ -16,7 +16,7 @@ namespace FOS.Model
             return "Statistics...";
         }
 
-        public void Perform(ICharacter character)
+        public void Perform(ICharacter character, params string[] parameters)
         {
             character.SetMode(Modes.STATISTICS);
         }

@@ -6,7 +6,7 @@ namespace FOS.Model
     {
         public string Identifier => ModeVerbs.FEATURES_MODE;
 
-        public bool CanPerform(ICharacter character)
+        public bool CanPerform(ICharacter character, params string[] parameters)
         {
             return !character.IsDead() && !character.HasMode() && character.Location.HasFeatures;
         }
@@ -16,7 +16,7 @@ namespace FOS.Model
             return "Features...";
         }
 
-        public void Perform(ICharacter character)
+        public void Perform(ICharacter character, params string[] parameters)
         {
             character.SetMode(Modes.FEATURES);
         }

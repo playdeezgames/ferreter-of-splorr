@@ -6,7 +6,7 @@ namespace FOS.Model
     {
         public string Identifier => ModeVerbs.MOVE_MODE;
 
-        public bool CanPerform(ICharacter character)
+        public bool CanPerform(ICharacter character, params string[] parameters)
         {
             return !character.IsDead() && !character.HasMode();
         }
@@ -16,7 +16,7 @@ namespace FOS.Model
             return "Move...";
         }
 
-        public void Perform(ICharacter character)
+        public void Perform(ICharacter character, params string[] parameters)
         {
             character.SetMode(Modes.MOVE);
         }

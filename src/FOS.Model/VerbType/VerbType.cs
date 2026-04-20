@@ -4,16 +4,16 @@ namespace FOS.Model
 {
     internal class VerbType(
         string identifier,
-        Func<ICharacter, bool> canPerform,
+        Func<ICharacter, IEnumerable<string>, bool> canPerform,
         Func<ICharacter, string> getText,
-        Action<ICharacter> perform) : IVerbType
+        Action<ICharacter, IEnumerable<string>> perform) : IVerbType
     {
         public string Identifier => identifier;
 
-        public bool CanPerform(ICharacter character) => canPerform(character);
+        public bool CanPerform(ICharacter character, params string[] parameters) => canPerform(character, parameters);
 
         public string GetText(ICharacter character) => getText(character);
 
-        public void Perform(ICharacter character) => perform(character);
+        public void Perform(ICharacter character, params string[] parameters) => perform(character, parameters);
     }
 }

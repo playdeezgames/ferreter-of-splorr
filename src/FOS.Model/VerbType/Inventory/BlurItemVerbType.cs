@@ -6,7 +6,7 @@ namespace FOS.Model
     {
         public string Identifier => ItemVerbs.BLUR_ITEM;
 
-        public bool CanPerform(ICharacter character)
+        public bool CanPerform(ICharacter character, params string[] parameters)
         {
             return !character.IsDead() && character.HasFocusItem;
         }
@@ -16,7 +16,7 @@ namespace FOS.Model
             return "Inventory...";
         }
 
-        public void Perform(ICharacter character)
+        public void Perform(ICharacter character, params string[] parameters)
         {
             character.FocusItem = null;
         }

@@ -6,7 +6,7 @@ namespace FOS.Model
     {
         public string Identifier => FeatureVerbs.SEARCH_FEATURE;
 
-        public bool CanPerform(ICharacter character)
+        public bool CanPerform(ICharacter character, params string[] parameters)
         {
             return !character.IsDead() && (character.FocusFeature?.HasTrigger(Triggers.SEARCH) ?? false);
         }
@@ -16,7 +16,7 @@ namespace FOS.Model
             return "Search...";
         }
 
-        public void Perform(ICharacter character)
+        public void Perform(ICharacter character, params string[] parameters)
         {
             character.FocusFeature!.FireTrigger(Triggers.SEARCH, character);
         }

@@ -6,7 +6,7 @@ namespace FOS.Model
     {
         public string Identifier => ItemVerbs.TAKE_ITEM;
 
-        public bool CanPerform(ICharacter character)
+        public bool CanPerform(ICharacter character, params string[] parameters)
         {
             return
                 !character.IsDead() &&
@@ -20,7 +20,7 @@ namespace FOS.Model
             return "Take...";
         }
 
-        public void Perform(ICharacter character)
+        public void Perform(ICharacter character, params string[] parameters)
         {
             var item = character.FocusItem!;
             character.FocusItem = null;

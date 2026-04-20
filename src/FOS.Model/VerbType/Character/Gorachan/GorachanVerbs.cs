@@ -7,7 +7,7 @@ namespace FOS.Model
         private static string GetName(string name) => $"{nameof(CharacterVerbs)}.{name}";
         private static readonly string INTRODUCTION = GetName(nameof(INTRODUCTION));
         private static readonly string ACCEPT_QUEST = GetName(nameof(ACCEPT_QUEST));
-        private static bool IsInteractingWithGorachan(this ICharacter character) => !character.IsDead() && character.IsInMode(Modes.CHARACTERS) && (character.FocusCharacter?.HasTag(CharacterTags.GORACHAN) ?? false);
+        private static bool IsInteractingWithGorachan(this ICharacter character, IEnumerable<string> parameters) => !character.IsDead() && character.IsInMode(Modes.CHARACTERS) && (character.FocusCharacter?.HasTag(CharacterTags.GORACHAN) ?? false);
         private static bool HasAcceptedQuest(this ICharacter character)
         {
             return character.HasTag(QuestTags.INN_RATS_ACCEPTED);
@@ -18,12 +18,12 @@ namespace FOS.Model
                     INTRODUCTION,
                     IsInteractingWithGorachan,
                     x=> "\"Hello!\"",
-                    x=> x.AddMessage(Moods.NORMAL, "Gorachan says, \"Henlo!\".")),
+                    (x, p)=> x.AddMessage(Moods.NORMAL, "Gorachan says, \"Henlo!\".")),
                 new VerbType(
                     ACCEPT_QUEST,
-                    x=> x.IsInteractingWithGorachan() && !x.HasAcceptedQuest(),
+                    (x, p)=> x.IsInteractingWithGorachan(p) && !x.HasAcceptedQuest(),
                     x=> "I need work!",
-                    x=>
+                    (x, p)=>
                     {
                         x.SetTag(QuestTags.INN_RATS_ACCEPTED);
                         x.AddMessage(Moods.NORMAL, "As a matter of fact, there are rats infesting my cellar, and could use help clearing them out.");

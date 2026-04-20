@@ -6,7 +6,7 @@ namespace FOS.Model
     {
         public string Identifier => ModeVerbs.GROUND_INVENTORY_MODE;
 
-        public bool CanPerform(ICharacter character)
+        public bool CanPerform(ICharacter character, params string[] parameters)
         {
             return !character.IsDead() && !character.HasMode() && character.Location.Inventory.HasItems;
         }
@@ -16,7 +16,7 @@ namespace FOS.Model
             return "Ground...";
         }
 
-        public void Perform(ICharacter character)
+        public void Perform(ICharacter character, params string[] parameters)
         {
             character.SetMode(Modes.GROUND_INVENTORY);
         }

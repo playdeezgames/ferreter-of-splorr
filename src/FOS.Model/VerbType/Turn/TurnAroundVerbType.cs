@@ -6,7 +6,7 @@ namespace FOS.Model
     {
         public string Identifier => TurnVerbs.TURN_AROUND;
 
-        public bool CanPerform(ICharacter character)
+        public bool CanPerform(ICharacter character, params string[] parameters)
         {
             return !character.IsDead() && character.HasMode() && character.GetMode() == Modes.TURN;
         }
@@ -16,7 +16,7 @@ namespace FOS.Model
             return "Turn Around";
         }
 
-        public void Perform(ICharacter character)
+        public void Perform(ICharacter character, params string[] parameters)
         {
             character.Direction = Directions.All[character.Direction].Opposite;
             character.ClearMode();

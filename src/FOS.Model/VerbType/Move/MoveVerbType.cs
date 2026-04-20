@@ -5,7 +5,7 @@ namespace FOS.Model
     internal abstract class MoveVerbType(string identifier) : IVerbType
     {
         public string Identifier => identifier;
-        public bool CanPerform(ICharacter character)
+        public bool CanPerform(ICharacter character, params string[] parameters)
         {
             return
                 !character.IsDead() &&
@@ -16,7 +16,7 @@ namespace FOS.Model
         public abstract string GetDirection(ICharacter character);
         protected abstract string GetSuccessMessage(ICharacter character, IRoute route);
         protected abstract string GetFailureMessage(ICharacter character, IRoute route);
-        public void Perform(ICharacter character)
+        public void Perform(ICharacter character, params string[] parameters)
         {
             var route = character.Location.GetRoute(GetDirection(character))!;
             if (route.Allows(character))

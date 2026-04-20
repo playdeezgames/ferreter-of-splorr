@@ -12,17 +12,17 @@ namespace FOS.Model
                 .. GorachanVerbs.All,
                 new VerbType(
                     FIGHT,
-                    x=> !x.IsDead() && x.HasFocusCharacter && x.FocusCharacter!.HasTag(CharacterTags.ENEMY),
+                    (x, p)=> !x.IsDead() && x.HasFocusCharacter && x.FocusCharacter!.HasTag(CharacterTags.ENEMY),
                     x=>"Fight!",
                     AttackEnemy),
                 new VerbType(
                     BLUR,
-                    x => !x.IsDead() && x.HasFocusCharacter,
+                    (x, p) => !x.IsDead() && x.HasFocusCharacter,
                     x => "Characters...",
-                    x => x.FocusCharacter = null)
+                    (x, p) => x.FocusCharacter = null)
             ];
 
-        private static void AttackEnemy(ICharacter character)
+        private static void AttackEnemy(ICharacter character, IEnumerable<string> parameters)
         {
             character.Attack(character.FocusCharacter!);
             if (character.HasFocusCharacter)

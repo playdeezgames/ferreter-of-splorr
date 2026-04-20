@@ -6,7 +6,7 @@ namespace FOS.Model
     {
         public string Identifier => FeatureVerbs.BLUR_FEATURE;
 
-        public bool CanPerform(ICharacter character)
+        public bool CanPerform(ICharacter character, params string[] parameters)
         {
             return !character.IsDead() && character.HasFocusFeature;
         }
@@ -16,7 +16,7 @@ namespace FOS.Model
             return "Features...";
         }
 
-        public void Perform(ICharacter character)
+        public void Perform(ICharacter character, params string[] parameters)
         {
             character.FocusFeature = null;
         }
