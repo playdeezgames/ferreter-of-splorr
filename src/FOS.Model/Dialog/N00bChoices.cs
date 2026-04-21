@@ -5,7 +5,9 @@ namespace FOS.Model.Dialog
 {
     internal static class N00bChoices
     {
-        private record ChoiceGenerator(Func<ICharacter, bool> Condition, Func<ICharacter, IEnumerable<IDialogChoice>> ChoiceSource);
+        private record ChoiceGenerator(
+            Func<ICharacter, bool> Condition,
+            Func<ICharacter, IEnumerable<IDialogChoice>> ChoiceSource);
 
         private readonly static IEnumerable<ChoiceGenerator> choiceGenerators =
             [
@@ -73,7 +75,12 @@ namespace FOS.Model.Dialog
 
         internal static IEnumerable<IDialogChoice> GetChoices(ICharacter character)
         {
-            return choiceGenerators.Where(y => y.Condition(character)).Select(z => z.ChoiceSource(character)).SelectMany(x => x);
+            return choiceGenerators.
+                Where(y =>
+                y.Condition(character)).
+                    Select(z =>
+                        z.ChoiceSource(character)).
+                            SelectMany(x => x);
         }
     }
 }
