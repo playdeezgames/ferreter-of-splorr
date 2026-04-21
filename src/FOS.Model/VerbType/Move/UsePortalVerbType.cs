@@ -2,16 +2,11 @@
 
 namespace FOS.Model
 {
-    internal class UsePortalVerbType() : MoveVerbType(MoveVerbs.USE_PORTAL), IVerbType
+    internal class UsePortalVerbType() : MoveVerbType(MoveVerbs.USE_PORTAL, x => "Use Portal"), IVerbType
     {
         protected override string GetDirection(ICharacter character)
         {
             return Directions.PORTAL;
-        }
-
-        public override string GetText(ICharacter character)
-        {
-            return "Use Portal";
         }
 
         protected override string GetFailureMessage(ICharacter character, IRoute route)

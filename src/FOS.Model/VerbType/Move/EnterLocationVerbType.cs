@@ -2,16 +2,11 @@
 
 namespace FOS.Model
 {
-    internal class EnterLocationVerbType() : MoveVerbType(MoveVerbs.ENTER_LOCATION), IVerbType
+    internal class EnterLocationVerbType() : MoveVerbType(MoveVerbs.ENTER_LOCATION, x => "Enter"), IVerbType
     {
         protected override string GetDirection(ICharacter character)
         {
             return Directions.IN;
-        }
-
-        public override string GetText(ICharacter character)
-        {
-            return "Enter";
         }
 
         protected override string GetFailureMessage(ICharacter character, IRoute route)

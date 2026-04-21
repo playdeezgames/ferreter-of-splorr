@@ -2,16 +2,14 @@
 
 namespace FOS.Model
 {
-    internal class ClimbUpVerbType() : MoveVerbType(MoveVerbs.CLIMB_UP), IVerbType
+    internal class ClimbUpVerbType() :
+        MoveVerbType(
+            MoveVerbs.CLIMB_UP,
+            x => "Climb Up"), IVerbType
     {
         protected override string GetDirection(ICharacter character)
         {
             return Directions.UP;
-        }
-
-        public override string GetText(ICharacter character)
-        {
-            return "Climb Up";
         }
 
         protected override string GetFailureMessage(ICharacter character, IRoute route)
