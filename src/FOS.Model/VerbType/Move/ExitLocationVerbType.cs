@@ -2,12 +2,12 @@
 
 namespace FOS.Model
 {
-    internal class ExitLocationVerbType() : MoveVerbType(MoveVerbs.EXIT_LOCATION, x => "Exit"), IVerbType
+    internal class ExitLocationVerbType() :
+        MoveVerbType(
+            MoveVerbs.EXIT_LOCATION,
+            x => "Exit",
+            x => Directions.OUT), IVerbType
     {
-        protected override string GetDirection(ICharacter character)
-        {
-            return Directions.OUT;
-        }
 
         protected override string GetFailureMessage(ICharacter character, IRoute route)
         {

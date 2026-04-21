@@ -2,12 +2,12 @@
 
 namespace FOS.Model
 {
-    internal class MoveAheadVerbType() : MoveVerbType(MoveVerbs.MOVE_AHEAD, x => "Move Ahead"), IVerbType
+    internal class MoveAheadVerbType() :
+        MoveVerbType(
+            MoveVerbs.MOVE_AHEAD,
+            x => "Move Ahead",
+            x => x.Direction), IVerbType
     {
-        protected override string GetDirection(ICharacter character)
-        {
-            return character.Direction;
-        }
 
         protected override string GetFailureMessage(ICharacter character, IRoute route)
         {
