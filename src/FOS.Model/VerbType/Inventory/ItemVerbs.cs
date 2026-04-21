@@ -8,9 +8,41 @@
         internal readonly static string TAKE_ITEM = GetName(nameof(TAKE_ITEM));
         internal static readonly IReadOnlyList<IVerbType> All =
             [
-                new DropItemVerbType(),
-                new TakeItemVerbType(),
-                new BlurItemVerbType()
+                new VerbType(
+                    BLUR_ITEM,
+                    (x,_)=>!x.IsDead() && x.HasFocusItem,
+                    x=>"Inventory...",
+                    (x,_)=>x.FocusItem = null),
+                new VerbType(
+                    DROP_ITEM,
+                    (x,_)=> !x.IsDead() &&
+                        x.HasMode() &&
+                        x.GetMode() == Modes.INVENTORY &&
+                        x.HasFocusItem,
+                    x=> "Drop",
+                    (x,_)=>
+                    {
+                        var item = x.FocusItem!;
+                        x.FocusItem = null;
+                        x.Inventory.RemoveItem(item);
+                        x.Location.Inventory.AddItem(item);
+                        x.AddMessage(Moods.NORMAL, $"You drop {item.Name}.");
+                    }),
+                new VerbType(
+                    TAKE_ITEM,
+                    (x,_)=>!x.IsDead() &&
+                        x.HasMode() &&
+                        x.GetMode() == Modes.GROUND_INVENTORY &&
+                        x.HasFocusItem,
+                    x=>"Take...",
+                    (x,_)=>
+                    {
+                        var item = x.FocusItem!;
+                        x.FocusItem = null;
+                        x.Location.Inventory.RemoveItem(item);
+                        x.Inventory.AddItem(item);
+                        x.AddMessage(Moods.NORMAL, $"You take {item.Name}.");
+                    })
             ];
     }
 }
