@@ -2,10 +2,12 @@
 
 namespace FOS.Model
 {
-    internal abstract class MoveVerbType(
+    internal class MoveVerbType(
         string identifier,
         Func<ICharacter, string> getText,
-        Func<ICharacter, string> getDirection) : IVerbType
+        Func<ICharacter, string> getDirection,
+        Func<ICharacter, IRoute, string> getSuccessMessage,
+        Func<ICharacter, IRoute, string> getFailureMessage) : IVerbType
     {
         public string Identifier => identifier;
         public bool CanPerform(ICharacter character, params string[] parameters)
@@ -19,20 +21,18 @@ namespace FOS.Model
         {
             return getText(character);
         }
-        protected abstract string GetSuccessMessage(ICharacter character, IRoute route);
-        protected abstract string GetFailureMessage(ICharacter character, IRoute route);
         public void Perform(ICharacter character, params string[] parameters)
         {
             var route = character.Location.GetRoute(getDirection(character))!;
             if (route.Allows(character))
             {
-                character.AddMessage(Moods.NORMAL, GetSuccessMessage(character, route));
+                character.AddMessage(Moods.NORMAL, getSuccessMessage(character, route));
                 character.Location = route.Destination;
                 character.ClearMode();
             }
             else
             {
-                character.AddMessage(Moods.NORMAL, GetFailureMessage(character, route));
+                character.AddMessage(Moods.NORMAL, getFailureMessage(character, route));
             }
         }
     }

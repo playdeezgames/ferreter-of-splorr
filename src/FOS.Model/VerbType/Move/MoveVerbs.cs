@@ -11,12 +11,42 @@
         internal readonly static string USE_PORTAL = GetName(nameof(USE_PORTAL));
         internal static readonly IReadOnlyList<IVerbType> All =
             [
-                new MoveAheadVerbType(),
-                new ClimbUpVerbType(),
-                new ClimbDownVerbType(),
-                new EnterLocationVerbType(),
-                new ExitLocationVerbType(),
-                new UsePortalVerbType()
+                new MoveVerbType(
+                    MoveVerbs.MOVE_AHEAD,
+                    x => "Move Ahead",
+                    x => x.Direction,
+                    (x, r) => $"{x.Name} moves ahead thru {r.Name}.",
+                    (x, r) => $"{x.Name} cannot move thru {r.Name}."),
+                new MoveVerbType(
+                    MoveVerbs.CLIMB_UP,
+                    x => "Climb Up",
+                    x => Directions.UP,
+                    (x, r) => $"{x.Name} climbs up {r.Name}.",
+                    (x, r) => $"{x.Name} cannot climb up {r.Name}."),
+                new MoveVerbType(
+                    MoveVerbs.CLIMB_DOWN,
+                    x => "Climb Down",
+                    x => Directions.DOWN,
+                    (x, r) => $"{x.Name} climbs down {r.Name}.",
+                    (x, r) => $"{x.Name} cannot climb down {r.Name}."),
+                new MoveVerbType(
+                    MoveVerbs.ENTER_LOCATION,
+                    x => "Enter",
+                    x => Directions.IN,
+                    (x, r) => $"{x.Name} enters thru {r.Name}.",
+                    (x, r) => $"{x.Name} cannot enter {r.Name}."),
+                new MoveVerbType(
+                    MoveVerbs.EXIT_LOCATION,
+                    x => "Exit",
+                    x => Directions.OUT,
+                    (x, r) => $"{x.Name} exits thru {r.Name}.",
+                    (x, r) => $"{x.Name} cannot exit thru {r.Name}."),
+                new MoveVerbType(
+                    MoveVerbs.USE_PORTAL,
+                    x => "Use Portal",
+                    x => Directions.PORTAL,
+                    (x, r) => $"{x.Name} uses {r.Name}.",
+                    (x, r) => $"{x.Name} cannot use {r.Name}.")
             ];
     }
 }
