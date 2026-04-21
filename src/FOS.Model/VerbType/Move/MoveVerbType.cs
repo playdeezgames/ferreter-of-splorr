@@ -13,7 +13,7 @@ namespace FOS.Model
                 character.Location.HasRoute(GetDirection(character));
         }
         public abstract string GetText(ICharacter character);
-        public abstract string GetDirection(ICharacter character);
+        protected abstract string GetDirection(ICharacter character);
         protected abstract string GetSuccessMessage(ICharacter character, IRoute route);
         protected abstract string GetFailureMessage(ICharacter character, IRoute route);
         public void Perform(ICharacter character, params string[] parameters)

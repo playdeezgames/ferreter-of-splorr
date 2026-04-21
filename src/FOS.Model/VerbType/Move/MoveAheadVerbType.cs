@@ -1,11 +1,10 @@
 ﻿using FOS.Business;
-using FOS.Model;
 
 namespace FOS.Model
 {
     internal class MoveAheadVerbType() : MoveVerbType(MoveVerbs.MOVE_AHEAD), IVerbType
     {
-        public override string GetDirection(ICharacter character)
+        protected override string GetDirection(ICharacter character)
         {
             return character.Direction;
         }

@@ -1,11 +1,10 @@
 ﻿using FOS.Business;
-using FOS.Model;
 
 namespace FOS.Model
 {
     internal class UsePortalVerbType() : MoveVerbType(MoveVerbs.USE_PORTAL), IVerbType
     {
-        public override string GetDirection(ICharacter character)
+        protected override string GetDirection(ICharacter character)
         {
             return Directions.PORTAL;
         }

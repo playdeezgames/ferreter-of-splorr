@@ -1,11 +1,10 @@
 ﻿using FOS.Business;
-using FOS.Model;
 
 namespace FOS.Model
 {
     internal class ClimbUpVerbType() : MoveVerbType(MoveVerbs.CLIMB_UP), IVerbType
     {
-        public override string GetDirection(ICharacter character)
+        protected override string GetDirection(ICharacter character)
         {
             return Directions.UP;
         }
