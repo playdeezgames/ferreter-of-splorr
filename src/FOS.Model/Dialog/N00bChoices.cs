@@ -33,7 +33,7 @@ namespace FOS.Model.Dialog
                             Items.
                             Select(x =>
                                 new DialogChoice(
-                                    [x.ItemId.ToString()],
+                                    [ItemVerbs.FOCUS_ITEM, x.ItemId.ToString()],
                                     x.Name))),
                 new ChoiceGenerator(
                     x=>
@@ -46,7 +46,7 @@ namespace FOS.Model.Dialog
                             Items.
                             Select(x =>
                                 new DialogChoice(
-                                    [x.ItemId.ToString()],
+                                    [ItemVerbs.FOCUS_ITEM, x.ItemId.ToString()],
                                     x.Name))),
                 new ChoiceGenerator(
                     x=>
