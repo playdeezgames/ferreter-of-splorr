@@ -11,12 +11,6 @@ namespace FOS.Model.Dialog
                 new CommandHandler(
                     (x,s)=>
                         x.HasMode() &&
-                        x.GetMode()== Modes.FEATURES &&
-                        Guid.TryParse(s.FirstOrDefault(), out _),
-                    (x,s)=>x.FocusFeature = x.World.GetFeature(Guid.Parse(s.First()))),
-                new CommandHandler(
-                    (x,s)=>
-                        x.HasMode() &&
                         x.GetMode()== Modes.CHARACTERS &&
                         Guid.TryParse(s.FirstOrDefault(), out _),
                     (x,s)=>x.FocusCharacter = x.World.GetCharacter(Guid.Parse(s.First()))),
@@ -26,7 +20,10 @@ namespace FOS.Model.Dialog
                         (x.GetMode()== Modes.INVENTORY || x.GetMode()== Modes.GROUND_INVENTORY) &&
                         Guid.TryParse(s.FirstOrDefault(), out _),
                     (x,s)=>x.FocusItem = x.World.GetItem(Guid.Parse(s.First()))),
-                new CommandHandler((_,_) => true, (x,s) => Verbs.All[s.First()].Perform(x))
+                new CommandHandler(
+                    (_,_) => true,
+                    (x,s) =>
+                        Verbs.All[s.First()].Perform(x,[.. s.Skip(1)]))
             ];
 
         internal static void HandleCommand(ICharacter character, IEnumerable<string> command)

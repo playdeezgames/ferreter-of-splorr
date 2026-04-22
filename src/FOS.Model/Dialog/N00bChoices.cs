@@ -21,7 +21,7 @@ namespace FOS.Model.Dialog
                             Features.
                             Select(x =>
                                 new DialogChoice(
-                                    [x.FeatureId.ToString()],
+                                    [FeatureVerbs.FOCUS_FEATURE, x.FeatureId.ToString()],
                                     x.Name))),
                 new ChoiceGenerator(
                     x=>
