@@ -10,5 +10,6 @@
         internal static readonly string DEFEND_DICE = nameof(DEFEND_DICE);
         internal static readonly string MAXIMUM_ATTACK = nameof(MAXIMUM_ATTACK);
         internal static readonly string MAXIMUM_DEFEND = nameof(MAXIMUM_DEFEND);
+        internal static readonly string RAT_TAILS_REMAINING = nameof(RAT_TAILS_REMAINING);
     }
 }
