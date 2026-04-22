@@ -58,7 +58,7 @@ namespace FOS.Model.Dialog
                             GetOtherCharacters(x).
                             Select(y =>
                                 new DialogChoice(
-                                    [y.CharacterId.ToString()],
+                                    [CharacterVerbs.FOCUS_CHARACTER, y.CharacterId.ToString()],
                                     y.Name))),
                 new ChoiceGenerator(
                     x=> true,

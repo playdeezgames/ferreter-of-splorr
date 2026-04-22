@@ -7,6 +7,7 @@ namespace FOS.Model
         private static string GetName(string name) => $"{nameof(CharacterVerbs)}.{name}";
         private readonly static string BLUR = GetName(nameof(BLUR));
         private readonly static string FIGHT = GetName(nameof(FIGHT));
+        internal readonly static string FOCUS_CHARACTER = GetName(nameof(FOCUS_CHARACTER));
         internal static readonly IReadOnlyList<IVerbType> All =
             [
                 .. GorachanVerbs.All,
@@ -19,7 +20,17 @@ namespace FOS.Model
                     BLUR,
                     (x, p) => !x.IsDead() && x.HasFocusCharacter,
                     x => "Characters...",
-                    (x, p) => x.FocusCharacter = null)
+                    (x, p) => x.FocusCharacter = null),
+                new VerbType(
+                    FOCUS_CHARACTER,
+                    (x, p) =>
+                        x.HasMode() &&
+                        x.GetMode()== Modes.CHARACTERS &&
+                        p.Count()== 1 &&
+                        Guid.TryParse(p.Single(), out _),
+                    x=> throw new NotImplementedException(),
+                    (x, p) =>
+                        x.FocusCharacter = x.World.GetCharacter(Guid.Parse(p.Single())))
             ];
 
         private static void AttackEnemy(ICharacter character, IEnumerable<string> parameters)
